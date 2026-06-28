@@ -35,23 +35,113 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: var(--font);
   background: #0a0a0a;
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  line-height: 1.6;
+  color: #ffffff;
   position: relative;
+  overflow-x: hidden;
+  font-family: var(--font);
+  min-height: 100vh;
+  line-height: 1.6;
 }
+/* Layer 1: Ultra-subtle K-line candlestick watermark pattern */
 body::before {
   content: '';
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(22,119,255,0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(22,119,255,0.02) 0%, transparent 50%),
-    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+    /* Candlestick bodies - very faint horizontal bars */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 40px,
+      rgba(255,255,255,0.008) 40px,
+      rgba(255,255,255,0.008) 42px,
+      transparent 42px,
+      transparent 80px
+    ),
+    /* Candlestick wicks - ultra-thin vertical lines */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 120px,
+      rgba(255,255,255,0.005) 120px,
+      rgba(255,255,255,0.005) 121px,
+      transparent 121px,
+      transparent 240px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Layer 2: Floating radial glow orbs */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 20%, rgba(22,119,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 500px at 85% 60%, rgba(22,119,255,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 50% 90%, rgba(255,77,79,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 30% 70%, rgba(22,119,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%, 100% { opacity: 1; transform: translate(0, 0); }
+  33% { opacity: 0.8; transform: translate(10px, -10px); }
+  66% { opacity: 0.9; transform: translate(-5px, 5px); }
+}
+
+/* Layer 3: Moving chart line (scanline-like effect) */
+.chart-line {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.chart-line::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: -100%;
+  width: 300%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(22,119,255,0.15), rgba(22,119,255,0.3), rgba(22,119,255,0.15), transparent);
+  animation: chartLineMove 15s linear infinite;
+}
+.chart-line::after {
+  content: '';
+  position: absolute;
+  top: 70%;
+  left: -100%;
+  width: 300%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,77,79,0.1), rgba(255,77,79,0.2), rgba(255,77,79,0.1), transparent);
+  animation: chartLineMove 12s linear infinite reverse;
+}
+@keyframes chartLineMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(33.33%); }
+}
+
+/* Layer 4: Fine dot grid */
+.grid-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Layer 5: Subtle noise texture for premium feel */
+.noise-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
   pointer-events: none;
   z-index: 0;
 }
@@ -149,6 +239,29 @@ body::before {
 .card:hover {
   border-color: var(--border-hover);
   box-shadow: 0 0 20px rgba(22,119,255,0.1);
+}
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(22,119,255,0.3), rgba(22,119,255,0.5), rgba(22,119,255,0.3), transparent);
+  opacity: 0.6;
+}
+
+/* Hero glow */
+.hero-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(22,119,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Grid */
@@ -292,9 +405,11 @@ body::before {
   font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
 }
 .master-avatar {
-  width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05);
-  display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;
-  color: var(--accent); border: 1px solid var(--border); flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; color: #ffffff;
+  border: 2px solid rgba(255,255,255,0.15);
+  flex-shrink: 0; text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 .master-quote {
   font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; font-style: italic;
@@ -305,6 +420,44 @@ body::before {
 .master-quote::after { content: '"'; color: var(--accent); font-size: 1.2rem; font-weight: 700; }
 .master-tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .master-tag { font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+.master-picks {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.master-picks-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.master-picks-label i { color: var(--accent); font-size: 0.7rem; }
+.master-picks-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.master-pick {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(22,119,255,0.12), rgba(22,119,255,0.05));
+  border: 1px solid rgba(22,119,255,0.2);
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--accent-light);
+  transition: all 0.2s;
+}
+.master-pick:hover {
+  background: linear-gradient(135deg, rgba(22,119,255,0.2), rgba(22,119,255,0.08));
+  border-color: rgba(22,119,255,0.4);
+  transform: translateY(-1px);
+}
+.master-pick-tag {
+  font-size: 0.65rem; padding: 1px 5px; border-radius: 3px;
+  font-weight: 700; margin-left: 2px;
+}
+.master-pick-tag.up { background: var(--up-bg); color: var(--up); }
+.master-pick-tag.down { background: var(--down-bg); color: var(--down); }
+.master-pick-tag.defense { background: rgba(250,140,22,0.12); color: var(--orange); }
+.master-pick-tag.new { background: rgba(22,119,255,0.15); color: var(--accent-light); }
+.master-pick-tag.empty { background: rgba(255,255,255,0.05); color: var(--text-dim); }
 
 /* Strategy */
 .strategy-card { border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 20px; }
@@ -392,6 +545,10 @@ body::before {
 </head>
 <body>
 
+<div class="chart-line"></div>
+<div class="grid-overlay"></div>
+<div class="noise-overlay"></div>
+
 <nav class="navbar">
   <div class="nav-brand">
     <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
@@ -399,10 +556,12 @@ body::before {
   </div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#overview" class="active">概览</a></li>
+    <li><a href="#masters">AI投资大师观点</a></li>
     <li><a href="#indices">指数</a></li>
     <li><a href="#sentiment">情绪</a></li>
     <li><a href="#sectors">板块</a></li>
     <li><a href="#capital">资金</a></li>
+    <li><a href="chain.html">产业链</a></li>
     <li><a href="#strategy">策略</a></li>
   </ul>
   <div class="nav-meta">
@@ -416,6 +575,7 @@ body::before {
 
   <!-- Hero -->
   <section class="hero">
+    <div class="hero-glow"></div>
     <h1 class="hero-slogan">洞察先机 / 把握趋势</h1>
     <p class="hero-subtitle">每日深度复盘，助你洞察市场先机</p>
     <div class="hero-actions">
@@ -427,62 +587,6 @@ body::before {
       <span>2026年6月26日 周五</span>
       <span style="opacity:0.3">|</span>
       <span>成交 3.58万亿</span>
-    </div>
-  </section>
-
-  <!-- 明日盘前看点 -->
-  <section class="section" id="overview">
-    <div class="section-title">
-      <span>明日盘前看点</span>
-      <span class="title-badge">前瞻</span>
-    </div>
-    <div class="preview-card">
-      <div class="preview-title"><i class="fas fa-binoculars" style="color:var(--accent)"></i> 盘前关键事件</div>
-      <ul class="preview-list">
-        <li>周末关注：中东局势持续升级，美军对伊朗实施打击，霍尔木兹海峡安全存疑 <span class="preview-tag urgent">URGENT</span></li>
-        <li>周末关注：美股芯片股暴跌，美光科技跌超6%，存储概念全线重挫，周一A股芯片板块承压 <span class="preview-tag urgent">URGENT</span></li>
-        <li>周末关注：第三批国补625亿元资金已下达，消费刺激政策持续发力 <span class="preview-tag hot">HOT</span></li>
-        <li>周末关注：证监会发布新规规范量化交易，短线生态或将改变 <span class="preview-tag hot">HOT</span></li>
-        <li>周末关注：GPT-5.6深夜亮相，AI应用概念或再受催化 <span class="preview-tag info">INFO</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Quick Stats -->
-  <section class="section">
-    <div class="quick-stats">
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-2.26%</div>
-        <div class="quick-stat-label">上证指数</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-3.44%</div>
-        <div class="quick-stat-label">深证成指</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-4.07%</div>
-        <div class="quick-stat-label">创业板指</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-1.65%</div>
-        <div class="quick-stat-label">科创50</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--text)">3.58万亿</div>
-        <div class="quick-stat-label">成交额</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--up)">768</div>
-        <div class="quick-stat-label">上涨</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">4456</div>
-        <div class="quick-stat-label">下跌</div>
-      </div>
-      <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--up)">68</div>
-        <div class="quick-stat-label">涨停</div>
-      </div>
     </div>
   </section>
 
@@ -568,7 +672,437 @@ body::before {
         <div id="chartIndex8" class="index-chart-mini"></div>
       </div>
     </div>
+
+      <div class="card" style="margin-top:20px; border-color:rgba(22,119,255,0.3)">
+        <div class="card-title" style="color:var(--accent-light)"><i class="fas fa-crosshairs"></i> 市场主线分析</div>
+        <div class="grid-3" style="gap:16px">
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--up)">🔴 崩溃主线</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">科技主线全面崩盘：半导体-5.2%、CPO-4.8%、存储芯片-2.6%。兆易创新-7%、新易盛-8.5%，获利盘踩踏式出逃。</p>
+            <div class="tag-row" style="margin-top:10px">
+              <span class="stock-ticker" style="color:var(--down)">半导体 -5.2%</span>
+              <span class="stock-ticker" style="color:var(--down)">CPO -4.8%</span>
+              <span class="stock-ticker" style="color:var(--down)">存储芯片 -2.6%</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--accent-light)">🔵 逆势主线</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">航天装备+4.25%领涨，光伏TCL中环涨停，新股N惠科暴涨315%。资金在科技崩盘时寻找新突破口。</p>
+            <div class="tag-row" style="margin-top:10px">
+              <span class="stock-ticker" style="color:var(--up)">航天装备 +4.25%</span>
+              <span class="stock-ticker" style="color:var(--up)">TCL中环 涨停</span>
+              <span class="stock-ticker" style="color:var(--up)">N惠科 +315%</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--orange)">🟠 防御主线</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">高股息板块受资金追捧：煤炭+2.8%、银行+1.5%、电力+3.2%。中国神华业绩+35%，农业银行新高。</p>
+            <div class="tag-row" style="margin-top:10px">
+              <span class="stock-ticker" style="color:var(--up)">煤炭 +2.8%</span>
+              <span class="stock-ticker" style="color:var(--up)">银行 +1.5%</span>
+              <span class="stock-ticker" style="color:var(--up)">电力 +3.2%</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight-box" style="margin-top:16px; background:rgba(22,119,255,0.06)">
+          <span style="color:var(--accent);font-weight:700"><i class="fas fa-lightbulb" style="margin-right:6px"></i>风格判定：</span>
+          <span style="color:var(--text-muted)">科技成长 → 防御高股息，市场从进攻切向防守。短线关注逆势抗跌品种，中线等待科技企稳信号。</span>
+        </div>
+      </div>
   </section>
+
+
+  <div class="section-divider"></div>
+
+  <!-- AI投资大师观点 -->
+  <section class="section" id="masters">
+    <div class="section-title">
+      <span>AI投资大师观点</span>
+      <span class="title-badge">实时洞察</span>
+    </div>
+    <div class="master-grid">
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-gem" style="font-size:0.8rem"></i> 价值投资</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #f6d365, #fda085);">巴</div> 沃伦·巴菲特</div>
+        <div class="master-quote">市场恐慌时保持理性，大跌往往是最好的买入机会。但前提是你要知道你买的是什么。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">保持理性</span>
+          <span class="master-tag">大跌机会</span>
+          <span class="master-tag">价值</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">中国神华 <span class="master-pick-tag defense">高股息</span></span>
+            <span class="master-pick">农业银行 <span class="master-pick-tag defense">防御</span></span>
+            <span class="master-pick">迈瑞医疗 <span class="master-pick-tag defense">蓝筹</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">养</div> 炒股养家</div>
+        <div class="master-quote">4000+家下跌，这是真正的冰点。冰点后必有修复，关键是修复的力度。</div>
+        <div class="master-tag-row">
+          <span class="master-tag hot">情绪冰点</span>
+          <span class="master-tag">必有修复</span>
+          <span class="master-tag">修复力度</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">新股+315%</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">涨停</span></span>
+            <span class="master-pick">TCL中环 <span class="master-pick-tag up">涨停</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">涅</div> 涅槃重生</div>
+        <div class="master-quote">航天板块逆势走强，说明资金在找新的突破口。但一日游的概率很大。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">资金突破</span>
+          <span class="master-tag">航天逆势</span>
+          <span class="master-tag hot">一日游概率</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">龙头</span></span>
+            <span class="master-pick">天娱数科 <span class="master-pick-tag up">涨停</span></span>
+            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">+20%</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">令</div> 令狐冲</div>
+        <div class="master-quote">最高板在哪里？连板梯队还有没有？如果没有，短线就是休息。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">最高板</span>
+          <span class="master-tag">连板梯队</span>
+          <span class="master-tag">短线休息</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">凯盛科技 <span class="master-pick-tag up">首板</span></span>
+            <span class="master-pick">节能风电 <span class="master-pick-tag up">首板</span></span>
+            <span class="master-pick">彤程新材 <span class="master-pick-tag up">首板</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">乔</div> 乔帮主</div>
+        <div class="master-quote">龙头都不在了，还谈什么信仰？等新的龙头诞生再说。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">龙头缺失</span>
+          <span class="master-tag">等龙头</span>
+          <span class="master-tag">不信仰</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">龙头</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">龙头</span></span>
+            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">龙头</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4);">赵</div> 赵老哥</div>
+        <div class="master-quote">这种行情，首板质量都不高。空仓是最好的策略。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">首板质量低</span>
+          <span class="master-tag">空仓策略</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">宏柏新材 <span class="master-pick-tag up">4连板</span></span>
+            <span class="master-pick">大连热电 <span class="master-pick-tag up">反包</span></span>
+            <span class="master-pick">华能国际 <span class="master-pick-tag up">2连板</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">新</div> 作手新一</div>
+        <div class="master-quote">趋势破了就是破了，不要幻想。5日线、10日线、20日线全破，离场。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">趋势破位</span>
+          <span class="master-tag">全破离场</span>
+          <span class="master-tag">不幻想</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">TCL中环 <span class="master-pick-tag up">趋势</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">趋势</span></span>
+            <span class="master-pick">菲利华 <span class="master-pick-tag up">趋势</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">瑞</div> 瑞鹤仙</div>
+        <div class="master-quote">没有合力，没有主线，没有龙头。三无行情，观望。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">无合力</span>
+          <span class="master-tag">无主线</span>
+          <span class="master-tag">观望</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">试错</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">试错</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">观望</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-sync-alt" style="font-size:0.8rem"></i> 弱转强</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">退</div> 退学炒股</div>
+        <div class="master-quote">弱转强？没有弱转强，只有弱更弱。尾盘没有回流，下周继续低预期。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">弱更弱</span>
+          <span class="master-tag">无回流</span>
+          <span class="master-tag">低预期</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">尾盘</span></span>
+            <span class="master-pick">观望 <span class="master-pick-tag empty">等周一</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">为主</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-bolt" style="font-size:0.8rem"></i> 打板与高频</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">北</div> 北京炒家</div>
+        <div class="master-quote">炸板率可能创新高。放弃打板，因为根本没有板可打。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">炸板率高</span>
+          <span class="master-tag">放弃打板</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">节能风电 <span class="master-pick-tag up">低吸</span></span>
+            <span class="master-pick">华能国际 <span class="master-pick-tag up">低吸</span></span>
+            <span class="master-pick">中国神华 <span class="master-pick-tag defense">防御</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-bolt" style="font-size:0.8rem"></i> 打板与高频</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #fa709a, #fee140);">杰</div> 杰哥学霸</div>
+        <div class="master-quote">量化资金也在跑，踩踏式下跌。不要试图抄底，因为你不知道底在哪里。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">量化踩踏</span>
+          <span class="master-tag">不抄底</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">量化</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">量化</span></span>
+            <span class="master-pick">天娱数科 <span class="master-pick-tag up">量化</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">杨</div> 杨永兴</div>
+        <div class="master-quote">趋势确认结束。从高点跌下来的，再涨回去需要时间和信心。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">趋势结束</span>
+          <span class="master-tag">时间信心</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">中国神华 <span class="master-pick-tag defense">防守</span></span>
+            <span class="master-pick">农业银行 <span class="master-pick-tag defense">防守</span></span>
+            <span class="master-pick">节能风电 <span class="master-pick-tag up">趋势</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">陈</div> 陈小群</div>
+        <div class="master-quote">节点确认——下跌趋势。要么空仓，要么做空（如果有工具的话）。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">下跌趋势</span>
+          <span class="master-tag">空仓</span>
+          <span class="master-tag">做空</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">重仓</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">重仓</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">备选</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">字</div> 字母哥</div>
+        <div class="master-quote">从2成仓降到空仓。不硬抗，不抄底，不预测。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">空仓</span>
+          <span class="master-tag">不硬抗</span>
+          <span class="master-tag">不预测</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">核心</span></span>
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">核心</span></span>
+            <span class="master-pick">农业银行 <span class="master-pick-tag defense">防守</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-shield-alt" style="font-size:0.8rem"></i> 防守与复利</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #f6d365, #fda085);">龙</div> 龙飞虎</div>
+        <div class="master-quote">保住本金的最好方式就是不参与。现在参与就是送钱。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">保住本金</span>
+          <span class="master-tag">不参与</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">中国神华 <span class="master-pick-tag defense">保本</span></span>
+            <span class="master-pick">农业银行 <span class="master-pick-tag defense">保本</span></span>
+            <span class="master-pick">迈瑞医疗 <span class="master-pick-tag defense">保本</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">科</div> 92科比</div>
+        <div class="master-quote">今天看不懂，明天更看不懂。休息一周再说。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">看不懂</span>
+          <span class="master-tag">休息</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">唯一</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">为主</span></span>
+            <span class="master-pick">观望 <span class="master-pick-tag empty">观望</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #fa709a, #fee140);">独</div> 独孤一剑</div>
+        <div class="master-quote">没有一击必杀的机会。因为整个市场在下跌，没有独立的强势股。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">无机会</span>
+          <span class="master-tag">无强势股</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">等时机</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">等时机</span></span>
+            <span class="master-pick">空仓 <span class="master-pick-tag empty">等时机</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="master-card">
+        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
+        <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">光</div> 一瞬流光</div>
+        <div class="master-quote">没有亮点。所有板块都在跌，资金无处可去。</div>
+        <div class="master-tag-row">
+          <span class="master-tag">无亮点</span>
+          <span class="master-tag">资金无处可去</span>
+        </div>
+        <div class="master-picks">
+          <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
+          <div class="master-picks-row">
+            <span class="master-pick">N惠科 <span class="master-pick-tag new">亮点</span></span>
+            <span class="master-pick">中国卫星 <span class="master-pick-tag up">亮点</span></span>
+            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">亮点</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- 明日盘前看点 -->
+  <section class="section" id="overview">
+    <div class="section-title">
+      <span>明日盘前看点</span>
+      <span class="title-badge">前瞻</span>
+    </div>
+    <div class="preview-card">
+      <div class="preview-title"><i class="fas fa-binoculars" style="color:var(--accent)"></i> 盘前关键事件</div>
+      <ul class="preview-list">
+        <li>周末关注：中东局势持续升级，美军对伊朗实施打击，霍尔木兹海峡安全存疑 <span class="preview-tag urgent">URGENT</span></li>
+        <li>周末关注：美股芯片股暴跌，美光科技跌超6%，存储概念全线重挫，周一A股芯片板块承压 <span class="preview-tag urgent">URGENT</span></li>
+        <li>周末关注：第三批国补625亿元资金已下达，消费刺激政策持续发力 <span class="preview-tag hot">HOT</span></li>
+        <li>周末关注：证监会发布新规规范量化交易，短线生态或将改变 <span class="preview-tag hot">HOT</span></li>
+        <li>周末关注：GPT-5.6深夜亮相，AI应用概念或再受催化 <span class="preview-tag info">INFO</span></li>
+      </ul>
+    </div>
+  </section>
+
+
+  <div class="section-divider"></div>
+
+  <section class="section">
+    <div class="quick-stats">
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--down)">-2.26%</div>
+        <div class="quick-stat-label">上证指数</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--down)">-3.44%</div>
+        <div class="quick-stat-label">深证成指</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--down)">-4.07%</div>
+        <div class="quick-stat-label">创业板指</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--down)">-1.65%</div>
+        <div class="quick-stat-label">科创50</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--text)">3.58万亿</div>
+        <div class="quick-stat-label">成交额</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--up)">768</div>
+        <div class="quick-stat-label">上涨</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--down)">4456</div>
+        <div class="quick-stat-label">下跌</div>
+      </div>
+      <div class="quick-stat-item">
+        <div class="quick-stat-value" style="color:var(--up)">68</div>
+        <div class="quick-stat-label">涨停</div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="section-divider"></div>
 
   <!-- 外围联动 -->
   <section class="section">
@@ -620,6 +1154,7 @@ body::before {
     </div>
   </section>
 
+
   <div class="section-divider"></div>
 
   <!-- 市场情绪 -->
@@ -646,6 +1181,9 @@ body::before {
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -695,6 +1233,9 @@ body::before {
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -769,6 +1310,9 @@ body::before {
 
   <div class="section-divider"></div>
 
+
+  <div class="section-divider"></div>
+
   <!-- 板块梯队 -->
   <section class="section">
     <div class="section-title">
@@ -809,6 +1353,9 @@ body::before {
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -871,6 +1418,9 @@ body::before {
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -958,6 +1508,9 @@ body::before {
 
   <div class="section-divider"></div>
 
+
+  <div class="section-divider"></div>
+
   <!-- 中国股票新闻 -->
   <section class="section">
     <div class="section-title">
@@ -1010,6 +1563,9 @@ body::before {
 
   <div class="section-divider"></div>
 
+
+  <div class="section-divider"></div>
+
   <!-- 涨停排行 -->
   <section class="section">
     <div class="section-title">
@@ -1048,6 +1604,9 @@ body::before {
 
   <div class="section-divider"></div>
 
+
+  <div class="section-divider"></div>
+
   <!-- 风险警示（跌停/大跌） -->
   <section class="section">
     <div class="section-title">
@@ -1074,6 +1633,9 @@ body::before {
       </table>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -1113,187 +1675,6 @@ body::before {
 
   <div class="section-divider"></div>
 
-  <!-- 投资大师观点 -->
-  <section class="section" id="masters">
-    <div class="section-title">
-      <span>投资大师观点</span>
-      <span class="title-badge">今日市场</span>
-    </div>
-    <div class="master-grid">
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-gem" style="font-size:0.8rem"></i> 价值投资</div>
-        <div class="master-name"><div class="master-avatar">巴</div> 沃伦·巴菲特</div>
-        <div class="master-quote">市场恐慌时保持理性，大跌往往是最好的买入机会。但前提是你要知道你买的是什么。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">保持理性</span>
-          <span class="master-tag">大跌机会</span>
-          <span class="master-tag">价值</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
-        <div class="master-name"><div class="master-avatar">养</div> 炒股养家</div>
-        <div class="master-quote">4000+家下跌，这是真正的冰点。冰点后必有修复，关键是修复的力度。</div>
-        <div class="master-tag-row">
-          <span class="master-tag hot">情绪冰点</span>
-          <span class="master-tag">必有修复</span>
-          <span class="master-tag">修复力度</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
-        <div class="master-name"><div class="master-avatar">涅</div> 涅槃重生</div>
-        <div class="master-quote">航天板块逆势走强，说明资金在找新的突破口。但一日游的概率很大。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">资金突破</span>
-          <span class="master-tag">航天逆势</span>
-          <span class="master-tag hot">一日游概率</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
-        <div class="master-name"><div class="master-avatar">令</div> 令狐冲</div>
-        <div class="master-quote">最高板在哪里？连板梯队还有没有？如果没有，短线就是休息。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">最高板</span>
-          <span class="master-tag">连板梯队</span>
-          <span class="master-tag">短线休息</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
-        <div class="master-name"><div class="master-avatar">乔</div> 乔帮主</div>
-        <div class="master-quote">龙头都不在了，还谈什么信仰？等新的龙头诞生再说。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">龙头缺失</span>
-          <span class="master-tag">等龙头</span>
-          <span class="master-tag">不信仰</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
-        <div class="master-name"><div class="master-avatar">赵</div> 赵老哥</div>
-        <div class="master-quote">这种行情，首板质量都不高。空仓是最好的策略。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">首板质量低</span>
-          <span class="master-tag">空仓策略</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
-        <div class="master-name"><div class="master-avatar">新</div> 作手新一</div>
-        <div class="master-quote">趋势破了就是破了，不要幻想。5日线、10日线、20日线全破，离场。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">趋势破位</span>
-          <span class="master-tag">全破离场</span>
-          <span class="master-tag">不幻想</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
-        <div class="master-name"><div class="master-avatar">瑞</div> 瑞鹤仙</div>
-        <div class="master-quote">没有合力，没有主线，没有龙头。三无行情，观望。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">无合力</span>
-          <span class="master-tag">无主线</span>
-          <span class="master-tag">观望</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-sync-alt" style="font-size:0.8rem"></i> 弱转强</div>
-        <div class="master-name"><div class="master-avatar">退</div> 退学炒股</div>
-        <div class="master-quote">弱转强？没有弱转强，只有弱更弱。尾盘没有回流，下周继续低预期。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">弱更弱</span>
-          <span class="master-tag">无回流</span>
-          <span class="master-tag">低预期</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-bolt" style="font-size:0.8rem"></i> 打板与高频</div>
-        <div class="master-name"><div class="master-avatar">北</div> 北京炒家</div>
-        <div class="master-quote">炸板率可能创新高。放弃打板，因为根本没有板可打。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">炸板率高</span>
-          <span class="master-tag">放弃打板</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-bolt" style="font-size:0.8rem"></i> 打板与高频</div>
-        <div class="master-name"><div class="master-avatar">杰</div> 杰哥学霸</div>
-        <div class="master-quote">量化资金也在跑，踩踏式下跌。不要试图抄底，因为你不知道底在哪里。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">量化踩踏</span>
-          <span class="master-tag">不抄底</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
-        <div class="master-name"><div class="master-avatar">杨</div> 杨永兴</div>
-        <div class="master-quote">趋势确认结束。从高点跌下来的，再涨回去需要时间和信心。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">趋势结束</span>
-          <span class="master-tag">时间信心</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
-        <div class="master-name"><div class="master-avatar">陈</div> 陈小群</div>
-        <div class="master-quote">节点确认——下跌趋势。要么空仓，要么做空（如果有工具的话）。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">下跌趋势</span>
-          <span class="master-tag">空仓</span>
-          <span class="master-tag">做空</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
-        <div class="master-name"><div class="master-avatar">字</div> 字母哥</div>
-        <div class="master-quote">从2成仓降到空仓。不硬抗，不抄底，不预测。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">空仓</span>
-          <span class="master-tag">不硬抗</span>
-          <span class="master-tag">不预测</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-shield-alt" style="font-size:0.8rem"></i> 防守与复利</div>
-        <div class="master-name"><div class="master-avatar">龙</div> 龙飞虎</div>
-        <div class="master-quote">保住本金的最好方式就是不参与。现在参与就是送钱。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">保住本金</span>
-          <span class="master-tag">不参与</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
-        <div class="master-name"><div class="master-avatar">科</div> 92科比</div>
-        <div class="master-quote">今天看不懂，明天更看不懂。休息一周再说。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">看不懂</span>
-          <span class="master-tag">休息</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
-        <div class="master-name"><div class="master-avatar">独</div> 独孤一剑</div>
-        <div class="master-quote">没有一击必杀的机会。因为整个市场在下跌，没有独立的强势股。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">无机会</span>
-          <span class="master-tag">无强势股</span>
-        </div>
-      </div>
-      <div class="master-card">
-        <div class="master-category"><i class="fas fa-fingerprint" style="font-size:0.8rem"></i> 独立风格</div>
-        <div class="master-name"><div class="master-avatar">光</div> 一瞬流光</div>
-        <div class="master-quote">没有亮点。所有板块都在跌，资金无处可去。</div>
-        <div class="master-tag-row">
-          <span class="master-tag">无亮点</span>
-          <span class="master-tag">资金无处可去</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <div class="section-divider"></div>
 
@@ -1360,6 +1741,9 @@ body::before {
 
   <div class="section-divider"></div>
 
+
+  <div class="section-divider"></div>
+
   <!-- 持仓诊断 -->
   <section class="section">
     <div class="section-title">
@@ -1387,6 +1771,9 @@ body::before {
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
 
   <div class="section-divider"></div>
 
@@ -1471,13 +1858,12 @@ body::before {
     </div>
   </section>
 
+
   <!-- Footer -->
   <footer class="footer">
     <p>MarketReview · 2026.06.26 A股复盘</p>
     <p style="margin-top:8px; font-size:0.75rem; color:var(--text-dim)">本页面仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
   </footer>
-
-</div>
 
 <script>
 // ECharts dark theme colors
