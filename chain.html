@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -191,6 +192,211 @@ body::after {
   padding: 16px 20px; background: linear-gradient(135deg, rgba(22,119,255,0.08), rgba(22,119,255,0.02));
   border: 1px solid rgba(22,119,255,0.2); border-radius: 12px;
 }
+
+/* ===== Chain Visual Covers ===== */
+.chain-visual {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: 40px 32px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid var(--border);
+}
+.chain-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 500px 400px at 80% 50%, rgba(255,255,255,0.04) 0%, transparent 70%),
+              radial-gradient(ellipse 300px 200px at 20% 80%, rgba(255,255,255,0.02) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.chain-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+  pointer-events: none; z-index: 0;
+}
+
+/* AI算力 - 蓝色 */
+.chain-visual.ai {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1b3a 50%, #0a1628 100%);
+  border-color: rgba(22,119,255,0.25);
+  box-shadow: 0 0 40px rgba(22,119,255,0.1), inset 0 0 60px rgba(22,119,255,0.05);
+}
+.chain-visual.ai .visual-icon {
+  background: linear-gradient(135deg, rgba(22,119,255,0.2), rgba(22,119,255,0.05));
+  border-color: rgba(22,119,255,0.4);
+  box-shadow: 0 0 30px rgba(22,119,255,0.3);
+}
+
+/* 机器人 - 紫色/红 */
+.chain-visual.robot {
+  background: linear-gradient(135deg, #1a0a1a 0%, #1e0d1e 50%, #1a0a1a 100%);
+  border-color: rgba(139,92,246,0.25);
+  box-shadow: 0 0 40px rgba(139,92,246,0.1), inset 0 0 60px rgba(139,92,246,0.05);
+}
+.chain-visual.robot .visual-icon {
+  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.05));
+  border-color: rgba(139,92,246,0.4);
+  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+}
+
+/* 半导体 - 橙色/金 */
+.chain-visual.semi {
+  background: linear-gradient(135deg, #1a1205 0%, #1e1508 50%, #1a1205 100%);
+  border-color: rgba(250,140,22,0.25);
+  box-shadow: 0 0 40px rgba(250,140,22,0.1), inset 0 0 60px rgba(250,140,22,0.05);
+}
+.chain-visual.semi .visual-icon {
+  background: linear-gradient(135deg, rgba(250,140,22,0.2), rgba(250,140,22,0.05));
+  border-color: rgba(250,140,22,0.4);
+  box-shadow: 0 0 30px rgba(250,140,22,0.3);
+}
+
+/* 光伏 - 绿色 */
+.chain-visual.pv {
+  background: linear-gradient(135deg, #0a1a0a 0%, #0d1e0d 50%, #0a1a0a 100%);
+  border-color: rgba(82,196,26,0.25);
+  box-shadow: 0 0 40px rgba(82,196,26,0.1), inset 0 0 60px rgba(82,196,26,0.05);
+}
+.chain-visual.pv .visual-icon {
+  background: linear-gradient(135deg, rgba(82,196,26,0.2), rgba(82,196,26,0.05));
+  border-color: rgba(82,196,26,0.4);
+  box-shadow: 0 0 30px rgba(82,196,26,0.3);
+}
+
+/* 新能源 - 红色 */
+.chain-visual.ev {
+  background: linear-gradient(135deg, #1a0a0a 0%, #1e0d0d 50%, #1a0a0a 100%);
+  border-color: rgba(255,77,79,0.25);
+  box-shadow: 0 0 40px rgba(255,77,79,0.1), inset 0 0 60px rgba(255,77,79,0.05);
+}
+.chain-visual.ev .visual-icon {
+  background: linear-gradient(135deg, rgba(255,77,79,0.2), rgba(255,77,79,0.05));
+  border-color: rgba(255,77,79,0.4);
+  box-shadow: 0 0 30px rgba(255,77,79,0.3);
+}
+
+/* 商业航天 - 青色 */
+.chain-visual.space {
+  background: linear-gradient(135deg, #0a151a 0%, #0d1a1e 50%, #0a151a 100%);
+  border-color: rgba(6,182,212,0.25);
+  box-shadow: 0 0 40px rgba(6,182,212,0.1), inset 0 0 60px rgba(6,182,212,0.05);
+}
+.chain-visual.space .visual-icon {
+  background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.05));
+  border-color: rgba(6,182,212,0.4);
+  box-shadow: 0 0 30px rgba(6,182,212,0.3);
+}
+
+/* 量子科技 - 紫色 */
+.chain-visual.quantum {
+  background: linear-gradient(135deg, #120a1a 0%, #160d1e 50%, #120a1a 100%);
+  border-color: rgba(139,92,246,0.25);
+  box-shadow: 0 0 40px rgba(139,92,246,0.1), inset 0 0 60px rgba(139,92,246,0.05);
+}
+.chain-visual.quantum .visual-icon {
+  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.05));
+  border-color: rgba(139,92,246,0.4);
+  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+}
+
+/* 生物制造 - 粉色 */
+.chain-visual.bio {
+  background: linear-gradient(135deg, #1a0a12 0%, #1e0d16 50%, #1a0a12 100%);
+  border-color: rgba(236,72,153,0.25);
+  box-shadow: 0 0 40px rgba(236,72,153,0.1), inset 0 0 60px rgba(236,72,153,0.05);
+}
+.chain-visual.bio .visual-icon {
+  background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05));
+  border-color: rgba(236,72,153,0.4);
+  box-shadow: 0 0 30px rgba(236,72,153,0.3);
+}
+
+/* 氢能和核聚变 - 亮绿色 */
+.chain-visual.hydrogen {
+  background: linear-gradient(135deg, #0a1a0a 0%, #0d1e0d 50%, #0a1a0a 100%);
+  border-color: rgba(34,197,94,0.25);
+  box-shadow: 0 0 40px rgba(34,197,94,0.1), inset 0 0 60px rgba(34,197,94,0.05);
+}
+.chain-visual.hydrogen .visual-icon {
+  background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05));
+  border-color: rgba(34,197,94,0.4);
+  box-shadow: 0 0 30px rgba(34,197,94,0.3);
+}
+
+.visual-content { position: relative; z-index: 1; flex: 1; }
+.visual-icon {
+  position: relative; z-index: 1;
+  width: 80px; height: 80px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; border: 2px solid;
+  flex-shrink: 0;
+  animation: visualPulse 3s ease-in-out infinite;
+}
+@keyframes visualPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.visual-title { font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 6px; letter-spacing: -0.5px; }
+.visual-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; }
+.visual-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.visual-tag { font-size: 0.72rem; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); font-weight: 600; }
+
+.visual-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.visual-data-row { display: flex; gap: 24px; }
+.visual-data-item { text-align: center; }
+.visual-data-value { font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--text); }
+.visual-data-label { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+.visual-bar {
+  width: 200px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+  position: relative; margin-top: 8px;
+}
+.visual-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-light));
+  animation: visualBarGrow 2s ease-out forwards;
+}
+@keyframes visualBarGrow { from { width: 0; } }
+
+.visual-scanline {
+  position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: visualScan 4s ease-in-out infinite;
+  pointer-events: none; z-index: 2;
+}
+@keyframes visualScan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.visual-dots {
+  position: absolute; z-index: 0;
+  display: flex; gap: 4px;
+}
+.visual-dot { width: 3px; height: 3px; border-radius: 50%; opacity: 0.4; }
+
+.visual-circuit {
+  position: absolute; z-index: 0; opacity: 0.1;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: visualCircuitSpin 10s linear infinite;
+}
+@keyframes visualCircuitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .chain-detail-title { font-size: 1.2rem; font-weight: 700; color: var(--text); }
 .chain-detail-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
 
@@ -273,6 +479,87 @@ body::after {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 2px; }
+
+/* Chain Diagram - SVG-based flowchart */
+.chain-diagram {
+  margin-bottom: 24px;
+  padding: 32px 24px;
+  background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(14,14,14,0.95));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.chain-diagram::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+/* SVG flowchart styles */
+.chain-flowchart { width: 100%; max-width: 1200px; margin: 0 auto; display: block; }
+.flow-node {
+  rx: 8; ry: 8;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+.flow-node-text {
+  fill: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.flow-node-subtext {
+  fill: #a0a0a0;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.chain-flowchart .flow-arrow {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.chain-flowchart .flow-arrow-dashed {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4,3;
+}
+.flow-label {
+  fill: #a0a0a0;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+/* Node colors by tier */
+.node-tier-1 { fill: rgba(255,77,79,0.12); stroke: rgba(255,77,79,0.5); }
+.node-tier-2 { fill: rgba(22,119,255,0.12); stroke: rgba(22,119,255,0.5); }
+.node-tier-3 { fill: rgba(250,140,22,0.12); stroke: rgba(250,140,22,0.5); }
+.node-tier-4 { fill: rgba(82,196,26,0.12); stroke: rgba(82,196,26,0.5); }
+.node-tier-5 { fill: rgba(6,182,212,0.12); stroke: rgba(6,182,212,0.5); }
+
+/* Layer labels */
+.flow-layer-label {
+  fill: #666;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .chain-diagram { padding: 16px 8px; overflow-x: auto; }
+  .chain-flowchart { min-width: 800px; }
+}
 </style>
 </head>
 <body>
@@ -311,6 +598,9 @@ body::after {
       <a href="#robot" class="btn btn-outline"><i class="fas fa-robot"></i> 机器人</a>
       <a href="#semi" class="btn btn-outline"><i class="fas fa-memory"></i> 半导体</a>
       <a href="#new-energy" class="btn btn-outline"><i class="fas fa-solar-panel"></i> 新能源</a>
+      <a href="#quantum" class="btn btn-outline" style="border-color: rgba(139,92,246,0.3); color: #c4b5fd;"><i class="fas fa-atom"></i> 量子科技</a>
+      <a href="#bio" class="btn btn-outline" style="border-color: rgba(236,72,153,0.3); color: #f9a8d4;"><i class="fas fa-dna"></i> 生物制造</a>
+      <a href="#hydrogen" class="btn btn-outline" style="border-color: rgba(34,197,94,0.3); color: #86efac;"><i class="fas fa-bolt"></i> 氢能核聚变</a>
       <a href="#rating" class="btn btn-outline"><i class="fas fa-star"></i> 个股评级</a>
     </div>
   </section>
@@ -319,7 +609,7 @@ body::after {
   <section class="section">
     <div class="section-title">
       <span>高景气赛道概览</span>
-      <span class="title-badge">6大赛道</span>
+      <span class="title-badge">9大赛道</span>
     </div>
     <div class="chain-overview">
       <div class="card chain-card">
@@ -448,11 +738,167 @@ body::after {
           <span class="chain-tag">航天晨光</span>
         </div>
       </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon" style="background: rgba(139,92,246,0.15); color: #c4b5fd;"><i class="fas fa-atom"></i></div>
+          <div>
+            <div class="chain-name">量子科技产业链</div>
+            <div class="chain-desc">量子计算硬件 → 量子通信设备 → 量子计算机整机 → 金融/药物/密码应用</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$120亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>45%</span></div>
+          <div class="chain-stat-item">核心标的: <span>15只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">国盾量子</span>
+          <span class="chain-tag">科大国创</span>
+          <span class="chain-tag">神州信息</span>
+          <span class="chain-tag">光迅科技</span>
+          <span class="chain-tag">本源量子</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon" style="background: rgba(236,72,153,0.15); color: #f9a8d4;"><i class="fas fa-dna"></i></div>
+          <div>
+            <div class="chain-name">生物制造产业链</div>
+            <div class="chain-desc">基因编辑/DNA合成 → 细胞工厂 → 生物制造平台 → 生物制药/生物基化学品</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$1,800亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>22%</span></div>
+          <div class="chain-stat-item">核心标的: <span>25只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">凯赛生物</span>
+          <span class="chain-tag">华恒生物</span>
+          <span class="chain-tag">梅花生物</span>
+          <span class="chain-tag">蔚蓝生物</span>
+          <span class="chain-tag">川宁生物</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon" style="background: rgba(34,197,94,0.15); color: #86efac;"><i class="fas fa-bolt"></i></div>
+          <div>
+            <div class="chain-name">氢能和核聚变能产业链</div>
+            <div class="chain-desc">制氢/电解槽 → 储氢/运氢 → 氢燃料电池 → 核聚变装置/超导磁体</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$2,500亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>30%</span></div>
+          <div class="chain-stat-item">核心标的: <span>30只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">亿华通</span>
+          <span class="chain-tag">潍柴动力</span>
+          <span class="chain-tag">美锦能源</span>
+          <span class="chain-tag">中国核建</span>
+          <span class="chain-tag">东方电气</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- AI算力产业链 -->
   <section class="section chain-detail" id="ai-compute">
+    <div class="chain-visual ai">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:120px;height:120px;top:20px;right:40px;"></div>
+      <div class="visual-circuit" style="width:80px;height:80px;bottom:20px;right:80px;animation-direction:reverse;"></div>
+      <div class="visual-content">
+        <div class="visual-title">AI算力产业链</div>
+        <div class="visual-desc">AI Chip → HBM Memory → Optical Module → PCB → Power Supply → Liquid Cooling</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $3,300亿</span>
+          <span class="visual-tag">CAGR 23%</span>
+          <span class="visual-tag">核心标的 46只</span>
+          <span class="visual-tag">国产替代加速</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#1677ff;"><i class="fas fa-microchip"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:85%;background:linear-gradient(90deg,transparent,#1677ff,#4096ff);"></div></div>
+      </div>
+    </div>
+    <div class="chain-diagram">
+      <svg class="chain-flowchart" viewBox="0 0 1000 480">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(160,160,160,0.6)" />
+          </marker>
+        </defs>
+
+        <!-- Layer labels -->
+        <text x="500" y="20" class="flow-layer-label">上游 · 硬件与材料</text>
+        <text x="500" y="180" class="flow-layer-label">中游 · 算力基础设施</text>
+        <text x="500" y="340" class="flow-layer-label">下游 · 模型应用</text>
+
+        <!-- Layer 1: 6 nodes -->
+        <rect x="35" y="35" width="130" height="60" class="flow-node node-tier-1" />
+        <text x="100" y="58" class="flow-node-text">AI芯片</text>
+        <text x="100" y="76" class="flow-node-subtext">寒武纪 · 海光 · 英伟达</text>
+
+        <rect x="185" y="35" width="130" height="60" class="flow-node node-tier-2" />
+        <text x="250" y="58" class="flow-node-text">存储 / HBM</text>
+        <text x="250" y="76" class="flow-node-subtext">SK海力士 · 三星 · 澜起</text>
+
+        <rect x="335" y="35" width="130" height="60" class="flow-node node-tier-3" />
+        <text x="400" y="58" class="flow-node-text">光模块</text>
+        <text x="400" y="76" class="flow-node-subtext">中际旭创 · 新易盛 · 天孚</text>
+
+        <rect x="485" y="35" width="130" height="60" class="flow-node node-tier-4" />
+        <text x="550" y="58" class="flow-node-text">PCB / 先进封装</text>
+        <text x="550" y="76" class="flow-node-subtext">胜宏 · 沪电 · 长电</text>
+
+        <rect x="635" y="35" width="130" height="60" class="flow-node node-tier-5" />
+        <text x="700" y="58" class="flow-node-text">电源</text>
+        <text x="700" y="76" class="flow-node-subtext">麦格米特 · 欧陆通</text>
+
+        <rect x="785" y="35" width="130" height="60" class="flow-node node-tier-1" />
+        <text x="850" y="58" class="flow-node-text">液冷</text>
+        <text x="850" y="76" class="flow-node-subtext">英维克 · 三花 · 申菱</text>
+
+        <!-- Layer 2: 2 nodes -->
+        <rect x="220" y="200" width="180" height="60" class="flow-node node-tier-2" />
+        <text x="310" y="223" class="flow-node-text">AI服务器</text>
+        <text x="310" y="241" class="flow-node-subtext">工业富联 · 浪潮 · 中科曙光</text>
+
+        <rect x="520" y="200" width="180" height="60" class="flow-node node-tier-2" />
+        <text x="610" y="223" class="flow-node-text">数据中心</text>
+        <text x="610" y="241" class="flow-node-subtext">万国数据 · 世纪互联 · 润泽</text>
+
+        <!-- Layer 3: 2 nodes -->
+        <rect x="220" y="360" width="180" height="60" class="flow-node node-tier-3" />
+        <text x="310" y="383" class="flow-node-text">大模型</text>
+        <text x="310" y="401" class="flow-node-subtext">科大讯飞 · 百度 · 阿里</text>
+
+        <rect x="520" y="360" width="180" height="60" class="flow-node node-tier-4" />
+        <text x="610" y="383" class="flow-node-text">AI Agent</text>
+        <text x="610" y="401" class="flow-node-subtext">汉王 · 彩讯 · 昆仑万维</text>
+
+        <!-- Arrows from L1 to L2 (left group -> left L2, right group -> right L2) -->
+        <path d="M100,95 L100,150 L310,150 L310,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(255,77,79,0.4)" />
+        <path d="M250,95 L250,150 L310,150 L310,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(22,119,255,0.4)" />
+        <path d="M400,95 L400,150 L310,150 L310,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(250,140,22,0.4)" />
+        <path d="M550,95 L550,150 L610,150 L610,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(82,196,26,0.4)" />
+        <path d="M700,95 L700,150 L610,150 L610,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(6,182,212,0.4)" />
+        <path d="M850,95 L850,150 L610,150 L610,200" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(255,77,79,0.4)" />
+
+        <!-- Arrows from L2 to L3 (straight down) -->
+        <path d="M310,260 L310,360" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(22,119,255,0.4)" />
+        <path d="M610,260 L610,360" class="flow-arrow" marker-end="url(#arrowhead)" stroke="rgba(22,119,255,0.4)" />
+
+        <!-- Dashed cross arrows -->
+        <path d="M400,260 L400,310 L610,310 L610,360" class="flow-arrow-dashed" marker-end="url(#arrowhead)" stroke="rgba(22,119,255,0.25)" />
+        <path d="M520,260 L520,310 L310,310 L310,360" class="flow-arrow-dashed" marker-end="url(#arrowhead)" stroke="rgba(22,119,255,0.25)" />
+      </svg>
+    </div>
+
     <div class="chain-detail-header">
       <div class="chain-icon blue" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-microchip"></i></div>
       <div>
@@ -716,6 +1162,89 @@ body::after {
 
   <!-- 机器人产业链 -->
   <section class="section chain-detail" id="robot">
+    <div class="chain-visual robot">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:100px;height:100px;top:30px;right:50px;border-color:rgba(139,92,246,0.3);"></div>
+      <div class="visual-content">
+        <div class="visual-title">人形机器人产业链</div>
+        <div class="visual-desc">Sensor → Reducer → Motor → Actuator → Ball Screw → Structural Part → Whole Machine</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $500亿</span>
+          <span class="visual-tag">CAGR 35%</span>
+          <span class="visual-tag">T链 59只</span>
+          <span class="visual-tag">Tesla Optimus</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#a78bfa;"><i class="fas fa-robot"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:70%;background:linear-gradient(90deg,transparent,#a78bfa,#c4b5fd);"></div></div>
+      </div>
+    </div>
+    
+    <div class="chain-diagram">
+      <svg class="chain-flowchart" viewBox="0 0 1000 640">
+        <defs>
+          <marker id="arrowhead-robot" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(160,160,160,0.6)" />
+          </marker>
+        </defs>
+
+        <!-- 头部总成 -->
+        <rect x="400" y="15" width="200" height="50" class="flow-node node-tier-1" />
+        <text x="500" y="33" class="flow-node-text">头部总成</text>
+        <text x="500" y="51" class="flow-node-subtext">均胜电子 · 蓝思科技</text>
+
+        <!-- 传感器 Row 1 -->
+        <rect x="170" y="95" width="160" height="50" class="flow-node node-tier-2" />
+        <text x="250" y="113" class="flow-node-text">传感器</text>
+        <text x="250" y="131" class="flow-node-subtext">安培龙 · 凌云 · 奥比中光</text>
+
+        <rect x="420" y="95" width="160" height="50" class="flow-node node-tier-2" />
+        <text x="500" y="113" class="flow-node-text">电机 / 控制</text>
+        <text x="500" y="131" class="flow-node-subtext">鸣志 · 兆威 · 汇川</text>
+
+        <rect x="670" y="95" width="160" height="50" class="flow-node node-tier-2" />
+        <text x="750" y="113" class="flow-node-text">减速器</text>
+        <text x="750" y="131" class="flow-node-subtext">绿的谐波 · 双环 · 昊志</text>
+
+        <!-- 执行器 Row 2 -->
+        <rect x="170" y="185" width="160" height="50" class="flow-node node-tier-3" />
+        <text x="250" y="203" class="flow-node-text">执行器</text>
+        <text x="250" y="221" class="flow-node-subtext">三花 · 拓普 · 震裕</text>
+
+        <rect x="420" y="185" width="160" height="50" class="flow-node node-tier-3" />
+        <text x="500" y="203" class="flow-node-text">丝杠</text>
+        <text x="500" y="221" class="flow-node-subtext">恒立 · 北特 · 五洲</text>
+
+        <rect x="670" y="185" width="160" height="50" class="flow-node node-tier-3" />
+        <text x="750" y="203" class="flow-node-text">结构件</text>
+        <text x="750" y="221" class="flow-node-subtext">长盈 · 恒勃 · 统联</text>
+
+        <!-- 整机 -->
+        <rect x="300" y="275" width="400" height="50" class="flow-node node-tier-1" />
+        <text x="500" y="293" class="flow-node-text">整机</text>
+        <text x="500" y="311" class="flow-node-subtext">特斯拉 · 优必选 · 小米</text>
+
+        <!-- Arrows: head -> row1 -->
+        <path d="M500,65 L500,80 L250,80 L250,95" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+        <path d="M500,65 L500,80 L500,80 L500,95" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+        <path d="M500,65 L500,80 L750,80 L750,95" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+
+        <!-- Arrows: row1 -> row2 (cross) -->
+        <path d="M250,145 L250,165 L250,165 L250,185" class="flow-arrow" stroke="rgba(139,92,246,0.3)" marker-end="url(#arrowhead-robot)" />
+        <path d="M500,145 L500,165 L500,165 L500,185" class="flow-arrow" stroke="rgba(139,92,246,0.3)" marker-end="url(#arrowhead-robot)" />
+        <path d="M750,145 L750,165 L750,165 L750,185" class="flow-arrow" stroke="rgba(139,92,246,0.3)" marker-end="url(#arrowhead-robot)" />
+        <path d="M250,145 L250,165 L500,165 L500,185" class="flow-arrow-dashed" stroke="rgba(139,92,246,0.2)" marker-end="url(#arrowhead-robot)" />
+        <path d="M750,145 L750,165 L500,165 L500,185" class="flow-arrow-dashed" stroke="rgba(139,92,246,0.2)" marker-end="url(#arrowhead-robot)" />
+        <path d="M250,145 L250,165 L750,165 L750,185" class="flow-arrow-dashed" stroke="rgba(139,92,246,0.15)" marker-end="url(#arrowhead-robot)" />
+
+        <!-- Arrows: row2 -> 整机 -->
+        <path d="M250,235 L250,255 L500,255 L500,275" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+        <path d="M500,235 L500,255 L500,255 L500,275" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+        <path d="M750,235 L750,255 L500,255 L500,275" class="flow-arrow" stroke="rgba(139,92,246,0.4)" marker-end="url(#arrowhead-robot)" />
+      </svg>
+    </div>
+
     <div class="chain-detail-header">
       <div class="chain-icon purple" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-robot"></i></div>
       <div>
@@ -908,6 +1437,74 @@ body::after {
 
   <!-- 半导体产业链 -->
   <section class="section chain-detail" id="semi">
+    <div class="chain-visual semi">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:110px;height:110px;top:25px;right:45px;border-color:rgba(250,140,22,0.3);"></div>
+      <div class="visual-content">
+        <div class="visual-title">半导体产业链</div>
+        <div class="visual-desc">EDA → Equipment → Materials → Manufacturing → Packaging → Design</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $6,000亿</span>
+          <span class="visual-tag">CAGR 12%</span>
+          <span class="visual-tag">核心标的 120+</span>
+          <span class="visual-tag">国产替代</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#fa8c16;"><i class="fas fa-memory"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:60%;background:linear-gradient(90deg,transparent,#fa8c16,#ffd591);"></div></div>
+      </div>
+    </div>
+    
+    <div class="chain-diagram">
+      <svg class="chain-flowchart" viewBox="0 0 1000 300">
+        <defs>
+          <marker id="arrowhead-semi" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(160,160,160,0.6)" />
+          </marker>
+        </defs>
+
+        <!-- Pipeline: EDA -> 设备 -> 材料 -> 制造 -> 封测 -> 设计 -->
+        <rect x="40" y="90" width="120" height="70" class="flow-node node-tier-1" />
+        <text x="100" y="115" class="flow-node-text">EDA</text>
+        <text x="100" y="133" class="flow-node-subtext">Cadence · Synopsys · 华大九天</text>
+
+        <rect x="185" y="90" width="120" height="70" class="flow-node node-tier-2" />
+        <text x="245" y="115" class="flow-node-text">设备</text>
+        <text x="245" y="133" class="flow-node-subtext">ASML · 应用材料 · 北方华创</text>
+
+        <rect x="330" y="90" width="120" height="70" class="flow-node node-tier-3" />
+        <text x="390" y="115" class="flow-node-text">材料</text>
+        <text x="390" y="133" class="flow-node-subtext">信越化学 · 沪硅 · 南大光电</text>
+
+        <rect x="475" y="90" width="120" height="70" class="flow-node node-tier-4" />
+        <text x="535" y="115" class="flow-node-text">制造</text>
+        <text x="535" y="133" class="flow-node-subtext">台积电 · 中芯国际 · 英特尔</text>
+
+        <rect x="620" y="90" width="120" height="70" class="flow-node node-tier-5" />
+        <text x="680" y="115" class="flow-node-text">封测</text>
+        <text x="680" y="133" class="flow-node-subtext">日月光 · 长电 · 通富微电</text>
+
+        <rect x="765" y="90" width="120" height="70" class="flow-node node-tier-1" />
+        <text x="825" y="115" class="flow-node-text">设计</text>
+        <text x="825" y="133" class="flow-node-subtext">英伟达 · 高通 · 韦尔 · 兆易</text>
+
+        <!-- Arrows -->
+        <line x1="160" y1="125" x2="185" y2="125" class="flow-arrow" stroke="rgba(250,140,22,0.4)" marker-end="url(#arrowhead-semi)" />
+        <line x1="305" y1="125" x2="330" y2="125" class="flow-arrow" stroke="rgba(250,140,22,0.4)" marker-end="url(#arrowhead-semi)" />
+        <line x1="450" y1="125" x2="475" y2="125" class="flow-arrow" stroke="rgba(250,140,22,0.4)" marker-end="url(#arrowhead-semi)" />
+        <line x1="595" y1="125" x2="620" y2="125" class="flow-arrow" stroke="rgba(250,140,22,0.4)" marker-end="url(#arrowhead-semi)" />
+        <line x1="740" y1="125" x2="765" y2="125" class="flow-arrow" stroke="rgba(250,140,22,0.4)" marker-end="url(#arrowhead-semi)" />
+
+        <!-- Feedback dashed arrows -->
+        <path d="M185,160 L185,190 L160,190 L160,160" class="flow-arrow-dashed" stroke="rgba(250,140,22,0.2)" marker-end="url(#arrowhead-semi)" />
+        <path d="M330,160 L330,190 L305,190 L305,160" class="flow-arrow-dashed" stroke="rgba(250,140,22,0.2)" marker-end="url(#arrowhead-semi)" />
+        <path d="M475,160 L475,190 L450,190 L450,160" class="flow-arrow-dashed" stroke="rgba(250,140,22,0.2)" marker-end="url(#arrowhead-semi)" />
+        <path d="M620,160 L620,190 L595,190 L595,160" class="flow-arrow-dashed" stroke="rgba(250,140,22,0.2)" marker-end="url(#arrowhead-semi)" />
+        <path d="M765,160 L765,190 L740,190 L740,160" class="flow-arrow-dashed" stroke="rgba(250,140,22,0.2)" marker-end="url(#arrowhead-semi)" />
+      </svg>
+    </div>
+
     <div class="chain-detail-header">
       <div class="chain-icon orange" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-memory"></i></div>
       <div>
@@ -1031,6 +1628,74 @@ body::after {
 
   <!-- 新能源产业链 -->
   <section class="section chain-detail" id="new-energy">
+    <div class="chain-visual pv">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:105px;height:105px;top:28px;right:48px;border-color:rgba(82,196,26,0.3);"></div>
+      <div class="visual-content">
+        <div class="visual-title">光伏 / 储能产业链</div>
+        <div class="visual-desc">Silicon → Wafer → Cell → Module → Inverter → Energy Storage</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $2,800亿</span>
+          <span class="visual-tag">CAGR 18%</span>
+          <span class="visual-tag">核心标的 80+</span>
+          <span class="visual-tag">全球领先</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#52c41a;"><i class="fas fa-solar-panel"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:75%;background:linear-gradient(90deg,transparent,#52c41a,#95de64);"></div></div>
+      </div>
+    </div>
+    
+    <div class="chain-diagram">
+      <svg class="chain-flowchart" viewBox="0 0 1000 300">
+        <defs>
+          <marker id="arrowhead-pv" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(160,160,160,0.6)" />
+          </marker>
+        </defs>
+
+        <!-- Pipeline: 硅料 -> 硅片 -> 电池 -> 组件 -> 逆变器 -> 储能系统 -->
+        <rect x="40" y="90" width="120" height="70" class="flow-node node-tier-4" />
+        <text x="100" y="115" class="flow-node-text">硅料</text>
+        <text x="100" y="133" class="flow-node-subtext">通威 · 大全 · 协鑫</text>
+
+        <rect x="185" y="90" width="120" height="70" class="flow-node node-tier-4" />
+        <text x="245" y="115" class="flow-node-text">硅片</text>
+        <text x="245" y="133" class="flow-node-subtext">TCL中环 · 隆基 · 晶科</text>
+
+        <rect x="330" y="90" width="120" height="70" class="flow-node node-tier-4" />
+        <text x="390" y="115" class="flow-node-text">电池</text>
+        <text x="390" y="133" class="flow-node-subtext">隆基 · 晶科 · 天合 · 爱旭</text>
+
+        <rect x="475" y="90" width="120" height="70" class="flow-node node-tier-4" />
+        <text x="535" y="115" class="flow-node-text">组件</text>
+        <text x="535" y="133" class="flow-node-subtext">晶澳 · 天合 · 阿特斯 · 东方</text>
+
+        <rect x="620" y="90" width="120" height="70" class="flow-node node-tier-3" />
+        <text x="680" y="115" class="flow-node-text">逆变器</text>
+        <text x="680" y="133" class="flow-node-subtext">阳光电源 · 华为 · 锦浪 · 固德威</text>
+
+        <rect x="765" y="90" width="120" height="70" class="flow-node node-tier-2" />
+        <text x="825" y="115" class="flow-node-text">储能系统</text>
+        <text x="825" y="133" class="flow-node-subtext">宁德时代 · 比亚迪 · 亿纬锂能</text>
+
+        <!-- Arrows -->
+        <line x1="160" y1="125" x2="185" y2="125" class="flow-arrow" stroke="rgba(82,196,26,0.4)" marker-end="url(#arrowhead-pv)" />
+        <line x1="305" y1="125" x2="330" y2="125" class="flow-arrow" stroke="rgba(82,196,26,0.4)" marker-end="url(#arrowhead-pv)" />
+        <line x1="450" y1="125" x2="475" y2="125" class="flow-arrow" stroke="rgba(82,196,26,0.4)" marker-end="url(#arrowhead-pv)" />
+        <line x1="595" y1="125" x2="620" y2="125" class="flow-arrow" stroke="rgba(82,196,26,0.4)" marker-end="url(#arrowhead-pv)" />
+        <line x1="740" y1="125" x2="765" y2="125" class="flow-arrow" stroke="rgba(82,196,26,0.4)" marker-end="url(#arrowhead-pv)" />
+
+        <!-- Dashed feedback arrows -->
+        <path d="M185,160 L185,190 L160,190 L160,160" class="flow-arrow-dashed" stroke="rgba(82,196,26,0.2)" marker-end="url(#arrowhead-pv)" />
+        <path d="M330,160 L330,190 L305,190 L305,160" class="flow-arrow-dashed" stroke="rgba(82,196,26,0.2)" marker-end="url(#arrowhead-pv)" />
+        <path d="M475,160 L475,190 L450,190 L450,160" class="flow-arrow-dashed" stroke="rgba(82,196,26,0.2)" marker-end="url(#arrowhead-pv)" />
+        <path d="M620,160 L620,190 L595,190 L595,160" class="flow-arrow-dashed" stroke="rgba(82,196,26,0.2)" marker-end="url(#arrowhead-pv)" />
+        <path d="M765,160 L765,190 L740,190 L740,160" class="flow-arrow-dashed" stroke="rgba(82,196,26,0.2)" marker-end="url(#arrowhead-pv)" />
+      </svg>
+    </div>
+
     <div class="chain-detail-header">
       <div class="chain-icon green" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-solar-panel"></i></div>
       <div>
@@ -1106,6 +1771,339 @@ body::after {
           <span class="segment-stock">科华数据 <span class="stock-tag core">国产</span></span>
           <span class="segment-stock">盛弘股份 <span class="stock-tag core">国产</span></span>
           <span class="segment-stock">南都电源 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 量子科技产业链 -->
+  <section class="section chain-detail" id="quantum">
+    <div class="chain-visual quantum">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:120px;height:120px;top:20px;right:40px;border-color:rgba(139,92,246,0.3);"></div>
+      <div class="visual-circuit" style="width:80px;height:80px;bottom:20px;right:80px;animation-direction:reverse;border-color:rgba(139,92,246,0.2);"></div>
+      <div class="visual-content">
+        <div class="visual-title">量子科技产业链</div>
+        <div class="visual-desc">Quantum Hardware → Quantum Communication → Quantum Computer → Applications</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $120亿</span>
+          <span class="visual-tag">CAGR 45%</span>
+          <span class="visual-tag">核心标的 15只</span>
+          <span class="visual-tag">国家战略</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#c4b5fd;"><i class="fas fa-atom"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:95%;background:linear-gradient(90deg,transparent,#a78bfa,#c4b5fd);"></div></div>
+      </div>
+    </div>
+    <div class="chain-detail-header">
+      <div class="chain-icon" style="width:48px;height:48px;font-size:1.5rem;background:rgba(139,92,246,0.15);color:#c4b5fd;"><i class="fas fa-atom"></i></div>
+      <div>
+        <div class="chain-detail-title">量子科技产业链全景</div>
+        <div class="chain-detail-subtitle">量子计算 → 量子通信 → 量子测量 → 下游应用</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> 量子计算硬件 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$50亿</div>
+        </div>
+        <div class="segment-desc">超导量子比特、离子阱、光量子、硅量子点。量子计算核心。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">国盾量子 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">科大国创 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">光迅科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">IBM <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Google <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">IonQ <span class="stock-tag overseas">美</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 量子通信设备</div>
+          <div class="segment-size">$30亿</div>
+        </div>
+        <div class="segment-desc">量子密钥分发、量子随机数发生器、量子中继器。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">国盾量子 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">神州信息 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">九州量子 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 量子测量仪器</div>
+          <div class="segment-size">$20亿</div>
+        </div>
+        <div class="segment-desc">量子陀螺仪、量子重力仪、量子磁力计。精密测量。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">国盾量子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科大国创 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">航天电子 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 稀释制冷机 / 低温系统</div>
+          <div class="segment-size">$10亿</div>
+        </div>
+        <div class="segment-desc">超导量子计算必需的mK级低温环境。核心技术壁垒。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">BlueFors <span class="stock-tag overseas">芬</span></span>
+          <span class="segment-stock">Oxford Instruments <span class="stock-tag overseas">英</span></span>
+          <span class="segment-stock">国盾量子 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 量子计算机整机</div>
+          <div class="segment-size">$25亿</div>
+        </div>
+        <div class="segment-desc">量子计算机系统集成。IBM、Google、本源量子等。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">IBM <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Google <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">国盾量子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">阿里巴巴 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 下游应用</div>
+          <div class="segment-size">$15亿</div>
+        </div>
+        <div class="segment-desc">金融风控、药物研发、密码学、气象预测、材料模拟。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">国盾量子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">神州信息 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">药明康德 <span class="stock-tag core">应用</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 生物制造产业链 -->
+  <section class="section chain-detail" id="bio">
+    <div class="chain-visual bio">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:115px;height:115px;top:22px;right:42px;border-color:rgba(236,72,153,0.3);"></div>
+      <div class="visual-content">
+        <div class="visual-title">生物制造产业链</div>
+        <div class="visual-desc">Gene Editing → Cell Factory → Bio-Manufacturing → Bio-Pharma / Chemicals</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $1,800亿</span>
+          <span class="visual-tag">CAGR 22%</span>
+          <span class="visual-tag">核心标的 25只</span>
+          <span class="visual-tag">合成生物学</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#f9a8d4;"><i class="fas fa-dna"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:80%;background:linear-gradient(90deg,transparent,#ec4899,#f9a8d4);"></div></div>
+      </div>
+    </div>
+    <div class="chain-detail-header">
+      <div class="chain-icon" style="width:48px;height:48px;font-size:1.5rem;background:rgba(236,72,153,0.15);color:#f9a8d4;"><i class="fas fa-dna"></i></div>
+      <div>
+        <div class="chain-detail-title">生物制造产业链全景</div>
+        <div class="chain-detail-subtitle">合成生物学工具 → 细胞工厂 → 生物制造平台 → 下游应用</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> 合成生物学工具 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$200亿</div>
+        </div>
+        <div class="segment-desc">基因编辑(CRISPR)、DNA合成、测序、生物信息学。底层技术。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">华大智造 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">贝瑞基因 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Illumina <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Twist Bioscience <span class="stock-tag overseas">美</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 发酵原料与装备</div>
+          <div class="segment-size">$300亿</div>
+        </div>
+        <div class="segment-desc">培养基、酶制剂、生物反应器、分离纯化设备。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">梅花生物 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">安琪酵母 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">楚天科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东富龙 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 细胞工厂 / 底盘细胞</div>
+          <div class="segment-size">$150亿</div>
+        </div>
+        <div class="segment-desc">工程化微生物、酵母、大肠杆菌等底盘细胞改造。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">凯赛生物 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">华恒生物 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">川宁生物 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 生物制造平台</div>
+          <div class="segment-size">$400亿</div>
+        </div>
+        <div class="segment-desc">酶催化、微生物发酵、生物转化平台。核心制造环节。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">凯赛生物 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">华恒生物 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">梅花生物 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">蔚蓝生物 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 生物基材料</div>
+          <div class="segment-size">$250亿</div>
+        </div>
+        <div class="segment-desc">PLA、PHA、生物基尼龙、生物基聚氨酯等替代石化材料。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">凯赛生物 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">金发科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">金丹科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 下游应用</div>
+          <div class="segment-size">$500亿</div>
+        </div>
+        <div class="segment-desc">生物制药、生物基化学品、生物燃料、食品替代(人造肉)。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">药明康德 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">凯赛生物 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华恒生物 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 氢能和核聚变能产业链 -->
+  <section class="section chain-detail" id="hydrogen">
+    <div class="chain-visual hydrogen">
+      <div class="visual-scanline"></div>
+      <div class="visual-circuit" style="width:110px;height:110px;top:25px;right:45px;border-color:rgba(34,197,94,0.3);"></div>
+      <div class="visual-circuit" style="width:70px;height:70px;bottom:25px;right:75px;animation-direction:reverse;border-color:rgba(34,197,94,0.2);"></div>
+      <div class="visual-content">
+        <div class="visual-title">氢能和核聚变能产业链</div>
+        <div class="visual-desc">Hydrogen Production → Storage / Transport → Fuel Cell → Nuclear Fusion</div>
+        <div class="visual-tags">
+          <span class="visual-tag">市场规模 $2,500亿</span>
+          <span class="visual-tag">CAGR 30%</span>
+          <span class="visual-tag">核心标的 30只</span>
+          <span class="visual-tag">零碳能源</span>
+        </div>
+      </div>
+      <div class="visual-right">
+        <div class="visual-icon" style="color:#86efac;"><i class="fas fa-bolt"></i></div>
+        <div class="visual-bar"><div class="visual-bar-fill" style="width:72%;background:linear-gradient(90deg,transparent,#22c55e,#86efac);"></div></div>
+      </div>
+    </div>
+    <div class="chain-detail-header">
+      <div class="chain-icon" style="width:48px;height:48px;font-size:1.5rem;background:rgba(34,197,94,0.15);color:#86efac;"><i class="fas fa-bolt"></i></div>
+      <div>
+        <div class="chain-detail-title">氢能和核聚变能产业链全景</div>
+        <div class="chain-detail-subtitle">制氢 → 储氢/运氢 → 氢燃料电池 → 核聚变装置</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> 制氢设备 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$600亿</div>
+        </div>
+        <div class="segment-desc">电解槽(ALK/PEM/SOEC)、质子交换膜、催化剂、绿氢项目。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">隆基氢能 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">阳光氢能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国富氢能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Plug Power <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">宝丰能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">双良节能 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 储氢与运氢</div>
+          <div class="segment-size">$300亿</div>
+        </div>
+        <div class="segment-desc">高压储氢罐、液氢、固态储氢、管道输氢、长管拖车。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">中材科技 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">国富氢能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">京城股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">厚普股份 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 氢燃料电池</div>
+          <div class="segment-size">$800亿</div>
+        </div>
+        <div class="segment-desc">电堆、膜电极、双极板、质子交换膜、催化剂、空压机等。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">亿华通 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">潍柴动力 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">美锦能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">雄韬股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东方电气 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Ballard <span class="stock-tag overseas">加</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 氢能整车与应用</div>
+          <div class="segment-size">$400亿</div>
+        </div>
+        <div class="segment-desc">氢燃料电池汽车、重卡、船舶、氢能发电。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">亿华通 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">潍柴动力 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">宇通客车 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">福田汽车 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 核聚变装置 <span class="tier-badge a">A级</span></div>
+          <div class="segment-size">$200亿</div>
+        </div>
+        <div class="segment-desc">托卡马克、仿星器、激光惯性约束。超导磁体、第一壁材料、氚燃料。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">中国核建 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">东方电气 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">上海电气 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国机重装 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">久立特材 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">西部超导 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">安泰科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国光电气 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 核聚变材料与部件</div>
+          <div class="segment-size">$100亿</div>
+        </div>
+        <div class="segment-desc">超导磁体(Nb3Sn/REBCO)、钨铜合金第一壁、氚增殖包层。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">西部超导 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">久立特材 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">安泰科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国光电气 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">宝胜股份 <span class="stock-tag core">国产</span></span>
         </div>
       </div>
     </div>
