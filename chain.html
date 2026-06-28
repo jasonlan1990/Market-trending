@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产业链拆解 | MarketReview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.15);
+  --text: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --text-dim: #666666;
+  --accent: #1677ff;
+  --accent-light: #4096ff;
+  --accent-glow: rgba(22,119,255,0.3);
+  --up: #ff4d4f;
+  --up-bg: rgba(255,77,79,0.12);
+  --down: #52c41a;
+  --down-bg: rgba(82,196,26,0.12);
+  --orange: #fa8c16;
+  --yellow: #fadb14;
+  --font: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0a0a0a;
+  color: #ffffff;
+  font-family: var(--font);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Background layers */
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 40px, rgba(255,255,255,0.008) 40px, rgba(255,255,255,0.008) 42px, transparent 42px, transparent 80px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 120px, rgba(255,255,255,0.005) 120px, rgba(255,255,255,0.005) 121px, transparent 121px, transparent 240px);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 20%, rgba(22,119,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 500px at 85% 60%, rgba(22,119,255,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 50% 90%, rgba(255,77,79,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 30% 70%, rgba(22,119,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%, 100% { opacity: 1; transform: translate(0, 0); }
+  33% { opacity: 0.8; transform: translate(10px, -10px); }
+  66% { opacity: 0.9; transform: translate(-5px, 5px); }
+}
+
+.chart-line {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.chart-line::before {
+  content: '';
+  position: absolute; top: 30%; left: -100%; width: 300%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(22,119,255,0.15), rgba(22,119,255,0.3), rgba(22,119,255,0.15), transparent);
+  animation: chartLineMove 15s linear infinite;
+}
+.chart-line::after {
+  content: '';
+  position: absolute; top: 70%; left: -100%; width: 300%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,77,79,0.1), rgba(255,77,79,0.2), rgba(255,77,79,0.1), transparent);
+  animation: chartLineMove 12s linear infinite reverse;
+}
+@keyframes chartLineMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(33.33%); }
+}
+
+.grid-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none; z-index: 0;
+}
+
+.noise-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02; pointer-events: none; z-index: 0;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 56px; background: rgba(10,10,10,0.95);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-brand .logo-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; }
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 6px 14px; border-radius: 6px; transition: all 0.2s ease; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); background: rgba(22,119,255,0.1); }
+.nav-links a.active { color: var(--accent-light); }
+.nav-meta { display: flex; align-items: center; gap: 12px; }
+.back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+.back-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+
+/* Main */
+.main-container { position: relative; z-index: 1; padding-top: 56px; }
+
+/* Hero */
+.hero { padding: 60px 32px 40px; text-align: center; position: relative; }
+.hero-glow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(22,119,255,0.15) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.hero-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; position: relative; z-index: 1; }
+.hero-subtitle { font-size: 1rem; color: var(--text-muted); margin-bottom: 24px; position: relative; z-index: 1; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; position: relative; z-index: 1; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; border: none; text-decoration: none; }
+.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: white; }
+.btn-primary:hover { box-shadow: 0 0 20px var(--accent-glow); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent-light); }
+
+/* Section */
+.section { padding: 32px; max-width: 1400px; margin: 0 auto; }
+.section-title {
+  font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px; color: var(--text);
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.section-title::before { content: ''; width: 4px; height: 20px; border-radius: 2px; background: var(--accent); display: inline-block; }
+.section-title .title-badge { margin-left: auto; font-size: 0.75rem; padding: 3px 10px; border-radius: 20px; background: rgba(22,119,255,0.12); color: var(--accent-light); font-weight: 600; }
+
+/* Cards */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; transition: all 0.2s ease; position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(22,119,255,0.3), rgba(22,119,255,0.5), rgba(22,119,255,0.3), transparent); opacity: 0.6;
+}
+.card:hover { border-color: var(--border-hover); box-shadow: 0 0 20px rgba(22,119,255,0.1); }
+
+/* Chain Overview */
+.chain-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.chain-card { padding: 24px; }
+.chain-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.chain-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.chain-icon.blue { background: rgba(22,119,255,0.15); color: var(--accent-light); }
+.chain-icon.green { background: rgba(82,196,26,0.15); color: var(--down); }
+.chain-icon.orange { background: rgba(250,140,22,0.15); color: var(--orange); }
+.chain-icon.purple { background: rgba(139,92,246,0.15); color: #a78bfa; }
+.chain-icon.red { background: rgba(255,77,79,0.15); color: var(--up); }
+.chain-icon.cyan { background: rgba(6,182,212,0.15); color: #67e8f9; }
+.chain-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.chain-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.6; }
+.chain-stat { display: flex; gap: 16px; margin-bottom: 12px; }
+.chain-stat-item { font-size: 0.8rem; color: var(--text-muted); }
+.chain-stat-item span { color: var(--text); font-weight: 700; font-family: var(--font-mono); }
+.chain-tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.chain-tag { font-size: 0.75rem; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted); }
+
+/* Chain Detail */
+.chain-detail { margin-bottom: 32px; }
+.chain-detail-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  padding: 16px 20px; background: linear-gradient(135deg, rgba(22,119,255,0.08), rgba(22,119,255,0.02));
+  border: 1px solid rgba(22,119,255,0.2); border-radius: 12px;
+}
+.chain-detail-title { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+.chain-detail-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Segment Grid */
+.segment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.segment-card { padding: 20px; }
+.segment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.segment-name { font-size: 1rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.segment-name .segment-num {
+  width: 24px; height: 24px; border-radius: 50%; background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: white;
+}
+.segment-size { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); }
+.segment-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+.segment-stocks { display: flex; flex-wrap: wrap; gap: 6px; }
+.segment-stock {
+  font-size: 0.78rem; padding: 3px 10px; border-radius: 6px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--text-secondary); transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.segment-stock:hover { background: rgba(22,119,255,0.1); border-color: rgba(22,119,255,0.3); color: var(--accent-light); }
+.segment-stock .stock-tag {
+  font-size: 0.65rem; padding: 1px 5px; border-radius: 3px; font-weight: 700;
+}
+.stock-tag.leader { background: rgba(255,77,79,0.15); color: var(--up); }
+.stock-tag.core { background: rgba(22,119,255,0.15); color: var(--accent-light); }
+.stock-tag.overseas { background: rgba(250,140,22,0.15); color: var(--orange); }
+
+/* Flow arrow */
+.flow-arrow {
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; color: var(--text-dim); font-size: 1.5rem;
+}
+
+/* Tier Badge */
+.tier-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-left: 8px; }
+.tier-badge.s { background: rgba(255,77,79,0.15); color: var(--up); }
+.tier-badge.a { background: rgba(22,119,255,0.15); color: var(--accent-light); }
+.tier-badge.b { background: rgba(250,140,22,0.15); color: var(--orange); }
+
+/* Rating Table */
+.rating-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.rating-table thead th { padding: 10px 12px; text-align: left; font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+.rating-table tbody td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); }
+.rating-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.rating-table tbody tr:last-child td { border-bottom: none; }
+.rating-name { font-weight: 600; color: var(--text); }
+.rating-tier { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+.rating-tier.s { background: rgba(255,77,79,0.15); color: var(--up); }
+.rating-tier.a-plus { background: rgba(22,119,255,0.15); color: var(--accent-light); }
+.rating-tier.a { background: rgba(82,196,26,0.15); color: var(--down); }
+.rating-tier.b { background: rgba(250,140,22,0.15); color: var(--orange); }
+.rating-tier.c { background: rgba(255,255,255,0.08); color: var(--text-muted); }
+.rating-tier.d { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+.rating-pe { font-family: var(--font-mono); color: var(--text-muted); }
+.rating-peg { font-family: var(--font-mono); font-weight: 700; }
+.rating-peg.low { color: var(--down); }
+.rating-peg.mid { color: var(--orange); }
+.rating-peg.high { color: var(--up); }
+.rating-growth { color: var(--text-secondary); }
+.rating-score { font-weight: 700; color: var(--accent-light); }
+.rating-note { font-size: 0.8rem; color: var(--text-muted); max-width: 300px; }
+
+/* Footer */
+.footer { padding: 40px 32px; text-align: center; border-top: 1px solid var(--border); margin-top: 40px; color: var(--text-dim); font-size: 0.85rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { padding: 40px 20px 30px; }
+  .hero-title { font-size: 2rem; }
+  .section { padding: 20px 16px; }
+  .chain-overview { grid-template-columns: 1fr; }
+  .segment-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="chart-line"></div>
+<div class="grid-overlay"></div>
+<div class="noise-overlay"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+    <span>MarketReview</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="index.html#indices">指数</a></li>
+    <li><a href="index.html#masters">AI大师</a></li>
+    <li><a href="index.html#strategy">策略</a></li>
+    <li><a href="report.html">报告</a></li>
+    <li><a href="chain.html" class="active">产业链</a></li>
+  </ul>
+  <div class="nav-meta">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> 返回首页</a>
+  </div>
+</nav>
+
+<div class="main-container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <h1 class="hero-title">产业链拆解</h1>
+    <p class="hero-subtitle">高景气赛道全产业链深度解析 · 从上游到下游 · 核心标的全覆盖</p>
+    <div class="hero-actions">
+      <a href="#ai-compute" class="btn btn-primary"><i class="fas fa-microchip"></i> AI算力</a>
+      <a href="#robot" class="btn btn-outline"><i class="fas fa-robot"></i> 机器人</a>
+      <a href="#semi" class="btn btn-outline"><i class="fas fa-memory"></i> 半导体</a>
+      <a href="#new-energy" class="btn btn-outline"><i class="fas fa-solar-panel"></i> 新能源</a>
+      <a href="#rating" class="btn btn-outline"><i class="fas fa-star"></i> 个股评级</a>
+    </div>
+  </section>
+
+  <!-- Chain Overview -->
+  <section class="section">
+    <div class="section-title">
+      <span>高景气赛道概览</span>
+      <span class="title-badge">6大赛道</span>
+    </div>
+    <div class="chain-overview">
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon blue"><i class="fas fa-microchip"></i></div>
+          <div>
+            <div class="chain-name">AI算力产业链</div>
+            <div class="chain-desc">AI芯片 → 存储/HBM → 光模块 → PCB → 电源 → 液冷 → 下游应用</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$3,300亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>23%</span></div>
+          <div class="chain-stat-item">核心标的: <span>46只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">英伟达</span>
+          <span class="chain-tag">台积电</span>
+          <span class="chain-tag">寒武纪</span>
+          <span class="chain-tag">海光信息</span>
+          <span class="chain-tag">中际旭创</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon purple"><i class="fas fa-robot"></i></div>
+          <div>
+            <div class="chain-name">人形机器人产业链</div>
+            <div class="chain-desc">传感器 → 减速器 → 电机 → 丝杠 → 执行器 → 结构件 → 整机</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$500亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>35%</span></div>
+          <div class="chain-stat-item">核心标的: <span>59只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">特斯拉Optimus</span>
+          <span class="chain-tag">绿的谐波</span>
+          <span class="chain-tag">鸣志电器</span>
+          <span class="chain-tag">三花智控</span>
+          <span class="chain-tag">拓普集团</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon orange"><i class="fas fa-memory"></i></div>
+          <div>
+            <div class="chain-name">半导体产业链</div>
+            <div class="chain-desc">EDA → 设备 → 材料 → 制造 → 封测 → 设计</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$6,000亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>12%</span></div>
+          <div class="chain-stat-item">核心标的: <span>120+只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">ASML</span>
+          <span class="chain-tag">中微公司</span>
+          <span class="chain-tag">北方华创</span>
+          <span class="chain-tag">兆易创新</span>
+          <span class="chain-tag">韦尔股份</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon green"><i class="fas fa-solar-panel"></i></div>
+          <div>
+            <div class="chain-name">光伏/储能产业链</div>
+            <div class="chain-desc">硅料 → 硅片 → 电池 → 组件 → 逆变器 → 储能系统</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$2,800亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>18%</span></div>
+          <div class="chain-stat-item">核心标的: <span>80+只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">隆基绿能</span>
+          <span class="chain-tag">通威股份</span>
+          <span class="chain-tag">阳光电源</span>
+          <span class="chain-tag">TCL中环</span>
+          <span class="chain-tag">宁德时代</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon red"><i class="fas fa-car"></i></div>
+          <div>
+            <div class="chain-name">新能源汽车产业链</div>
+            <div class="chain-desc">电池 → 电机 → 电控 → 底盘 → 智能化 → 整车</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$5,200亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>20%</span></div>
+          <div class="chain-stat-item">核心标的: <span>100+只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">比亚迪</span>
+          <span class="chain-tag">宁德时代</span>
+          <span class="chain-tag">汇川技术</span>
+          <span class="chain-tag">三花智控</span>
+          <span class="chain-tag">拓普集团</span>
+        </div>
+      </div>
+      <div class="card chain-card">
+        <div class="chain-card-header">
+          <div class="chain-icon cyan"><i class="fas fa-satellite"></i></div>
+          <div>
+            <div class="chain-name">商业航天产业链</div>
+            <div class="chain-desc">火箭制造 → 卫星制造 → 发射服务 → 地面设备 → 卫星应用</div>
+          </div>
+        </div>
+        <div class="chain-stat">
+          <div class="chain-stat-item">市场规模: <span>$400亿</span></div>
+          <div class="chain-stat-item">CAGR: <span>28%</span></div>
+          <div class="chain-stat-item">核心标的: <span>30+只</span></div>
+        </div>
+        <div class="chain-tag-row">
+          <span class="chain-tag">中国卫星</span>
+          <span class="chain-tag">航天电子</span>
+          <span class="chain-tag">铖昌科技</span>
+          <span class="chain-tag">上海瀚讯</span>
+          <span class="chain-tag">航天晨光</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI算力产业链 -->
+  <section class="section chain-detail" id="ai-compute">
+    <div class="chain-detail-header">
+      <div class="chain-icon blue" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-microchip"></i></div>
+      <div>
+        <div class="chain-detail-title">AI算力产业链全景</div>
+        <div class="chain-detail-subtitle">三层结构：上游硬件供应链 → 中游算力基础设施 → 下游模型应用</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="font-size:1.1rem;"><span>上游 · 硬件与材料供应链</span></div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> AI芯片 / GPU <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$3,300亿</div>
+        </div>
+        <div class="segment-desc">算力核心引擎。25-30年CAGR约23%。国产替代加速，部分可替代。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">寒武纪 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">海光信息 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">景嘉微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">英伟达 <span class="stock-tag overseas">美股</span></span>
+          <span class="segment-stock">AMD <span class="stock-tag overseas">美股</span></span>
+          <span class="segment-stock">博通 <span class="stock-tag overseas">美股</span></span>
+          <span class="segment-stock">Marvell <span class="stock-tag overseas">美股</span></span>
+          <span class="segment-stock">瑞芯微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">兆易创新 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">北京君正 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">翱捷科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">芯原股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">紫光国微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">复旦微电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">安路科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">云天励飞 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">格科微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">力芯微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">三星电子 <span class="stock-tag overseas">韩</span></span>
+          <span class="segment-stock">GlobalFoundries <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">联华电子 <span class="stock-tag overseas">台</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 存储 / HBM <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$5,516亿</div>
+        </div>
+        <div class="segment-desc">数据吞吐瓶颈。HBM全球三巨头垄断，A股只做配套。25-30年CAGR约25%。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">SK海力士 <span class="stock-tag overseas">韩</span></span>
+          <span class="segment-stock">三星 <span class="stock-tag overseas">韩</span></span>
+          <span class="segment-stock">美光 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">澜起科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">香农芯创 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">江波龙 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">佰维存储 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">聚辰股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">德明利 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国科微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">芯海科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">朗科科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东芯股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Rambus <span class="stock-tag overseas">美</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 光模块 / 光芯片 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$146亿</div>
+        </div>
+        <div class="segment-desc">高速互联。25-30年高速光模块CAGR约32-35%。国产部分可替代。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">中际旭创 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">新易盛 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">天孚通信 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">源杰科技 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">Coherent <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Lumentum <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">光迅科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华工科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">长光华芯 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">仕佳光子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">剑桥科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">德科立 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">光库科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">太辰光 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">联特科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">长芯博创 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">铭普光磁 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">顺络电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">富信科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> PCB / CCL · 先进封装 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$820亿</div>
+        </div>
+        <div class="segment-desc">载体与集成。25-30年AI高速板/高频高速CCL细分CAGR约25-30%。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">胜宏科技 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">沪电股份 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">生益科技 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">长电科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">台积电 <span class="stock-tag overseas">台</span></span>
+          <span class="segment-stock">Amkor <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">日月光 <span class="stock-tag overseas">台</span></span>
+          <span class="segment-stock">生益电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">深南电路 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">广合科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东山精密 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">鹏鼎控股 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">景旺电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">兴森科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">世运电路 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">中国巨石 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">TTM Technologies <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">AT&S <span class="stock-tag overseas">奥</span></span>
+          <span class="segment-stock">通富微电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华天科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">甬矽电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶方科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">气派科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">利扬芯片 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">长川科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 电源 / 供电 <span class="tier-badge s">S级</span></div>
+          <div class="segment-size">$145亿</div>
+        </div>
+        <div class="segment-desc">高功率密度。25-30年CAGR约23-25%，AI服务器高功率电源需求旺盛。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">麦格米特 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">欧陆通 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科华数据 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">MPS <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Vicor <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Navitas <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">英维克 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">三花智控 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">申菱环境 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">高澜股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">同飞股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">飞荣达 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">佳力图 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">依米康 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科士达 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">阳光电源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">盛弘股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">威迈斯 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">卧龙电驱 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">奥海科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东方电热 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">英杰电气 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">祥鑫科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">隆扬电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">迪森股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">飞龙股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">ST南都 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">富信科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Vertiv <span class="stock-tag overseas">美</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 液冷 / 散热 <span class="tier-badge a">A级</span></div>
+          <div class="segment-size">$85亿</div>
+        </div>
+        <div class="segment-desc">热管理。25-30年CAGR约28%。国产部分可替代。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">英维克 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">申菱环境 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">三花智控 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">Vertiv <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">高澜股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">同飞股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">飞荣达 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">佳力图 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">依米康 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科士达 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="font-size:1.1rem;margin-top:24px;"><span>中游 · 算力基础设施</span></div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">7</span> AI服务器 / 算力机柜</div>
+          <div class="segment-size">$1,200亿</div>
+        </div>
+        <div class="segment-desc">算力集成与交付。AI服务器出货量预计年增长30%以上。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">工业富联 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">浪潮信息 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">中科曙光 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">紫光股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">联想集团 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">神州数码 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">拓维信息 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">广电运通 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">8</span> 数据中心 / IDC</div>
+          <div class="segment-size">$800亿</div>
+        </div>
+        <div class="segment-desc">算力承载平台。AI数据中心建设进入高峰期。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">万国数据 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">世纪互联 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">宝信软件 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">数据港 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">奥飞数据 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">光环新网 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">润泽科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科华数据 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="font-size:1.1rem;margin-top:24px;"><span>下游 · 模型应用与变现</span></div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">9</span> 大模型 / AI应用</div>
+          <div class="segment-size">$500亿</div>
+        </div>
+        <div class="segment-desc">AI应用落地。GPT-5.6等新一代模型推动应用层爆发。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">科大讯飞 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">百度 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">阿里 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">腾讯 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">天娱数科 <span class="stock-tag core">应用</span></span>
+          <span class="segment-stock">昆仑万维 <span class="stock-tag core">应用</span></span>
+          <span class="segment-stock">万兴科技 <span class="stock-tag core">应用</span></span>
+          <span class="segment-stock">软通动力 <span class="stock-tag core">应用</span></span>
+          <span class="segment-stock">润和软件 <span class="stock-tag core">应用</span></span>
+          <span class="segment-stock">拓尔思 <span class="stock-tag core">应用</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">10</span> AI Agent / 智能体</div>
+          <div class="segment-size">$100亿</div>
+        </div>
+        <div class="segment-desc">下一代AI交互形态。从工具到助手到代理的演进。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">汉王科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">彩讯股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">梦网科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">思美传媒 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">值得买 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">开普云 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 机器人产业链 -->
+  <section class="section chain-detail" id="robot">
+    <div class="chain-detail-header">
+      <div class="chain-icon purple" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-robot"></i></div>
+      <div>
+        <div class="chain-detail-title">人形机器人产业链解剖</div>
+        <div class="chain-detail-subtitle">特斯拉T链 + 国产替代 · 59只A股核心标的</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> 头部总成</div>
+          <div class="segment-size">T链2</div>
+        </div>
+        <div class="segment-desc">视觉感知、决策系统、人机交互核心。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">均胜电子 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">蓝思科技 <span class="stock-tag core">T链</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 关节电机 / 控制</div>
+          <div class="segment-size">T链8</div>
+        </div>
+        <div class="segment-desc">机器人运动核心。无框力矩电机+空心杯电机。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">鸣志电器 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">兆威机电 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">步科股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">禾川科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">信质集团 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">东睦股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">易德龙 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">恒帅股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">汇川技术 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">杰华特 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">横店东磁 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶丰明源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">埃斯顿 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">峰岹科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">双林股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">雷赛智能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">伟创电气 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">英飞凌 <span class="stock-tag overseas">德</span></span>
+          <span class="segment-stock">瑞萨电子 <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">德州仪器 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">恩智浦 <span class="stock-tag overseas">美</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 执行器</div>
+          <div class="segment-size">T链7</div>
+        </div>
+        <div class="segment-desc">线性执行器+旋转执行器。核心传动部件。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">三花智控 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">拓普集团 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">星宇股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">震裕科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">银轮股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">新泉股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">雷格/Regal Rexnord <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">麦格纳 <span class="stock-tag overseas">加</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 结构件</div>
+          <div class="segment-size">T链4</div>
+        </div>
+        <div class="segment-desc">轻量化铝合金、碳纤维结构件。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">长盈精密 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">恒勃股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">统联精密 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">科森科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">万向钱潮 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">银轮股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">震裕科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">豪迈科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">伯特利 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">唯科科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">旭升集团 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">模塑科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">图南股份 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 传感器</div>
+          <div class="segment-size">T链5</div>
+        </div>
+        <div class="segment-desc">六维力矩传感器、触觉传感器、视觉传感器。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">安培龙 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">东华测试 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">凌云股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">奥比中光 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">亚普股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">士兰微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">睿创微纳 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">高德红外 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">纳芯微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">思特威 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">赛微电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">芯动联科 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">柯力传感 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">汉威科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">欧普光电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">苏州固锝 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">保隆科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">敏芯股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">必创科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">意法半导体 <span class="stock-tag overseas">欧</span></span>
+          <span class="segment-stock">迈来芯 <span class="stock-tag overseas">比</span></span>
+          <span class="segment-stock">森萨塔 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">亚德诺 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Mobileye <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">速腾聚创 <span class="stock-tag overseas">港</span></span>
+          <span class="segment-stock">英伟达 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">泰瑞达 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">泰科电子 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">地平线 <span class="stock-tag overseas">港</span></span>
+          <span class="segment-stock">安波福 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">基恩士 <span class="stock-tag overseas">日</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 减速器</div>
+          <div class="segment-size">T链10</div>
+        </div>
+        <div class="segment-desc">精密减速器：谐波+RV+行星。机器人关节核心。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">绿的谐波 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">科达利 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">双环传动 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">斯菱智驱 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">豪能股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">众辰科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">隆盛科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">崧盛股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">宏昌科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">昊志机电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">长盛轴承 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华明装备 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">中大力德 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">巨轮智能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国茂股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">福达股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">丰立智能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">哈默纳科 <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">纳博特斯克 <span class="stock-tag overseas">日</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">7</span> 丝杠</div>
+          <div class="segment-size">T链10</div>
+        </div>
+        <div class="segment-desc">滚珠丝杠、行星滚柱丝杠。线性执行器核心传动。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">恒立液压 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">北特科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">震裕科技 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">双林股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">贝斯特 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">五洲新春 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">夏厦精密 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">嵘泰股份 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">浙江荣泰 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">雷迪克 <span class="stock-tag core">T链</span></span>
+          <span class="segment-stock">创世纪 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">汉钟精机 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">新坐标 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">秦川机床 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">纽威数控 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">宇环数控 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华辰装备 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">浙海德曼 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">横河精密 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">软控股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">THK <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">上银科技 <span class="stock-tag overseas">台</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 半导体产业链 -->
+  <section class="section chain-detail" id="semi">
+    <div class="chain-detail-header">
+      <div class="chain-icon orange" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-memory"></i></div>
+      <div>
+        <div class="chain-detail-title">半导体产业链全景</div>
+        <div class="chain-detail-subtitle">EDA → 设备 → 材料 → 制造 → 封测 → 设计</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> EDA软件</div>
+          <div class="segment-size">$150亿</div>
+        </div>
+        <div class="segment-desc">芯片设计必备工具。双寡头垄断，国产替代加速。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">Cadence <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">Synopsys <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">华大九天 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">概伦电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">广立微 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 半导体设备</div>
+          <div class="segment-size">$1,200亿</div>
+        </div>
+        <div class="segment-desc">晶圆制造核心设备。光刻、刻蚀、薄膜沉积、量测。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">ASML <span class="stock-tag overseas">荷</span></span>
+          <span class="segment-stock">应用材料 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">拉姆研究 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">东京电子 <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">中微公司 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">北方华创 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">拓荆科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华海清科 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">芯源微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">盛美上海 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">至纯科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">万业企业 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 半导体材料</div>
+          <div class="segment-size">$700亿</div>
+        </div>
+        <div class="segment-desc">硅片、光刻胶、电子特气、靶材、CMP材料。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">信越化学 <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">SUMCO <span class="stock-tag overseas">日</span></span>
+          <span class="segment-stock">沪硅产业 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">立昂微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">中环股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">南大光电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶瑞电材 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">彤程新材 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">江丰电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">安集科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华特气体 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">雅克科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 晶圆制造</div>
+          <div class="segment-size">$1,500亿</div>
+        </div>
+        <div class="segment-desc">台积电模式。先进制程竞争白热化。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">台积电 <span class="stock-tag overseas">台</span></span>
+          <span class="segment-stock">三星 <span class="stock-tag overseas">韩</span></span>
+          <span class="segment-stock">英特尔 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">中芯国际 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">华虹半导体 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华润微 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">5</span> 封装测试</div>
+          <div class="segment-size">$800亿</div>
+        </div>
+        <div class="segment-desc">先进封装成为性能提升关键。Chiplet、3D封装。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">日月光 <span class="stock-tag overseas">台</span></span>
+          <span class="segment-stock">Amkor <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">长电科技 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">通富微电 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">华天科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">甬矽电子 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶方科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">6</span> 芯片设计</div>
+          <div class="segment-size">$2,000亿</div>
+        </div>
+        <div class="segment-desc">Fabless模式。消费电子、汽车电子、AI芯片。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">英伟达 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">AMD <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">高通 <span class="stock-tag overseas">美</span></span>
+          <span class="segment-stock">联发科 <span class="stock-tag overseas">台</span></span>
+          <span class="segment-stock">韦尔股份 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">兆易创新 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">圣邦股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">卓胜微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">紫光国微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">国民技术 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶晨股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">瑞芯微 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">全志科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">恒玄科技 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 新能源产业链 -->
+  <section class="section chain-detail" id="new-energy">
+    <div class="chain-detail-header">
+      <div class="chain-icon green" style="width:48px;height:48px;font-size:1.5rem;"><i class="fas fa-solar-panel"></i></div>
+      <div>
+        <div class="chain-detail-title">光伏 / 储能产业链</div>
+        <div class="chain-detail-subtitle">硅料 → 硅片 → 电池 → 组件 → 逆变器 → 储能系统</div>
+      </div>
+    </div>
+    <div class="segment-grid">
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">1</span> 硅料 / 硅片</div>
+          <div class="segment-size">$500亿</div>
+        </div>
+        <div class="segment-desc">光伏上游。多晶硅、单晶硅棒、硅片。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">通威股份 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">大全能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">协鑫科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">TCL中环 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">隆基绿能 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">晶科能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">晶澳科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">双良节能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">上机数控 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">2</span> 电池 / 组件</div>
+          <div class="segment-size">$1,000亿</div>
+        </div>
+        <div class="segment-desc">中游核心。PERC、TOPCon、HJT、钙钛矿技术路线。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">隆基绿能 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">晶科能源 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">晶澳科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">天合光能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">阿特斯 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">东方日升 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">爱旭股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">钧达股份 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">3</span> 逆变器</div>
+          <div class="segment-size">$300亿</div>
+        </div>
+        <div class="segment-desc">光伏系统心脏。组串式、集中式、微型逆变器。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">阳光电源 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">华为数字能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">锦浪科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">固德威 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">德业股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">禾迈股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">昱能科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">上能电气 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+      <div class="card segment-card">
+        <div class="segment-header">
+          <div class="segment-name"><span class="segment-num">4</span> 储能系统</div>
+          <div class="segment-size">$600亿</div>
+        </div>
+        <div class="segment-desc">电池+PCS+BMS+EMS。大储、户储、工商业储能。</div>
+        <div class="segment-stocks">
+          <span class="segment-stock">宁德时代 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">比亚迪 <span class="stock-tag leader">龙头</span></span>
+          <span class="segment-stock">亿纬锂能 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">鹏辉能源 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">派能科技 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">科华数据 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">盛弘股份 <span class="stock-tag core">国产</span></span>
+          <span class="segment-stock">南都电源 <span class="stock-tag core">国产</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 个股评级 -->
+  <section class="section" id="rating">
+    <div class="section-title">
+      <span>产业链核心个股评级</span>
+      <span class="title-badge">S/A/B/C/D</span>
+    </div>
+    <div class="card" style="overflow-x:auto">
+      <table class="rating-table">
+        <thead>
+          <tr>
+            <th>代码</th>
+            <th>名称</th>
+            <th>产业链</th>
+            <th>评级</th>
+            <th>PE</th>
+            <th>PEG</th>
+            <th>增长%</th>
+            <th>评分</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rating-name">NVDA</td>
+            <td class="rating-name">NVIDIA</td>
+            <td>AI算力</td>
+            <td><span class="rating-tier s">S</span></td>
+            <td class="rating-pe">34</td>
+            <td class="rating-peg low">0.57</td>
+            <td class="rating-growth">60%</td>
+            <td class="rating-score">100</td>
+            <td class="rating-note">CUDA生态100%垄断，AI训练80%+，PEG 0.6史诗级便宜</td>
+          </tr>
+          <tr>
+            <td class="rating-name">TSM</td>
+            <td class="rating-name">台积电</td>
+            <td>AI算力</td>
+            <td><span class="rating-tier a-plus">A+</span></td>
+            <td class="rating-pe">36</td>
+            <td class="rating-peg mid">1.20</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">100</td>
+            <td class="rating-note">3nm/2nm几乎独家，NVDA唯一代工，PEG 1.2</td>
+          </tr>
+          <tr>
+            <td class="rating-name">ASML</td>
+            <td class="rating-name">ASML</td>
+            <td>AI算力</td>
+            <td><span class="rating-tier a-plus">A+</span></td>
+            <td class="rating-pe">38</td>
+            <td class="rating-peg high">2.53</td>
+            <td class="rating-growth">15%</td>
+            <td class="rating-score">100</td>
+            <td class="rating-note">EUV 100%垄断，High-NA EUV 100%</td>
+          </tr>
+          <tr>
+            <td class="rating-name">BESIY</td>
+            <td class="rating-name">BE Semiconductor</td>
+            <td>先进封装</td>
+            <td><span class="rating-tier a-plus">A+</span></td>
+            <td class="rating-pe">45</td>
+            <td class="rating-peg mid">1.61</td>
+            <td class="rating-growth">28%</td>
+            <td class="rating-score">100</td>
+            <td class="rating-note">高端混合键合100%垄断，Q1订单+105%</td>
+          </tr>
+          <tr>
+            <td class="rating-name">6920.T</td>
+            <td class="rating-name">Lasertec</td>
+            <td>AI算力</td>
+            <td><span class="rating-tier a-plus">A+</span></td>
+            <td class="rating-pe">45</td>
+            <td class="rating-peg mid">1.50</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">100</td>
+            <td class="rating-note">EUV actinic检测100%独家，ROE 46.9%</td>
+          </tr>
+          <tr>
+            <td class="rating-name">688012</td>
+            <td class="rating-name">中微公司</td>
+            <td>半导体设备</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">56</td>
+            <td class="rating-peg low">0.93</td>
+            <td class="rating-growth">60%</td>
+            <td class="rating-score">95</td>
+            <td class="rating-note">刻蚀设备龙头，国产替代核心标的</td>
+          </tr>
+          <tr>
+            <td class="rating-name">002129</td>
+            <td class="rating-name">TCL中环</td>
+            <td>光伏</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">18</td>
+            <td class="rating-peg low">0.60</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">90</td>
+            <td class="rating-note">硅片龙头，大尺寸+薄片化领先</td>
+          </tr>
+          <tr>
+            <td class="rating-name">600118</td>
+            <td class="rating-name">中国卫星</td>
+            <td>商业航天</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">42</td>
+            <td class="rating-peg mid">1.40</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">88</td>
+            <td class="rating-note">卫星制造龙头，低轨星座建设核心</td>
+          </tr>
+          <tr>
+            <td class="rating-name">300274</td>
+            <td class="rating-name">阳光电源</td>
+            <td>逆变器</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">22</td>
+            <td class="rating-peg low">0.73</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">92</td>
+            <td class="rating-note">逆变器全球第一，储能业务高增长</td>
+          </tr>
+          <tr>
+            <td class="rating-name">300750</td>
+            <td class="rating-name">宁德时代</td>
+            <td>储能/电池</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">18</td>
+            <td class="rating-peg low">0.60</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">95</td>
+            <td class="rating-note">动力电池全球第一，储能电池快速放量</td>
+          </tr>
+          <tr>
+            <td class="rating-name">002594</td>
+            <td class="rating-name">比亚迪</td>
+            <td>新能源汽车</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">25</td>
+            <td class="rating-peg low">0.83</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">93</td>
+            <td class="rating-note">新能源车全栈自研，销量持续高增</td>
+          </tr>
+          <tr>
+            <td class="rating-name">002050</td>
+            <td class="rating-name">三花智控</td>
+            <td>机器人/汽零</td>
+            <td><span class="rating-tier a">A</span></td>
+            <td class="rating-pe">28</td>
+            <td class="rating-peg low">0.93</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">90</td>
+            <td class="rating-note">热管理龙头，机器人执行器核心供应商</td>
+          </tr>
+          <tr>
+            <td class="rating-name">601012</td>
+            <td class="rating-name">隆基绿能</td>
+            <td>光伏</td>
+            <td><span class="rating-tier b">B</span></td>
+            <td class="rating-pe">12</td>
+            <td class="rating-peg low">0.40</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">80</td>
+            <td class="rating-note">组件龙头，但产能过剩价格战</td>
+          </tr>
+          <tr>
+            <td class="rating-name">600438</td>
+            <td class="rating-name">通威股份</td>
+            <td>硅料</td>
+            <td><span class="rating-tier b">B</span></td>
+            <td class="rating-pe">8</td>
+            <td class="rating-peg low">0.27</td>
+            <td class="rating-growth">30%</td>
+            <td class="rating-score">78</td>
+            <td class="rating-note">硅料龙头，但价格持续下跌</td>
+          </tr>
+          <tr>
+            <td class="rating-name">688256</td>
+            <td class="rating-name">寒武纪</td>
+            <td>AI芯片</td>
+            <td><span class="rating-tier c">C</span></td>
+            <td class="rating-pe">-</td>
+            <td class="rating-peg high">-</td>
+            <td class="rating-growth">-</td>
+            <td class="rating-score">65</td>
+            <td class="rating-note">AI芯片设计，但持续亏损，估值偏高</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>MarketReview Pro · 产业链拆解系统</p>
+    <p style="margin-top:8px;font-size:0.8rem;opacity:0.6">数据来源：公开资料整理 | 仅供参考，不构成投资建议</p>
+  </footer>
+
+</div>
+</body>
+</html>
