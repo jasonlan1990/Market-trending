@@ -1,10 +1,11 @@
 
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026.06.26 A股复盘 | MarketReview</title>
+<title>2026.06.29 A股复盘 | MarketReview</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
@@ -386,9 +387,6 @@ body::after {
 .news-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .news-num { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(22,119,255,0.1); flex-shrink: 0; }
 .news-headline { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
-.news-headline a { color: inherit; text-decoration: none; }
-.news-headline a:hover { color: var(--accent-light); }
-.news-source { margin-top: 8px; font-size: 0.72rem; color: var(--text-dim); }
 
 /* Master cards */
 .master-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
@@ -568,8 +566,8 @@ body::after {
     <li><a href="#strategy">策略</a></li>
   </ul>
   <div class="nav-meta">
-    <div class="market-status" id="marketStatus">已收盘</div>
-    <span id="navDate">2026.06.26</span>
+    <div class="market-status">已收盘</div>
+    <span>2026.06.29</span>
     <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
   </div>
 </nav>
@@ -587,9 +585,9 @@ body::after {
     </div>
     <div class="hero-date">
       <i class="fas fa-calendar-alt"></i>
-      <span id="heroDateText">2026年6月26日 周五</span>
+      <span>2026年6月29日 周一</span>
       <span style="opacity:0.3">|</span>
-      <span id="heroTurnoverText">成交 3.58万亿</span>
+      <span>成交 2.50万亿</span>
     </div>
   </section>
 
@@ -599,16 +597,16 @@ body::after {
   <section class="section" id="indices">
     <div class="section-title">
       <span>指数行情</span>
-      <span class="title-badge" id="marketUpdatedAt">实时</span>
+      <span class="title-badge">实时</span>
     </div>
     <div class="index-grid">
       <div class="card index-card">
         <div class="index-card-header">
           <span class="index-name">上证指数</span>
-          <span class="index-tag down">DOWN</span>
+          <span class="index-tag up">UP</span>
         </div>
-        <div class="index-value">4,027.26</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -2.26%</div>
+        <div class="index-value">4,034.08</div>
+        <div class="index-change up"><i class="fas fa-arrow-up" style="font-size:0.8rem"></i> +0.17%</div>
         <div id="chartIndex1" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
@@ -616,8 +614,8 @@ body::after {
           <span class="index-name">深证成指</span>
           <span class="index-tag down">DOWN</span>
         </div>
-        <div class="index-value">15,782.22</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -3.44%</div>
+        <div class="index-value">15,591.37</div>
+        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -1.21%</div>
         <div id="chartIndex2" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
@@ -625,35 +623,35 @@ body::after {
           <span class="index-name">创业板指</span>
           <span class="index-tag down">DOWN</span>
         </div>
-        <div class="index-value">4,194.21</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -4.07%</div>
+        <div class="index-value">4,140.65</div>
+        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -1.28%</div>
         <div id="chartIndex3" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
         <div class="index-card-header">
           <span class="index-name">科创50</span>
-          <span class="index-tag down">DOWN</span>
+          <span class="index-tag up">UP</span>
         </div>
-        <div class="index-value">—</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -1.65%</div>
+        <div class="index-value">2,063.94</div>
+        <div class="index-change up"><i class="fas fa-arrow-up" style="font-size:0.8rem"></i> +1.56%</div>
         <div id="chartIndex4" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
         <div class="index-card-header">
-          <span class="index-name">北证50</span>
+          <span class="index-name">中证1000</span>
           <span class="index-tag down">DOWN</span>
         </div>
-        <div class="index-value">—</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -0.84%</div>
+        <div class="index-value">8,458.74</div>
+        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -1.66%</div>
         <div id="chartIndex5" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
         <div class="index-card-header">
           <span class="index-name">沪深300</span>
-          <span class="index-tag down">DOWN</span>
+          <span class="index-tag up">UP</span>
         </div>
-        <div class="index-value">—</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -3.03%</div>
+        <div class="index-value">4,871.03</div>
+        <div class="index-change up"><i class="fas fa-arrow-up" style="font-size:0.8rem"></i> +0.06%</div>
         <div id="chartIndex6" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
@@ -661,17 +659,17 @@ body::after {
           <span class="index-name">中证500</span>
           <span class="index-tag down">DOWN</span>
         </div>
-        <div class="index-value">—</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -2.62%</div>
+        <div class="index-value">8,676.33</div>
+        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -0.31%</div>
         <div id="chartIndex7" class="index-chart-mini"></div>
       </div>
       <div class="card index-card">
         <div class="index-card-header">
           <span class="index-name">上证50</span>
-          <span class="index-tag down">DOWN</span>
+          <span class="index-tag up">UP</span>
         </div>
-        <div class="index-value">—</div>
-        <div class="index-change down"><i class="fas fa-arrow-down" style="font-size:0.8rem"></i> -2.37%</div>
+        <div class="index-value">2,960.86</div>
+        <div class="index-change up"><i class="fas fa-arrow-up" style="font-size:0.8rem"></i> +1.85%</div>
         <div id="chartIndex8" class="index-chart-mini"></div>
       </div>
     </div>
@@ -680,36 +678,36 @@ body::after {
         <div class="card-title" style="color:var(--accent-light)"><i class="fas fa-crosshairs"></i> 市场主线分析</div>
         <div class="grid-3" style="gap:16px">
           <div>
-            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--up)">🔴 崩溃主线</div>
-            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">科技主线全面崩盘：半导体-5.2%、CPO-4.8%、存储芯片-2.6%。兆易创新-7%、新易盛-8.5%，获利盘踩踏式出逃。</p>
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--up)">🔴 风险主线</div>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">高位材料与电子链条回撤：玻纤制造-9.52%、通信线缆-7.62%、印制电路板-6.49%。风险集中在前期强势的小盘制造方向。</p>
             <div class="tag-row" style="margin-top:10px">
-              <span class="stock-ticker" style="color:var(--down)">半导体 -5.2%</span>
-              <span class="stock-ticker" style="color:var(--down)">CPO -4.8%</span>
-              <span class="stock-ticker" style="color:var(--down)">存储芯片 -2.6%</span>
+              <span class="stock-ticker" style="color:var(--down)">玻纤制造 -9.52%</span>
+              <span class="stock-ticker" style="color:var(--down)">通信线缆 -7.62%</span>
+              <span class="stock-ticker" style="color:var(--down)">PCB -6.49%</span>
             </div>
           </div>
           <div>
             <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--accent-light)">🔵 逆势主线</div>
-            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">航天装备+4.25%领涨，光伏TCL中环涨停，新股N惠科暴涨315%。资金在科技崩盘时寻找新突破口。</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">医药生物成为日内核心：医疗研发外包+7.56%、生物制品+6.28%、化学制药+5.18%。资金明显回流创新药与CRO。</p>
             <div class="tag-row" style="margin-top:10px">
-              <span class="stock-ticker" style="color:var(--up)">航天装备 +4.25%</span>
-              <span class="stock-ticker" style="color:var(--up)">TCL中环 涨停</span>
-              <span class="stock-ticker" style="color:var(--up)">N惠科 +315%</span>
+              <span class="stock-ticker" style="color:var(--up)">万邦医药 +20%</span>
+              <span class="stock-ticker" style="color:var(--up)">三生国健 +20%</span>
+              <span class="stock-ticker" style="color:var(--up)">广生堂 +20%</span>
             </div>
           </div>
           <div>
             <div style="font-weight:700;font-size:0.95rem;margin-bottom:8px;color:var(--orange)">🟠 防御主线</div>
-            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">高股息板块受资金追捧：煤炭+2.8%、银行+1.5%、电力+3.2%。中国神华业绩+35%，农业银行新高。</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">权重托底指数：上证50+1.85%、科创50+1.56%、沪深300微涨。上证红盘背后，中小盘与题材股仍有压力。</p>
             <div class="tag-row" style="margin-top:10px">
-              <span class="stock-ticker" style="color:var(--up)">煤炭 +2.8%</span>
-              <span class="stock-ticker" style="color:var(--up)">银行 +1.5%</span>
-              <span class="stock-ticker" style="color:var(--up)">电力 +3.2%</span>
+              <span class="stock-ticker" style="color:var(--up)">上证50 +1.85%</span>
+              <span class="stock-ticker" style="color:var(--up)">科创50 +1.56%</span>
+              <span class="stock-ticker" style="color:var(--up)">沪深300 +0.06%</span>
             </div>
           </div>
         </div>
         <div class="highlight-box" style="margin-top:16px; background:rgba(22,119,255,0.06)">
           <span style="color:var(--accent);font-weight:700"><i class="fas fa-lightbulb" style="margin-right:6px"></i>风格判定：</span>
-          <span style="color:var(--text-muted)">科技成长 → 防御高股息，市场从进攻切向防守。短线关注逆势抗跌品种，中线等待科技企稳信号。</span>
+          <span style="color:var(--text-muted)">弱分化修复。短线资金集中在医药生物，权重指数托底，但跌多涨少说明风险偏好仍未完全恢复。</span>
         </div>
       </div>
   </section>
@@ -727,7 +725,7 @@ body::after {
       <div class="master-card">
         <div class="master-category"><i class="fas fa-gem" style="font-size:0.8rem"></i> 价值投资</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #f6d365, #fda085);">巴</div> 沃伦·巴菲特</div>
-        <div class="master-quote">市场恐慌时保持理性，大跌往往是最好的买入机会。但前提是你要知道你买的是什么。</div>
+        <div class="master-quote">指数没有全面转强时，先看确定性。今天的确定性在权重托底和医药修复。</div>
         <div class="master-tag-row">
           <span class="master-tag">保持理性</span>
           <span class="master-tag">大跌机会</span>
@@ -736,52 +734,52 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">中国神华 <span class="master-pick-tag defense">高股息</span></span>
-            <span class="master-pick">农业银行 <span class="master-pick-tag defense">防御</span></span>
-            <span class="master-pick">迈瑞医疗 <span class="master-pick-tag defense">蓝筹</span></span>
+            <span class="master-pick">上证50 <span class="master-pick-tag defense">权重</span></span>
+            <span class="master-pick">沪深300 <span class="master-pick-tag defense">托底</span></span>
+            <span class="master-pick">迈瑞医疗 <span class="master-pick-tag defense">医疗</span></span>
           </div>
         </div>
       </div>
       <div class="master-card">
         <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">养</div> 炒股养家</div>
-        <div class="master-quote">4000+家下跌，这是真正的冰点。冰点后必有修复，关键是修复的力度。</div>
+        <div class="master-quote">涨停和跌停几乎持平，说明情绪很分裂。能做的是主线，不是全市场。</div>
         <div class="master-tag-row">
-          <span class="master-tag hot">情绪冰点</span>
-          <span class="master-tag">必有修复</span>
-          <span class="master-tag">修复力度</span>
+          <span class="master-tag hot">弱分化</span>
+          <span class="master-tag">主线修复</span>
+          <span class="master-tag">控制仓位</span>
         </div>
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">新股+315%</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">涨停</span></span>
-            <span class="master-pick">TCL中环 <span class="master-pick-tag up">涨停</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">+20%</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">+20%</span></span>
+            <span class="master-pick">舒泰神 <span class="master-pick-tag up">+20%</span></span>
           </div>
         </div>
       </div>
       <div class="master-card">
         <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">涅</div> 涅槃重生</div>
-        <div class="master-quote">航天板块逆势走强，说明资金在找新的突破口。但一日游的概率很大。</div>
+        <div class="master-quote">医药板块集体走强，说明资金在找避险和业绩弹性的交集。但追高要看分歧承接。</div>
         <div class="master-tag-row">
-          <span class="master-tag">资金突破</span>
-          <span class="master-tag">航天逆势</span>
-          <span class="master-tag hot">一日游概率</span>
+          <span class="master-tag">资金回流</span>
+          <span class="master-tag">医药逆势</span>
+          <span class="master-tag hot">看承接</span>
         </div>
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">龙头</span></span>
-            <span class="master-pick">天娱数科 <span class="master-pick-tag up">涨停</span></span>
-            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">+20%</span></span>
+            <span class="master-pick">佰仁医疗 <span class="master-pick-tag up">+20%</span></span>
+            <span class="master-pick">百奥赛图 <span class="master-pick-tag up">+17.65%</span></span>
+            <span class="master-pick">荣昌生物 <span class="master-pick-tag up">+16.39%</span></span>
           </div>
         </div>
       </div>
       <div class="master-card">
         <div class="master-category"><i class="fas fa-theater-masks" style="font-size:0.8rem"></i> 情绪流</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">令</div> 令狐冲</div>
-        <div class="master-quote">最高板在哪里？连板梯队还有没有？如果没有，短线就是休息。</div>
+        <div class="master-quote">最高强度在20cm医药，10cm连板不是核心。短线要跟着强度分布走。</div>
         <div class="master-tag-row">
           <span class="master-tag">最高板</span>
           <span class="master-tag">连板梯队</span>
@@ -790,9 +788,9 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">凯盛科技 <span class="master-pick-tag up">首板</span></span>
-            <span class="master-pick">节能风电 <span class="master-pick-tag up">首板</span></span>
-            <span class="master-pick">彤程新材 <span class="master-pick-tag up">首板</span></span>
+            <span class="master-pick">广生堂 <span class="master-pick-tag up">20cm</span></span>
+            <span class="master-pick">舒泰神 <span class="master-pick-tag up">20cm</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">20cm</span></span>
           </div>
         </div>
       </div>
@@ -808,19 +806,19 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">龙头</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">龙头</span></span>
-            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">龙头</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">龙头</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">龙头</span></span>
+            <span class="master-pick">广生堂 <span class="master-pick-tag up">龙头</span></span>
           </div>
         </div>
       </div>
       <div class="master-card">
         <div class="master-category"><i class="fas fa-crown" style="font-size:0.8rem"></i> 龙头战法</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4);">赵</div> 赵老哥</div>
-        <div class="master-quote">这种行情，首板质量都不高。空仓是最好的策略。</div>
+        <div class="master-quote">这种行情，不是没有机会，是机会集中。弱板块要回避，强板块也要等分歧。</div>
         <div class="master-tag-row">
           <span class="master-tag">首板质量低</span>
-          <span class="master-tag">空仓策略</span>
+          <span class="master-tag">等分歧</span>
         </div>
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
@@ -843,8 +841,8 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">TCL中环 <span class="master-pick-tag up">趋势</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">趋势</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">趋势</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">趋势</span></span>
             <span class="master-pick">菲利华 <span class="master-pick-tag up">趋势</span></span>
           </div>
         </div>
@@ -861,8 +859,8 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">试错</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">试错</span></span>
+            <span class="master-pick">佰仁医疗 <span class="master-pick-tag up">试错</span></span>
+            <span class="master-pick">荣昌生物 <span class="master-pick-tag up">试错</span></span>
             <span class="master-pick">空仓 <span class="master-pick-tag empty">观望</span></span>
           </div>
         </div>
@@ -879,8 +877,8 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">尾盘</span></span>
-            <span class="master-pick">观望 <span class="master-pick-tag empty">等周一</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">尾盘</span></span>
+            <span class="master-pick">观望 <span class="master-pick-tag empty">等分歧</span></span>
             <span class="master-pick">空仓 <span class="master-pick-tag empty">为主</span></span>
           </div>
         </div>
@@ -913,9 +911,9 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">量化</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">量化</span></span>
-            <span class="master-pick">天娱数科 <span class="master-pick-tag up">量化</span></span>
+            <span class="master-pick">舒泰神 <span class="master-pick-tag up">量化</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">量化</span></span>
+            <span class="master-pick">广生堂 <span class="master-pick-tag up">量化</span></span>
           </div>
         </div>
       </div>
@@ -939,17 +937,17 @@ body::after {
       <div class="master-card">
         <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">陈</div> 陈小群</div>
-        <div class="master-quote">节点确认——下跌趋势。要么空仓，要么做空（如果有工具的话）。</div>
+        <div class="master-quote">节点确认：指数托底，题材分化。只做强主线，不做弱修复。</div>
         <div class="master-tag-row">
-          <span class="master-tag">下跌趋势</span>
-          <span class="master-tag">空仓</span>
-          <span class="master-tag">做空</span>
+          <span class="master-tag">指数托底</span>
+          <span class="master-tag">题材分化</span>
+          <span class="master-tag">只做强</span>
         </div>
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">重仓</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">重仓</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">核心</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">核心</span></span>
             <span class="master-pick">空仓 <span class="master-pick-tag empty">备选</span></span>
           </div>
         </div>
@@ -957,17 +955,17 @@ body::after {
       <div class="master-card">
         <div class="master-category"><i class="fas fa-chart-line" style="font-size:0.8rem"></i> 趋势与节点</div>
         <div class="master-name"><div class="master-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">字</div> 字母哥</div>
-        <div class="master-quote">从2成仓降到空仓。不硬抗，不抄底，不预测。</div>
+        <div class="master-quote">仓位可以低，但观察不能停。医药强、材料弱，方向已经给出来了。</div>
         <div class="master-tag-row">
-          <span class="master-tag">空仓</span>
+          <span class="master-tag">低仓</span>
           <span class="master-tag">不硬抗</span>
           <span class="master-tag">不预测</span>
         </div>
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">核心</span></span>
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">核心</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">核心</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">核心</span></span>
             <span class="master-pick">农业银行 <span class="master-pick-tag defense">防守</span></span>
           </div>
         </div>
@@ -1000,7 +998,7 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">唯一</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">唯一</span></span>
             <span class="master-pick">空仓 <span class="master-pick-tag empty">为主</span></span>
             <span class="master-pick">观望 <span class="master-pick-tag empty">观望</span></span>
           </div>
@@ -1034,9 +1032,9 @@ body::after {
         <div class="master-picks">
           <div class="master-picks-label"><i class="fas fa-bullseye"></i> 今日推荐</div>
           <div class="master-picks-row">
-            <span class="master-pick">N惠科 <span class="master-pick-tag new">亮点</span></span>
-            <span class="master-pick">中国卫星 <span class="master-pick-tag up">亮点</span></span>
-            <span class="master-pick">雷曼光电 <span class="master-pick-tag up">亮点</span></span>
+            <span class="master-pick">万邦医药 <span class="master-pick-tag up">亮点</span></span>
+            <span class="master-pick">三生国健 <span class="master-pick-tag up">亮点</span></span>
+            <span class="master-pick">广生堂 <span class="master-pick-tag up">亮点</span></span>
           </div>
         </div>
       </div>
@@ -1055,11 +1053,11 @@ body::after {
     <div class="preview-card">
       <div class="preview-title"><i class="fas fa-binoculars" style="color:var(--accent)"></i> 盘前关键事件</div>
       <ul class="preview-list">
-        <li>周末关注：中东局势持续升级，美军对伊朗实施打击，霍尔木兹海峡安全存疑 <span class="preview-tag urgent">URGENT</span></li>
-        <li>周末关注：美股芯片股暴跌，美光科技跌超6%，存储概念全线重挫，周一A股芯片板块承压 <span class="preview-tag urgent">URGENT</span></li>
-        <li>周末关注：第三批国补625亿元资金已下达，消费刺激政策持续发力 <span class="preview-tag hot">HOT</span></li>
-        <li>周末关注：证监会发布新规规范量化交易，短线生态或将改变 <span class="preview-tag hot">HOT</span></li>
-        <li>周末关注：GPT-5.6深夜亮相，AI应用概念或再受催化 <span class="preview-tag info">INFO</span></li>
+        <li>明日关注：医药生物强修复后的分歧承接，CRO与创新药能否继续扩散 <span class="preview-tag urgent">URGENT</span></li>
+        <li>明日关注：玻纤、PCB、元件等领跌方向是否止跌，避免弱修复诱多 <span class="preview-tag urgent">URGENT</span></li>
+        <li>明日关注：上证50与沪深300能否继续托底，决定指数修复质量 <span class="preview-tag hot">HOT</span></li>
+        <li>明日关注：成交额缩至2.50万亿后是否补量，缩量反弹需谨慎 <span class="preview-tag hot">HOT</span></li>
+        <li>明日关注：中报预告窗口临近，业绩兑现与估值切换同步升温 <span class="preview-tag info">INFO</span></li>
       </ul>
     </div>
   </section>
@@ -1068,37 +1066,37 @@ body::after {
   <div class="section-divider"></div>
 
   <section class="section">
-    <div class="quick-stats" id="quickStats">
+    <div class="quick-stats">
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-2.26%</div>
+        <div class="quick-stat-value" style="color:var(--up)">+0.17%</div>
         <div class="quick-stat-label">上证指数</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-3.44%</div>
+        <div class="quick-stat-value" style="color:var(--down)">-1.21%</div>
         <div class="quick-stat-label">深证成指</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-4.07%</div>
+        <div class="quick-stat-value" style="color:var(--down)">-1.28%</div>
         <div class="quick-stat-label">创业板指</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">-1.65%</div>
+        <div class="quick-stat-value" style="color:var(--up)">+1.56%</div>
         <div class="quick-stat-label">科创50</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--text)">3.58万亿</div>
+        <div class="quick-stat-value" style="color:var(--text)">2.50万亿</div>
         <div class="quick-stat-label">成交额</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--up)">768</div>
+        <div class="quick-stat-value" style="color:var(--up)">1857</div>
         <div class="quick-stat-label">上涨</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--down)">4456</div>
+        <div class="quick-stat-value" style="color:var(--down)">3228</div>
         <div class="quick-stat-label">下跌</div>
       </div>
       <div class="quick-stat-item">
-        <div class="quick-stat-value" style="color:var(--up)">68</div>
+        <div class="quick-stat-value" style="color:var(--up)">114</div>
         <div class="quick-stat-label">涨停</div>
       </div>
     </div>
@@ -1113,7 +1111,7 @@ body::after {
       <span>外围联动</span>
       <span class="title-badge">全球</span>
     </div>
-    <div class="global-grid" id="globalGrid">
+    <div class="global-grid">
       <div class="global-card">
         <div class="global-name">道琼斯</div>
         <div class="global-value">51,876.11</div>
@@ -1164,7 +1162,7 @@ body::after {
   <section class="section" id="sentiment">
     <div class="section-title">
       <span>市场情绪</span>
-      <span class="title-badge">结构性分化</span>
+      <span class="title-badge">弱分化</span>
     </div>
     <div class="grid-3">
       <div class="card">
@@ -1175,7 +1173,7 @@ body::after {
         <div class="card-title">涨跌停温度计</div>
         <div id="chartGauge" class="chart-container small"></div>
         <div style="text-align:center;margin-top:10px;font-size:0.85rem;color:var(--text-muted)">
-          涨停 <span style="color:var(--up);font-weight:700">68</span> · 跌停 <span style="color:var(--down);font-weight:700">42</span>
+          涨停 <span style="color:var(--up);font-weight:700">114</span> · 跌停 <span style="color:var(--down);font-weight:700">113</span>
         </div>
       </div>
       <div class="card">
@@ -1201,37 +1199,37 @@ body::after {
         <div class="fund-flow-item">
           <div class="fund-flow-label">主力</div>
           <div class="fund-flow-bar-wrap">
-            <div class="fund-flow-bar out" style="width:85%"></div>
+            <div class="fund-flow-bar out" style="width:60%"></div>
           </div>
-          <div class="fund-flow-value" style="color:var(--up)">-1,738.39亿</div>
+          <div class="fund-flow-value" style="color:var(--up)">-594.89亿</div>
         </div>
         <div class="fund-flow-item">
           <div class="fund-flow-label">超大单</div>
           <div class="fund-flow-bar-wrap">
-            <div class="fund-flow-bar out" style="width:60%"></div>
+            <div class="fund-flow-bar out" style="width:39%"></div>
           </div>
-          <div class="fund-flow-value" style="color:var(--up)">-1,224.76亿</div>
+          <div class="fund-flow-value" style="color:var(--up)">-386.43亿</div>
         </div>
         <div class="fund-flow-item">
           <div class="fund-flow-label">大单</div>
           <div class="fund-flow-bar-wrap">
-            <div class="fund-flow-bar out" style="width:25%"></div>
+            <div class="fund-flow-bar out" style="width:21%"></div>
           </div>
-          <div class="fund-flow-value" style="color:var(--up)">-513.62亿</div>
+          <div class="fund-flow-value" style="color:var(--up)">-208.46亿</div>
         </div>
         <div class="fund-flow-item">
           <div class="fund-flow-label">中单</div>
           <div class="fund-flow-bar-wrap">
-            <div class="fund-flow-bar in" style="width:27%"></div>
+            <div class="fund-flow-bar in" style="width:10%"></div>
           </div>
-          <div class="fund-flow-value" style="color:var(--down)">+554.53亿</div>
+          <div class="fund-flow-value" style="color:var(--down)">+55.00亿</div>
         </div>
         <div class="fund-flow-item">
           <div class="fund-flow-label">小单</div>
           <div class="fund-flow-bar-wrap">
-            <div class="fund-flow-bar in" style="width:58%"></div>
+            <div class="fund-flow-bar in" style="width:54%"></div>
           </div>
-          <div class="fund-flow-value" style="color:var(--down)">+1,183.86亿</div>
+          <div class="fund-flow-value" style="color:var(--down)">+539.90亿</div>
         </div>
       </div>
     </div>
@@ -1254,12 +1252,12 @@ body::after {
         <table class="data-table">
           <thead><tr><th>板块</th><th>涨幅</th><th>龙头</th></tr></thead>
           <tbody>
-            <tr><td class="td-strong">航天装备</td><td class="td-up">+4.25%</td><td>中国卫星 +10%</td></tr>
-            <tr><td class="td-strong">玻璃玻纤</td><td class="td-up">+1.62%</td><td>国际复材 +9.17%</td></tr>
-            <tr><td class="td-strong">教育</td><td class="td-up">+0.77%</td><td>*ST开元 +17.39%</td></tr>
-            <tr><td class="td-strong">养殖业</td><td class="td-up">+0.52%</td><td>神农集团 +10.02%</td></tr>
-            <tr><td class="td-strong">电子化学品</td><td class="td-up">+0.36%</td><td>三孚新科 +9.42%</td></tr>
-            <tr><td class="td-strong">光学光电子</td><td class="td-up">+0.35%</td><td>莱宝高科 +10%</td></tr>
+            <tr><td class="td-strong">医疗研发外包</td><td class="td-up">+7.56%</td><td>万邦医药 +20%</td></tr>
+            <tr><td class="td-strong">其他生物制品</td><td class="td-up">+7.27%</td><td>三生国健 +20%</td></tr>
+            <tr><td class="td-strong">生物制品</td><td class="td-up">+6.28%</td><td>荣昌生物 +16.39%</td></tr>
+            <tr><td class="td-strong">化学制剂</td><td class="td-up">+5.74%</td><td>广生堂 +20%</td></tr>
+            <tr><td class="td-strong">医疗服务</td><td class="td-up">+5.34%</td><td>康龙化成 +10.52%</td></tr>
+            <tr><td class="td-strong">化学制药</td><td class="td-up">+5.18%</td><td>舒泰神 +20%</td></tr>
           </tbody>
         </table>
       </div>
@@ -1268,44 +1266,45 @@ body::after {
         <table class="data-table">
           <thead><tr><th>板块</th><th>跌幅</th><th>龙头</th></tr></thead>
           <tbody>
-            <tr><td class="td-strong">能源金属</td><td class="td-down">-7.81%</td><td>永杉锂业 -9.98%</td></tr>
-            <tr><td class="td-strong">电池</td><td class="td-down">-5.23%</td><td>圣阳股份 -10.01%</td></tr>
-            <tr><td class="td-strong">保险</td><td class="td-down">-5.02%</td><td>新华保险 -6.05%</td></tr>
-            <tr><td class="td-strong">通信设备</td><td class="td-down">-5.00%</td><td>烽火通信 -10%</td></tr>
-            <tr><td class="td-strong">多元金融</td><td class="td-down">-4.66%</td><td>南华期货 -9.27%</td></tr>
-            <tr><td class="td-strong">电机</td><td class="td-down">-4.46%</td><td>华瑞股份 -8.08%</td></tr>
-            <tr><td class="td-strong">工业金属</td><td class="td-down">-4.45%</td><td>楚江新材 -9.55%</td></tr>
-            <tr><td class="td-strong">贵金属</td><td class="td-down">-4.38%</td><td>盛达资源 -8.39%</td></tr>
-            <tr><td class="td-strong">化学制药</td><td class="td-down">-4.25%</td><td>海欣股份 -10.02%</td></tr>
-            <tr><td class="td-strong">专业连锁</td><td class="td-down">-4.10%</td><td>华致酒行 -7.67%</td></tr>
+            <tr><td class="td-strong">玻纤制造</td><td class="td-down">-9.52%</td><td>长海股份 -14.46%</td></tr>
+            <tr><td class="td-strong">通信线缆及配套</td><td class="td-down">-7.62%</td><td>东方电缆 -8.31%</td></tr>
+            <tr><td class="td-strong">钨</td><td class="td-down">-6.54%</td><td>章源钨业 -10.02%</td></tr>
+            <tr><td class="td-strong">印制电路板</td><td class="td-down">-6.49%</td><td>胜宏科技 -9.41%</td></tr>
+            <tr><td class="td-strong">磨具磨料</td><td class="td-down">-5.85%</td><td>奔朗新材 -8.83%</td></tr>
+            <tr><td class="td-strong">元件</td><td class="td-down">-5.64%</td><td>景旺电子 -10.00%</td></tr>
+            <tr><td class="td-strong">非金属材料</td><td class="td-down">-5.16%</td><td>宏和科技 -10.00%</td></tr>
+            <tr><td class="td-strong">其他数字媒体</td><td class="td-down">-5.12%</td><td>佳创视讯 -16.79%</td></tr>
+            <tr><td class="td-strong">消费电子零部件</td><td class="td-down">-5.02%</td><td>信濠光电 -16.65%</td></tr>
+            <tr><td class="td-strong">玻璃玻纤</td><td class="td-down">-5.01%</td><td>国际复材 -11.12%</td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="grid-3" style="margin-top:20px">
       <div class="card" style="border-color:rgba(255,77,79,0.2)">
-        <div class="card-title" style="color:var(--up)"><i class="fas fa-rocket"></i> 航天装备</div>
-        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">逆势大涨+4.25%，中国卫星等多股涨停，军工板块资金抱团</p>
+        <div class="card-title" style="color:var(--up)"><i class="fas fa-rocket"></i> 医疗研发外包</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">板块大涨+7.56%，CRO和创新药方向成为全天最强主线</p>
         <div class="tag-row">
-          <span class="stock-ticker">中国卫星 +10%</span>
-          <span class="stock-ticker">航天动力 +10%</span>
-          <span class="stock-ticker">航天工程 +10%</span>
+          <span class="stock-ticker">万邦医药 +20%</span>
+          <span class="stock-ticker">百奥赛图 +17.65%</span>
+          <span class="stock-ticker">凯莱英 +10%</span>
         </div>
       </div>
       <div class="card" style="border-color:rgba(22,119,255,0.2)">
-        <div class="card-title" style="color:var(--accent)"><i class="fas fa-gem"></i> 玻璃基板</div>
-        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">玻璃基板概念+1.78%，雷曼光电20cm涨停，面板产业链异动</p>
+        <div class="card-title" style="color:var(--accent)"><i class="fas fa-gem"></i> 生物制品</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">生物制品+6.28%，科创医药弹性突出，20cm个股密集活跃</p>
         <div class="tag-row">
-          <span class="stock-ticker">雷曼光电 +19.98%</span>
-          <span class="stock-ticker">凯盛科技 +10%</span>
-          <span class="stock-ticker">莱宝高科 +10%</span>
+          <span class="stock-ticker">三生国健 +20%</span>
+          <span class="stock-ticker">荣昌生物 +16.39%</span>
+          <span class="stock-ticker">君实生物 +12.84%</span>
         </div>
       </div>
       <div class="card" style="border-color:rgba(82,196,26,0.2)">
-        <div class="card-title" style="color:var(--down)"><i class="fas fa-drumstick-bite"></i> 养殖业</div>
-        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">养殖业+0.52%，神农集团涨停，防御属性显现</p>
+        <div class="card-title" style="color:var(--down)"><i class="fas fa-drumstick-bite"></i> 生猪养殖</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:16px">生猪养殖+4.31%，农业链在弱分化行情中具备防御弹性</p>
         <div class="tag-row">
-          <span class="stock-ticker">神农集团 +10.02%</span>
+          <span class="stock-ticker">巨星农牧 +9.98%</span>
+          <span class="stock-ticker">农林牧渔 +1.26%</span>
         </div>
       </div>
     </div>
@@ -1326,32 +1325,32 @@ body::after {
       <div class="tier-card tier-1">
         <div class="tier-label">第一梯队 · 核心主线</div>
         <div class="tier-stocks">
-          <span class="tier-stock">航天装备</span>
-          <span class="tier-stock">玻璃基板</span>
-          <span class="tier-stock">养殖业</span>
+          <span class="tier-stock">医疗研发外包</span>
+          <span class="tier-stock">生物制品</span>
+          <span class="tier-stock">化学制药</span>
         </div>
       </div>
       <div class="tier-card tier-2">
         <div class="tier-label">第二梯队 · 趋势跟随</div>
         <div class="tier-stocks">
-          <span class="tier-stock">教育</span>
-          <span class="tier-stock">电子化学品</span>
+          <span class="tier-stock">医疗服务</span>
+          <span class="tier-stock">疫苗</span>
         </div>
       </div>
       <div class="tier-card tier-3">
         <div class="tier-label">第三梯队 · 轮动补涨</div>
         <div class="tier-stocks">
-          <span class="tier-stock">银行</span>
-          <span class="tier-stock">高股息</span>
+          <span class="tier-stock">上证50</span>
+          <span class="tier-stock">生猪养殖</span>
         </div>
       </div>
       <div class="tier-card tier-avoid">
         <div class="tier-label">回避 · 风险区域</div>
         <div class="tier-stocks">
-          <span class="tier-stock">能源金属</span>
-          <span class="tier-stock">电池</span>
-          <span class="tier-stock">保险</span>
-          <span class="tier-stock">通信</span>
+          <span class="tier-stock">玻纤制造</span>
+          <span class="tier-stock">通信线缆</span>
+          <span class="tier-stock">PCB</span>
+          <span class="tier-stock">元件</span>
         </div>
       </div>
     </div>
@@ -1520,7 +1519,7 @@ body::after {
       <span>中国股票新闻</span>
       <span class="title-badge">要闻</span>
     </div>
-    <div class="news-grid" id="newsGrid">
+    <div class="news-grid">
       <div class="news-item">
         <div class="news-header"><div class="news-num">01</div></div>
         <div class="news-headline">亚洲市场全线大跌，日股暴跌3000点，韩股暴跌近6%</div>
@@ -1579,27 +1578,21 @@ body::after {
       <table class="data-table">
         <thead><tr><th>个股</th><th>涨幅</th><th>题材</th></tr></thead>
         <tbody>
-          <tr><td class="td-strong">中国卫星</td><td class="td-up">+10.00%</td><td><span class="badge badge-hot">航天</span></td></tr>
-          <tr><td class="td-strong">TCL中环</td><td class="td-up">+10.03%</td><td><span class="badge badge-info">光伏</span></td></tr>
-          <tr><td class="td-strong">天娱数科</td><td class="td-up">+9.96%</td><td><span class="badge badge-info">AI应用</span></td></tr>
-          <tr><td class="td-strong">红星发展</td><td class="td-up">+10.00%</td><td><span class="badge badge-hot">有色</span></td></tr>
-          <tr><td class="td-strong">凯盛科技</td><td class="td-up">+10.00%</td><td><span class="badge badge-info">玻璃</span></td></tr>
-          <tr><td class="td-strong">节能风电</td><td class="td-up">+10.06%</td><td><span class="badge badge-info">风电</span></td></tr>
-          <tr><td class="td-strong">彤程新材</td><td class="td-up">+10.00%</td><td><span class="badge badge-info">化工</span></td></tr>
-          <tr><td class="td-strong">莱宝高科</td><td class="td-up">+10.00%</td><td><span class="badge badge-info">光学</span></td></tr>
-          <tr><td class="td-strong">铖昌科技</td><td class="td-up">+10.00%</td><td><span class="badge badge-hot">军工</span></td></tr>
-          <tr><td class="td-strong">亚威股份</td><td class="td-up">+10.01%</td><td><span class="badge badge-info">机床</span></td></tr>
-          <tr><td class="td-strong">航天动力</td><td class="td-up">+10.01%</td><td><span class="badge badge-hot">航天</span></td></tr>
-          <tr><td class="td-strong">康强电子</td><td class="td-up">+10.01%</td><td><span class="badge badge-info">电子</span></td></tr>
-          <tr><td class="td-strong">富创精密</td><td class="td-up">+20.00%</td><td><span class="badge badge-info">科创板</span></td></tr>
-          <tr><td class="td-strong">超声电子</td><td class="td-up">+10.01%</td><td><span class="badge badge-info">电子</span></td></tr>
-          <tr><td class="td-strong">五方光电</td><td class="td-up">+10.01%</td><td><span class="badge badge-info">光学</span></td></tr>
-          <tr><td class="td-strong">航天工程</td><td class="td-up">+10.00%</td><td><span class="badge badge-hot">航天</span></td></tr>
-          <tr><td class="td-strong">双良节能</td><td class="td-up">+10.00%</td><td><span class="badge badge-info">光伏</span></td></tr>
-          <tr><td class="td-strong">大胜达</td><td class="td-up">+10.00%</td><td><span class="badge badge-info">包装</span></td></tr>
-          <tr><td class="td-strong">上海瀚讯</td><td class="td-up">+11.89%</td><td><span class="badge badge-info">通信</span></td></tr>
-          <tr><td class="td-strong">雷曼光电</td><td class="td-up">+19.98%</td><td><span class="badge badge-hot">LED</span></td></tr>
-          <tr><td class="td-strong">软通动力</td><td class="td-up">+12.10%</td><td><span class="badge badge-info">软件</span></td></tr>
+          <tr><td class="td-strong">佰仁医疗</td><td class="td-up">+20.00%</td><td><span class="badge badge-hot">医疗器械</span></td></tr>
+          <tr><td class="td-strong">万邦医药</td><td class="td-up">+20.00%</td><td><span class="badge badge-hot">CRO</span></td></tr>
+          <tr><td class="td-strong">维峰电子</td><td class="td-up">+20.00%</td><td><span class="badge badge-info">电子</span></td></tr>
+          <tr><td class="td-strong">广生堂</td><td class="td-up">+20.00%</td><td><span class="badge badge-hot">创新药</span></td></tr>
+          <tr><td class="td-strong">舒泰神</td><td class="td-up">+20.00%</td><td><span class="badge badge-hot">生物医药</span></td></tr>
+          <tr><td class="td-strong">三生国健</td><td class="td-up">+20.00%</td><td><span class="badge badge-hot">生物制品</span></td></tr>
+          <tr><td class="td-strong">银河微电</td><td class="td-up">+19.99%</td><td><span class="badge badge-info">半导体</span></td></tr>
+          <tr><td class="td-strong">百奥赛图</td><td class="td-up">+17.65%</td><td><span class="badge badge-hot">医药研发</span></td></tr>
+          <tr><td class="td-strong">美利信</td><td class="td-up">+16.67%</td><td><span class="badge badge-info">通信设备</span></td></tr>
+          <tr><td class="td-strong">荣昌生物</td><td class="td-up">+16.39%</td><td><span class="badge badge-hot">创新药</span></td></tr>
+          <tr><td class="td-strong">有研硅</td><td class="td-up">+16.34%</td><td><span class="badge badge-info">半导体材料</span></td></tr>
+          <tr><td class="td-strong">多浦乐</td><td class="td-up">+16.34%</td><td><span class="badge badge-info">仪器仪表</span></td></tr>
+          <tr><td class="td-strong">金石亚药</td><td class="td-up">+16.32%</td><td><span class="badge badge-hot">化学制药</span></td></tr>
+          <tr><td class="td-strong">华丰科技</td><td class="td-up">+15.23%</td><td><span class="badge badge-info">连接器</span></td></tr>
+          <tr><td class="td-strong">睿智医药</td><td class="td-up">+14.94%</td><td><span class="badge badge-hot">CRO</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1620,18 +1613,18 @@ body::after {
       <table class="data-table">
         <thead><tr><th>个股</th><th>跌幅</th><th>原因</th></tr></thead>
         <tbody>
-          <tr><td class="td-strong">永杉锂业</td><td class="td-down">-9.98%</td><td><span class="badge badge-down">能源金属</span></td></tr>
-          <tr><td class="td-strong">圣阳股份</td><td class="td-down">-10.01%</td><td><span class="badge badge-down">电池</span></td></tr>
-          <tr><td class="td-strong">烽火通信</td><td class="td-down">-10.00%</td><td><span class="badge badge-down">通信</span></td></tr>
-          <tr><td class="td-strong">南华期货</td><td class="td-down">-9.27%</td><td><span class="badge badge-warn">金融</span></td></tr>
-          <tr><td class="td-strong">华瑞股份</td><td class="td-down">-8.08%</td><td><span class="badge badge-warn">电机</span></td></tr>
-          <tr><td class="td-strong">楚江新材</td><td class="td-down">-9.55%</td><td><span class="badge badge-down">工业金属</span></td></tr>
-          <tr><td class="td-strong">盛达资源</td><td class="td-down">-8.39%</td><td><span class="badge badge-warn">贵金属</span></td></tr>
-          <tr><td class="td-strong">海欣股份</td><td class="td-down">-10.02%</td><td><span class="badge badge-down">化学制药</span></td></tr>
-          <tr><td class="td-strong">华致酒行</td><td class="td-down">-7.67%</td><td><span class="badge badge-warn">连锁</span></td></tr>
-          <tr><td class="td-strong">安森美半导体(美股)</td><td class="td-down">-23.66%</td><td><span class="badge badge-down">芯片</span></td></tr>
-          <tr><td class="td-strong">西部数据(美股)</td><td class="td-down">-13.17%</td><td><span class="badge badge-down">存储</span></td></tr>
-          <tr><td class="td-strong">希捷科技(美股)</td><td class="td-down">-12.24%</td><td><span class="badge badge-down">存储</span></td></tr>
+          <tr><td class="td-strong">长盈通</td><td class="td-down">-20.00%</td><td><span class="badge badge-down">通信材料</span></td></tr>
+          <tr><td class="td-strong">集智股份</td><td class="td-down">-19.30%</td><td><span class="badge badge-down">仪器仪表</span></td></tr>
+          <tr><td class="td-strong">华阳智能</td><td class="td-down">-18.65%</td><td><span class="badge badge-down">自动化设备</span></td></tr>
+          <tr><td class="td-strong">佳创视讯</td><td class="td-down">-16.79%</td><td><span class="badge badge-down">数字媒体</span></td></tr>
+          <tr><td class="td-strong">信濠光电</td><td class="td-down">-16.65%</td><td><span class="badge badge-down">消费电子</span></td></tr>
+          <tr><td class="td-strong">杰恩股份</td><td class="td-down">-16.03%</td><td><span class="badge badge-warn">建筑装饰</span></td></tr>
+          <tr><td class="td-strong">聚杰微纤</td><td class="td-down">-15.76%</td><td><span class="badge badge-warn">纺织制造</span></td></tr>
+          <tr><td class="td-strong">博盈特焊</td><td class="td-down">-14.97%</td><td><span class="badge badge-warn">专用设备</span></td></tr>
+          <tr><td class="td-strong">长海股份</td><td class="td-down">-14.46%</td><td><span class="badge badge-down">玻纤制造</span></td></tr>
+          <tr><td class="td-strong">翔楼新材</td><td class="td-down">-13.99%</td><td><span class="badge badge-warn">金属材料</span></td></tr>
+          <tr><td class="td-strong">深科达</td><td class="td-down">-13.85%</td><td><span class="badge badge-warn">专用设备</span></td></tr>
+          <tr><td class="td-strong">德福科技</td><td class="td-down">-13.71%</td><td><span class="badge badge-down">铜箔</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1651,27 +1644,27 @@ body::after {
     <div class="hot-stocks-grid">
       <div class="hot-stocks-col">
         <div class="hot-stocks-title"><i class="fas fa-fire" style="color:var(--orange);margin-right:6px"></i>同花顺热榜</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>N惠科</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>中国卫星</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>TCL中环</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>天娱数科</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>雷曼光电</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>万邦医药</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>三生国健</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>广生堂</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>舒泰神</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>佰仁医疗</div>
       </div>
       <div class="hot-stocks-col">
         <div class="hot-stocks-title"><i class="fas fa-snowflake" style="color:var(--accent);margin-right:6px"></i>雪球热股</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>中国卫星</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>TCL中环</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>天娱数科</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>雷曼光电</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>富创精密</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>荣昌生物</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>百奥赛图</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>君实生物</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>百利天恒</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>凯莱英</div>
       </div>
       <div class="hot-stocks-col">
         <div class="hot-stocks-title"><i class="fas fa-chart-bar" style="color:var(--down);margin-right:6px"></i>东方财富热股</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>N惠科</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>中国卫星</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>TCL中环</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>天娱数科</div>
-        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>凯盛科技</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">1</span>有研硅</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">2</span>银河微电</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">3</span>维峰电子</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">4</span>华丰科技</div>
+        <div class="hot-stocks-item"><span class="hot-stocks-rank">5</span>美利信</div>
       </div>
     </div>
   </section>
@@ -1691,23 +1684,23 @@ body::after {
       <div class="card">
         <div class="strategy-card">
           <div class="strategy-title">短线策略</div>
-          <div class="strategy-content">空仓观望。4000+下跌，情绪冰点，不要试图抄底。等周一开盘看修复力度，如果继续低开低走，继续空仓。</div>
+          <div class="strategy-content">轻仓跟随强主线。医药生物是今日核心，但连续大涨后等待分歧承接，不追缩量一致。</div>
         </div>
         <div class="strategy-card cyan">
           <div class="strategy-title">中线策略</div>
-          <div class="strategy-content">空仓或极低仓位。趋势已破，下跌通道确立。等缩量企稳，至少3-5个交易日后看是否有底部结构。</div>
+          <div class="strategy-content">维持低到中性仓位。上证与权重指数托底，但深成指、创业板和中证1000仍偏弱，确认补量前不盲目加仓。</div>
         </div>
         <div class="strategy-card pink">
           <div class="strategy-title">仓位管理</div>
-          <div class="strategy-content">激进型20%以下，稳健型10%以下，保守型空仓。</div>
+          <div class="strategy-content">激进型30%以内，稳健型20%以内，保守型以观察为主。</div>
         </div>
         <div class="strategy-card">
           <div class="strategy-title">关注方向</div>
-          <div class="strategy-content">航天装备（逆势走强，观察持续性）、中报业绩预增（宁波华翔、富满微等）</div>
+          <div class="strategy-content">医疗研发外包、生物制品、化学制药、医疗服务，以及中报业绩预增方向。</div>
         </div>
         <div class="strategy-card">
           <div class="strategy-title">回避方向</div>
-          <div class="strategy-content">能源金属、电池、保险、通信设备、半导体芯片</div>
+          <div class="strategy-content">玻纤制造、通信线缆及配套、PCB、元件、消费电子零部件。</div>
         </div>
       </div>
       <div class="card">
@@ -1715,19 +1708,19 @@ body::after {
         <ul class="checklist">
           <li class="checklist-item">
             <div class="checklist-box checked"><i class="fas fa-check"></i></div>
-            <div class="checklist-text"><strong>确认趋势：</strong>下跌趋势已确立，不要幻想反转</div>
+            <div class="checklist-text"><strong>确认结构：</strong>指数托底但题材分化，优先看强主线</div>
           </li>
           <li class="checklist-item">
             <div class="checklist-box checked"><i class="fas fa-check"></i></div>
-            <div class="checklist-text"><strong>检查仓位：</strong>仓位是否已降至20%以下</div>
+            <div class="checklist-text"><strong>检查仓位：</strong>仓位是否控制在计划上限内</div>
           </li>
           <li class="checklist-item">
             <div class="checklist-box"></div>
-            <div class="checklist-text"><strong>回避领跌：</strong>是否已清仓能源金属、电池、保险、通信</div>
+            <div class="checklist-text"><strong>回避领跌：</strong>是否避开玻纤、PCB、元件等弱势链条</div>
           </li>
           <li class="checklist-item">
             <div class="checklist-box"></div>
-            <div class="checklist-text"><strong>监控航天：</strong>观察航天装备板块持续性</div>
+            <div class="checklist-text"><strong>监控医药：</strong>观察医药生物分歧后的承接力度</div>
           </li>
           <li class="checklist-item">
             <div class="checklist-box"></div>
@@ -1798,14 +1791,14 @@ body::after {
         <div class="risk-icon red"><i class="fas fa-microchip"></i></div>
         <div>
           <div class="risk-title">美股芯片股暴跌</div>
-          <div class="risk-desc">美光科技跌超6%，全球科技产业链承压，周一A股芯片板块承压。</div>
+          <div class="risk-desc">海外科技波动仍可能传导，重点观察A股电子材料与元件链条承压情况。</div>
         </div>
       </div>
       <div class="risk-item">
         <div class="risk-icon red"><i class="fas fa-chart-line"></i></div>
         <div>
-          <div class="risk-title">A股趋势破位</div>
-          <div class="risk-desc">下跌通道确立，短期无明显支撑。</div>
+          <div class="risk-title">题材分化加剧</div>
+          <div class="risk-desc">涨停与跌停数量接近，说明短线容错率仍低。</div>
         </div>
       </div>
       <div class="risk-item">
@@ -1843,7 +1836,7 @@ body::after {
         </li>
         <li class="checklist-item">
           <div class="checklist-box"></div>
-          <div class="checklist-text"><strong>趋势破位：</strong>5/10/20日线全破，确认下跌趋势</div>
+          <div class="checklist-text"><strong>结构分化：</strong>指数托底不等于题材全面修复</div>
         </li>
         <li class="checklist-item">
           <div class="checklist-box"></div>
@@ -1864,7 +1857,7 @@ body::after {
 
   <!-- Footer -->
   <footer class="footer">
-    <p>MarketReview · 2026.06.26 A股复盘</p>
+    <p>MarketReview · 2026.06.29 A股复盘</p>
     <p style="margin-top:8px; font-size:0.75rem; color:var(--text-dim)">本页面仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
   </footer>
 
@@ -1898,8 +1891,9 @@ const commonOption = {
 function makeSparklineData(n, trend) {
   const data = [];
   let v = 100;
+  const drift = trend === 'up' ? 0.45 : trend === 'flat' ? 0 : -0.45;
   for (let i = 0; i < n; i++) {
-    v += (Math.random() - 0.55) * 4;
+    v += (Math.random() - 0.5) * 3 + drift;
     data.push(v.toFixed(2));
   }
   return data;
@@ -1932,199 +1926,16 @@ function renderSparkline(id, trend, color) {
   return chart;
 }
 
-function escapeHTML(value) {
-  return String(value ?? '').replace(/[&<>"']/g, ch => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  }[ch]));
-}
-
-function formatNumber(value, digits = 2) {
-  const num = Number(value);
-  if (!Number.isFinite(num)) return value || '—';
-  return num.toLocaleString('zh-CN', {
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits
-  });
-}
-
-function formatPercent(value) {
-  const num = Number(value);
-  if (!Number.isFinite(num)) return value || '—';
-  return `${num > 0 ? '+' : ''}${num.toFixed(2)}%`;
-}
-
-function trendClass(value) {
-  return Number(value) >= 0 ? 'up' : 'down';
-}
-
-function trendColor(value) {
-  return Number(value) >= 0 ? 'var(--up)' : 'var(--down)';
-}
-
-function updateIndexSparkline(card, item) {
-  const chartEl = card.querySelector('.index-chart-mini');
-  if (!chartEl || !window.echarts) return;
-  const chart = echarts.getInstanceByDom(chartEl);
-  if (!chart) return;
-
-  const cls = trendClass(item.changePercent);
-  const lineColor = cls === 'up' ? colors.up : colors.down;
-  const data = Array.isArray(item.sparkline) && item.sparkline.length > 1
-    ? item.sparkline
-    : makeSparklineData(30, cls);
-
-  chart.setOption({
-    series: [{
-      data,
-      lineStyle: { color: lineColor },
-      areaStyle: {
-        color: {
-          type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-          colorStops: [
-            { offset: 0, color: lineColor + '33' },
-            { offset: 1, color: lineColor + '05' }
-          ]
-        }
-      }
-    }]
-  });
-}
-
-function updateIndexCards(indices = []) {
-  const byName = new Map(indices.map(item => [item.name, item]));
-  document.querySelectorAll('#indices .index-card').forEach(card => {
-    const name = card.querySelector('.index-name')?.textContent.trim();
-    const item = byName.get(name);
-    if (!item) return;
-
-    const cls = trendClass(item.changePercent);
-    const tag = card.querySelector('.index-tag');
-    const value = card.querySelector('.index-value');
-    const change = card.querySelector('.index-change');
-
-    if (tag) {
-      tag.className = `index-tag ${cls}`;
-      tag.textContent = cls === 'up' ? 'UP' : 'DOWN';
-    }
-    if (value) value.textContent = item.valueText || formatNumber(item.value);
-    if (change) {
-      change.className = `index-change ${cls}`;
-      change.innerHTML = `<i class="fas fa-arrow-${cls === 'up' ? 'up' : 'down'}" style="font-size:0.8rem"></i> ${escapeHTML(item.changeText || formatPercent(item.changePercent))}`;
-    }
-    updateIndexSparkline(card, item);
-  });
-}
-
-function updateQuickStats(stats = []) {
-  const byLabel = new Map(stats.map(item => [item.label, item]));
-  document.querySelectorAll('#quickStats .quick-stat-item').forEach(card => {
-    const label = card.querySelector('.quick-stat-label')?.textContent.trim();
-    const item = byLabel.get(label);
-    if (!item) return;
-
-    const value = card.querySelector('.quick-stat-value');
-    if (value) {
-      value.textContent = item.valueText || item.value || '—';
-      value.style.color = item.color || (item.changePercent == null ? 'var(--text)' : trendColor(item.changePercent));
-    }
-  });
-}
-
-function updateGlobalCards(markets = []) {
-  const byName = new Map(markets.map(item => [item.name, item]));
-  document.querySelectorAll('#globalGrid .global-card').forEach(card => {
-    const name = card.querySelector('.global-name')?.textContent.trim();
-    const item = byName.get(name);
-    if (!item) return;
-
-    const value = card.querySelector('.global-value');
-    const change = card.querySelector('.global-change');
-    if (value) value.textContent = item.valueText || formatNumber(item.value);
-    if (change) {
-      change.textContent = item.changeText || formatPercent(item.changePercent);
-      change.style.color = item.changePercent == null ? 'var(--text-muted)' : trendColor(item.changePercent);
-    }
-  });
-}
-
-function updateMarketMeta(data) {
-  const updatedAt = data.updatedAtText || data.updatedAt || '';
-  const tradingDate = data.tradingDateText || data.tradingDate || '';
-  const turnover = data.turnoverText || '';
-  const status = data.marketStatus || '';
-
-  if (updatedAt) document.getElementById('marketUpdatedAt').textContent = `更新 ${updatedAt}`;
-  if (tradingDate) {
-    document.getElementById('navDate').textContent = tradingDate.replaceAll('-', '.');
-    document.getElementById('heroDateText').textContent = tradingDate;
-  }
-  if (turnover) document.getElementById('heroTurnoverText').textContent = `成交 ${turnover}`;
-  if (status) document.getElementById('marketStatus').textContent = status;
-}
-
-function renderNews(items = []) {
-  if (!items.length) return;
-  const grid = document.getElementById('newsGrid');
-  grid.innerHTML = items.slice(0, 10).map((item, index) => {
-    const num = String(index + 1).padStart(2, '0');
-    const title = escapeHTML(item.title);
-    const source = escapeHTML(item.source || '');
-    const publishedAt = escapeHTML(item.publishedAtText || item.publishedAt || '');
-    const url = item.url ? escapeHTML(item.url) : '';
-    const headline = url
-      ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`
-      : title;
-    const meta = [source, publishedAt].filter(Boolean).join(' · ');
-
-    return `
-      <div class="news-item">
-        <div class="news-header"><div class="news-num">${num}</div></div>
-        <div class="news-headline">${headline}</div>
-        ${meta ? `<div class="news-source">${meta}</div>` : ''}
-      </div>
-    `;
-  }).join('');
-}
-
-async function fetchJSON(path) {
-  const response = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
-  if (!response.ok) throw new Error(`Failed to load ${path}`);
-  return response.json();
-}
-
-async function loadLiveData() {
-  const [marketResult, newsResult] = await Promise.allSettled([
-    fetchJSON('data/market.json'),
-    fetchJSON('data/news.json')
-  ]);
-
-  if (marketResult.status === 'fulfilled') {
-    const data = marketResult.value;
-    updateMarketMeta(data);
-    updateIndexCards(data.indices || []);
-    updateQuickStats(data.quickStats || []);
-    updateGlobalCards(data.globalMarkets || []);
-  }
-
-  if (newsResult.status === 'fulfilled') {
-    renderNews(newsResult.value.items || []);
-  }
-}
-
-// Index sparklines (all downtrend)
+// Index sparklines
 const indexCharts = [];
-indexCharts.push(renderSparkline('chartIndex1', 'down', colors.down));
+indexCharts.push(renderSparkline('chartIndex1', 'up', colors.up));
 indexCharts.push(renderSparkline('chartIndex2', 'down', colors.down));
 indexCharts.push(renderSparkline('chartIndex3', 'down', colors.down));
-indexCharts.push(renderSparkline('chartIndex4', 'down', colors.down));
+indexCharts.push(renderSparkline('chartIndex4', 'up', colors.up));
 indexCharts.push(renderSparkline('chartIndex5', 'down', colors.down));
-indexCharts.push(renderSparkline('chartIndex6', 'down', colors.down));
+indexCharts.push(renderSparkline('chartIndex6', 'up', colors.up));
 indexCharts.push(renderSparkline('chartIndex7', 'down', colors.down));
-indexCharts.push(renderSparkline('chartIndex8', 'down', colors.down));
+indexCharts.push(renderSparkline('chartIndex8', 'up', colors.up));
 
 // Pie chart
 const chartPie = echarts.init(document.getElementById('chartPie'));
@@ -2139,9 +1950,9 @@ chartPie.setOption({
     label: { show: false },
     labelLine: { show: false },
     data: [
-      { value: 768, name: '上涨', itemStyle: { color: colors.up } },
-      { value: 4456, name: '下跌', itemStyle: { color: colors.down } },
-      { value: 47, name: '平盘', itemStyle: { color: '#444' } }
+      { value: 1857, name: '上涨', itemStyle: { color: colors.up } },
+      { value: 3228, name: '下跌', itemStyle: { color: colors.down } },
+      { value: 449, name: '平盘', itemStyle: { color: '#444' } }
     ]
   }]
 });
@@ -2161,8 +1972,8 @@ chartGauge.setOption({
     splitLine: { length: 12, lineStyle: { color: 'rgba(255,255,255,0.1)' } },
     axisLabel: { color: colors.text, fontSize: 10, distance: 18 },
     title: { show: false },
-    detail: { valueAnimation: true, fontSize: 22, fontWeight: 700, color: '#e0e0e0', formatter: '降温', offsetCenter: [0, '70%'] },
-    data: [{ value: 25, name: '情绪指数' }]
+    detail: { valueAnimation: true, fontSize: 22, fontWeight: 700, color: '#e0e0e0', formatter: '分化', offsetCenter: [0, '70%'] },
+    data: [{ value: 48, name: '情绪指数' }]
   }]
 });
 
@@ -2172,10 +1983,10 @@ chartVolume.setOption({
   ...commonOption,
   tooltip: { ...commonOption.tooltip, trigger: 'axis' },
   grid: { left: 50, right: 20, top: 20, bottom: 30 },
-  xAxis: { type: 'category', data: ['6/22','6/23','6/24','6/25','6/26'], axisLine: { lineStyle: { color: colors.grid } }, axisLabel: { color: colors.text, fontSize: 11 } },
-  yAxis: { type: 'value', axisLine: { show: false }, splitLine: { lineStyle: { color: colors.grid } }, axisLabel: { color: colors.text, fontSize: 11, formatter: v => (v/10000).toFixed(1)+'万亿' } },
+  xAxis: { type: 'category', data: ['6/23','6/24','6/25','6/26','6/29'], axisLine: { lineStyle: { color: colors.grid } }, axisLabel: { color: colors.text, fontSize: 11 } },
+  yAxis: { type: 'value', axisLine: { show: false }, splitLine: { lineStyle: { color: colors.grid } }, axisLabel: { color: colors.text, fontSize: 11, formatter: v => v.toFixed(1)+'万亿' } },
   series: [{
-    type: 'bar', data: [3.2, 3.45, 3.38, 4.02, 3.58],
+    type: 'bar', data: [3.44, 3.28, 3.59, 3.55, 2.50],
     itemStyle: { color: colors.accent, borderRadius: [4, 4, 0, 0] },
     barWidth: '40%'
   }]
@@ -2186,9 +1997,6 @@ window.addEventListener('resize', () => {
   indexCharts.forEach(c => c && c.resize());
   chartPie.resize(); chartGauge.resize(); chartVolume.resize();
 });
-
-loadLiveData();
-setInterval(loadLiveData, 5 * 60 * 1000);
 </script>
 </body>
 </html>
