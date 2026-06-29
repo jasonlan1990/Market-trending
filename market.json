@@ -1,0 +1,182 @@
+{
+  "updatedAt": "2026-06-26T15:05:00+08:00",
+  "updatedAtText": "15:05",
+  "tradingDate": "2026-06-26",
+  "tradingDateText": "2026年6月26日 周五",
+  "marketStatus": "已收盘",
+  "turnoverText": "3.58万亿",
+  "indices": [
+    {
+      "name": "上证指数",
+      "symbol": "000001.SS",
+      "value": 4027.26,
+      "valueText": "4,027.26",
+      "changePercent": -2.26,
+      "changeText": "-2.26%"
+    },
+    {
+      "name": "深证成指",
+      "symbol": "399001.SZ",
+      "value": 15782.22,
+      "valueText": "15,782.22",
+      "changePercent": -3.44,
+      "changeText": "-3.44%"
+    },
+    {
+      "name": "创业板指",
+      "symbol": "399006.SZ",
+      "value": 4194.21,
+      "valueText": "4,194.21",
+      "changePercent": -4.07,
+      "changeText": "-4.07%"
+    },
+    {
+      "name": "科创50",
+      "symbol": "000688.SS",
+      "value": null,
+      "valueText": "—",
+      "changePercent": -1.65,
+      "changeText": "-1.65%"
+    },
+    {
+      "name": "北证50",
+      "symbol": "899050.BJ",
+      "value": null,
+      "valueText": "—",
+      "changePercent": -0.84,
+      "changeText": "-0.84%"
+    },
+    {
+      "name": "沪深300",
+      "symbol": "000300.SS",
+      "value": null,
+      "valueText": "—",
+      "changePercent": -3.03,
+      "changeText": "-3.03%"
+    },
+    {
+      "name": "中证500",
+      "symbol": "000905.SS",
+      "value": null,
+      "valueText": "—",
+      "changePercent": -2.62,
+      "changeText": "-2.62%"
+    },
+    {
+      "name": "上证50",
+      "symbol": "000016.SS",
+      "value": null,
+      "valueText": "—",
+      "changePercent": -2.37,
+      "changeText": "-2.37%"
+    }
+  ],
+  "quickStats": [
+    {
+      "label": "上证指数",
+      "valueText": "-2.26%",
+      "changePercent": -2.26
+    },
+    {
+      "label": "深证成指",
+      "valueText": "-3.44%",
+      "changePercent": -3.44
+    },
+    {
+      "label": "创业板指",
+      "valueText": "-4.07%",
+      "changePercent": -4.07
+    },
+    {
+      "label": "科创50",
+      "valueText": "-1.65%",
+      "changePercent": -1.65
+    },
+    {
+      "label": "成交额",
+      "valueText": "3.58万亿",
+      "color": "var(--text)"
+    },
+    {
+      "label": "上涨",
+      "valueText": "768",
+      "color": "var(--up)"
+    },
+    {
+      "label": "下跌",
+      "valueText": "4456",
+      "color": "var(--down)"
+    },
+    {
+      "label": "涨停",
+      "valueText": "68",
+      "color": "var(--up)"
+    }
+  ],
+  "globalMarkets": [
+    {
+      "name": "道琼斯",
+      "symbol": "^DJI",
+      "value": 51876.11,
+      "valueText": "51,876.11",
+      "changePercent": -0.09,
+      "changeText": "-0.09%"
+    },
+    {
+      "name": "纳斯达克",
+      "symbol": "^IXIC",
+      "value": 25297.62,
+      "valueText": "25,297.62",
+      "changePercent": -0.24,
+      "changeText": "-0.24%"
+    },
+    {
+      "name": "标普500",
+      "symbol": "^GSPC",
+      "value": 7354.02,
+      "valueText": "7,354.02",
+      "changePercent": -0.05,
+      "changeText": "-0.05%"
+    },
+    {
+      "name": "日经225",
+      "symbol": "^N225",
+      "value": 69360.88,
+      "valueText": "69,360.88",
+      "changePercent": -4.15,
+      "changeText": "-4.15%"
+    },
+    {
+      "name": "韩国KOSPI",
+      "symbol": "^KS11",
+      "value": 8411.21,
+      "valueText": "8,411.21",
+      "changePercent": -5.81,
+      "changeText": "-5.81%"
+    },
+    {
+      "name": "德国DAX",
+      "symbol": "^GDAXI",
+      "value": 24671.22,
+      "valueText": "24,671.22",
+      "changePercent": -1.29,
+      "changeText": "-1.29%"
+    },
+    {
+      "name": "法国CAC40",
+      "symbol": "^FCHI",
+      "value": 8384.87,
+      "valueText": "8,384.87",
+      "changePercent": -0.55,
+      "changeText": "-0.55%"
+    },
+    {
+      "name": "离岸人民币",
+      "symbol": "CNH=X",
+      "value": 7.12,
+      "valueText": "7.12",
+      "changePercent": null,
+      "changeText": "—"
+    }
+  ]
+}

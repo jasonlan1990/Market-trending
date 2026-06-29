@@ -386,6 +386,9 @@ body::after {
 .news-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .news-num { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(22,119,255,0.1); flex-shrink: 0; }
 .news-headline { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; font-weight: 500; }
+.news-headline a { color: inherit; text-decoration: none; }
+.news-headline a:hover { color: var(--accent-light); }
+.news-source { margin-top: 8px; font-size: 0.72rem; color: var(--text-dim); }
 
 /* Master cards */
 .master-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
@@ -565,8 +568,8 @@ body::after {
     <li><a href="#strategy">策略</a></li>
   </ul>
   <div class="nav-meta">
-    <div class="market-status">已收盘</div>
-    <span>2026.06.26</span>
+    <div class="market-status" id="marketStatus">已收盘</div>
+    <span id="navDate">2026.06.26</span>
     <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
   </div>
 </nav>
@@ -584,9 +587,9 @@ body::after {
     </div>
     <div class="hero-date">
       <i class="fas fa-calendar-alt"></i>
-      <span>2026年6月26日 周五</span>
+      <span id="heroDateText">2026年6月26日 周五</span>
       <span style="opacity:0.3">|</span>
-      <span>成交 3.58万亿</span>
+      <span id="heroTurnoverText">成交 3.58万亿</span>
     </div>
   </section>
 
@@ -596,7 +599,7 @@ body::after {
   <section class="section" id="indices">
     <div class="section-title">
       <span>指数行情</span>
-      <span class="title-badge">实时</span>
+      <span class="title-badge" id="marketUpdatedAt">实时</span>
     </div>
     <div class="index-grid">
       <div class="card index-card">
@@ -1065,7 +1068,7 @@ body::after {
   <div class="section-divider"></div>
 
   <section class="section">
-    <div class="quick-stats">
+    <div class="quick-stats" id="quickStats">
       <div class="quick-stat-item">
         <div class="quick-stat-value" style="color:var(--down)">-2.26%</div>
         <div class="quick-stat-label">上证指数</div>
@@ -1110,7 +1113,7 @@ body::after {
       <span>外围联动</span>
       <span class="title-badge">全球</span>
     </div>
-    <div class="global-grid">
+    <div class="global-grid" id="globalGrid">
       <div class="global-card">
         <div class="global-name">道琼斯</div>
         <div class="global-value">51,876.11</div>
@@ -1517,7 +1520,7 @@ body::after {
       <span>中国股票新闻</span>
       <span class="title-badge">要闻</span>
     </div>
-    <div class="news-grid">
+    <div class="news-grid" id="newsGrid">
       <div class="news-item">
         <div class="news-header"><div class="news-num">01</div></div>
         <div class="news-headline">亚洲市场全线大跌，日股暴跌3000点，韩股暴跌近6%</div>
@@ -1929,6 +1932,189 @@ function renderSparkline(id, trend, color) {
   return chart;
 }
 
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[ch]));
+}
+
+function formatNumber(value, digits = 2) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return value || '—';
+  return num.toLocaleString('zh-CN', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  });
+}
+
+function formatPercent(value) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return value || '—';
+  return `${num > 0 ? '+' : ''}${num.toFixed(2)}%`;
+}
+
+function trendClass(value) {
+  return Number(value) >= 0 ? 'up' : 'down';
+}
+
+function trendColor(value) {
+  return Number(value) >= 0 ? 'var(--up)' : 'var(--down)';
+}
+
+function updateIndexSparkline(card, item) {
+  const chartEl = card.querySelector('.index-chart-mini');
+  if (!chartEl || !window.echarts) return;
+  const chart = echarts.getInstanceByDom(chartEl);
+  if (!chart) return;
+
+  const cls = trendClass(item.changePercent);
+  const lineColor = cls === 'up' ? colors.up : colors.down;
+  const data = Array.isArray(item.sparkline) && item.sparkline.length > 1
+    ? item.sparkline
+    : makeSparklineData(30, cls);
+
+  chart.setOption({
+    series: [{
+      data,
+      lineStyle: { color: lineColor },
+      areaStyle: {
+        color: {
+          type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: lineColor + '33' },
+            { offset: 1, color: lineColor + '05' }
+          ]
+        }
+      }
+    }]
+  });
+}
+
+function updateIndexCards(indices = []) {
+  const byName = new Map(indices.map(item => [item.name, item]));
+  document.querySelectorAll('#indices .index-card').forEach(card => {
+    const name = card.querySelector('.index-name')?.textContent.trim();
+    const item = byName.get(name);
+    if (!item) return;
+
+    const cls = trendClass(item.changePercent);
+    const tag = card.querySelector('.index-tag');
+    const value = card.querySelector('.index-value');
+    const change = card.querySelector('.index-change');
+
+    if (tag) {
+      tag.className = `index-tag ${cls}`;
+      tag.textContent = cls === 'up' ? 'UP' : 'DOWN';
+    }
+    if (value) value.textContent = item.valueText || formatNumber(item.value);
+    if (change) {
+      change.className = `index-change ${cls}`;
+      change.innerHTML = `<i class="fas fa-arrow-${cls === 'up' ? 'up' : 'down'}" style="font-size:0.8rem"></i> ${escapeHTML(item.changeText || formatPercent(item.changePercent))}`;
+    }
+    updateIndexSparkline(card, item);
+  });
+}
+
+function updateQuickStats(stats = []) {
+  const byLabel = new Map(stats.map(item => [item.label, item]));
+  document.querySelectorAll('#quickStats .quick-stat-item').forEach(card => {
+    const label = card.querySelector('.quick-stat-label')?.textContent.trim();
+    const item = byLabel.get(label);
+    if (!item) return;
+
+    const value = card.querySelector('.quick-stat-value');
+    if (value) {
+      value.textContent = item.valueText || item.value || '—';
+      value.style.color = item.color || (item.changePercent == null ? 'var(--text)' : trendColor(item.changePercent));
+    }
+  });
+}
+
+function updateGlobalCards(markets = []) {
+  const byName = new Map(markets.map(item => [item.name, item]));
+  document.querySelectorAll('#globalGrid .global-card').forEach(card => {
+    const name = card.querySelector('.global-name')?.textContent.trim();
+    const item = byName.get(name);
+    if (!item) return;
+
+    const value = card.querySelector('.global-value');
+    const change = card.querySelector('.global-change');
+    if (value) value.textContent = item.valueText || formatNumber(item.value);
+    if (change) {
+      change.textContent = item.changeText || formatPercent(item.changePercent);
+      change.style.color = item.changePercent == null ? 'var(--text-muted)' : trendColor(item.changePercent);
+    }
+  });
+}
+
+function updateMarketMeta(data) {
+  const updatedAt = data.updatedAtText || data.updatedAt || '';
+  const tradingDate = data.tradingDateText || data.tradingDate || '';
+  const turnover = data.turnoverText || '';
+  const status = data.marketStatus || '';
+
+  if (updatedAt) document.getElementById('marketUpdatedAt').textContent = `更新 ${updatedAt}`;
+  if (tradingDate) {
+    document.getElementById('navDate').textContent = tradingDate.replaceAll('-', '.');
+    document.getElementById('heroDateText').textContent = tradingDate;
+  }
+  if (turnover) document.getElementById('heroTurnoverText').textContent = `成交 ${turnover}`;
+  if (status) document.getElementById('marketStatus').textContent = status;
+}
+
+function renderNews(items = []) {
+  if (!items.length) return;
+  const grid = document.getElementById('newsGrid');
+  grid.innerHTML = items.slice(0, 10).map((item, index) => {
+    const num = String(index + 1).padStart(2, '0');
+    const title = escapeHTML(item.title);
+    const source = escapeHTML(item.source || '');
+    const publishedAt = escapeHTML(item.publishedAtText || item.publishedAt || '');
+    const url = item.url ? escapeHTML(item.url) : '';
+    const headline = url
+      ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`
+      : title;
+    const meta = [source, publishedAt].filter(Boolean).join(' · ');
+
+    return `
+      <div class="news-item">
+        <div class="news-header"><div class="news-num">${num}</div></div>
+        <div class="news-headline">${headline}</div>
+        ${meta ? `<div class="news-source">${meta}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+async function fetchJSON(path) {
+  const response = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Failed to load ${path}`);
+  return response.json();
+}
+
+async function loadLiveData() {
+  const [marketResult, newsResult] = await Promise.allSettled([
+    fetchJSON('data/market.json'),
+    fetchJSON('data/news.json')
+  ]);
+
+  if (marketResult.status === 'fulfilled') {
+    const data = marketResult.value;
+    updateMarketMeta(data);
+    updateIndexCards(data.indices || []);
+    updateQuickStats(data.quickStats || []);
+    updateGlobalCards(data.globalMarkets || []);
+  }
+
+  if (newsResult.status === 'fulfilled') {
+    renderNews(newsResult.value.items || []);
+  }
+}
+
 // Index sparklines (all downtrend)
 const indexCharts = [];
 indexCharts.push(renderSparkline('chartIndex1', 'down', colors.down));
@@ -2000,6 +2186,9 @@ window.addEventListener('resize', () => {
   indexCharts.forEach(c => c && c.resize());
   chartPie.resize(); chartGauge.resize(); chartVolume.resize();
 });
+
+loadLiveData();
+setInterval(loadLiveData, 5 * 60 * 1000);
 </script>
 </body>
 </html>
