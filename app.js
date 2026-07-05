@@ -458,12 +458,41 @@ function getTemperature(market = {}) {
   return { value, label, upCount, downCount, limitUp, limitDown, breakRate };
 }
 
+function displayMetric(rawValue, parsedValue, suffix = "") {
+  if (parsedValue !== null && parsedValue !== undefined) return `${parsedValue}${suffix}`;
+  return safe(rawValue, "待刷新");
+}
+
+function buildDecisionTriggers(temp, topSector, volume = {}) {
+  const sectorName = safe(topSector.name, "强势主线");
+  const volumeState = safe(volume.change, "待接入");
+  return [
+    {
+      title: "可加仓条件",
+      text: `指数站稳分时均线，${sectorName}核心股回踩不破并再次放量。`
+    },
+    {
+      title: "低吸条件",
+      text: "强势股首次分歧缩量，板块强度仍在前三，尾盘承接不破关键均线。"
+    },
+    {
+      title: "回避条件",
+      text: `${volumeState.includes("待") ? "量能未确认" : "成交额转弱"}、后排冲高回落、核心股跌破5日线时降低出手频率。`
+    },
+    {
+      title: "仓位节奏",
+      text: temp.value >= 64 ? "情绪活跃时可用标准仓跟随核心。" : "当前更适合小仓确认，先看持续性再提高仓位。"
+    }
+  ];
+}
+
 function renderDecisionHub(market = {}) {
   const topSector = getTopSector(market.hotSectors);
   const topIndex = getTopIndex(market.indices);
   const styleRows = deriveStyleRows(market);
   const temp = getTemperature(market);
   const volume = market.volumeAnalysis || {};
+  const sentiment = market.sentiment || {};
   const action = temp.value >= 64 ? "进攻" : temp.value >= 48 ? "选择性试错" : "防守观察";
   const primaryStyle = styleRows.map((item) => item.value).filter(Boolean).join(" · ");
   const sectorName = safe(topSector.name, "强势板块待确认");
@@ -471,6 +500,28 @@ function renderDecisionHub(market = {}) {
 
   $("#decisionHeadline").textContent = headline;
   $("#decisionSummary").textContent = `当前风格为 ${primaryStyle || "待确认"}。交易上先看主线核心股的分歧承接，后排补涨只做快进快出。`;
+  $("#decisionInsights").innerHTML = [
+    ["指数强弱", `${safe(topIndex.name, "待确认")} ${safe(topIndex.changeText, "")}`, "领涨指数决定短线风格权重。"],
+    ["主线强度", `${sectorName} ${safe(topSector.changeText, "")}`, `强度 ${safe(topSector.strength, "--")}，观察核心股是否继续带队。`],
+    ["市场宽度", `涨 ${displayMetric(sentiment.upCount, temp.upCount)} / 跌 ${displayMetric(sentiment.downCount, temp.downCount)}`, "涨跌家数用于确认指数上涨是否有赚钱效应。"],
+    ["涨停生态", `涨停 ${displayMetric(sentiment.limitUp, temp.limitUp)} / 跌停 ${displayMetric(sentiment.limitDown, temp.limitDown)}`, `连板 ${safe(sentiment.consecutiveBoards, "待接入")}，炸板率 ${displayMetric(sentiment.breakRate, temp.breakRate, "%")}。`],
+    ["量能状态", `${safe(volume.today, "--")} / ${safe(volume.change, "待接入")}`, safe(volume.summary, "量能接口待刷新，先用价格强度辅助判断。")],
+    ["策略偏好", temp.value >= 64 ? "核心趋势股优先" : "分歧确认后再动手", "只做强势主线中辨识度最高、风险位最清晰的标的。"]
+  ].map(([label, value, note]) => `
+    <article class="decision-insight">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+      <p>${escapeHtml(note)}</p>
+    </article>
+  `).join("");
+
+  $("#decisionTriggers").innerHTML = buildDecisionTriggers(temp, topSector, volume).map((item) => `
+    <div class="decision-trigger">
+      <strong>${escapeHtml(item.title)}</strong>
+      <span>${escapeHtml(item.text)}</span>
+    </div>
+  `).join("");
+
   $("#decisionGrid").innerHTML = [
     ["市场状态", action, temp.value >= 64 ? "up" : temp.value >= 48 ? "flat" : "down"],
     ["主线方向", sectorName, "accent"],
@@ -487,13 +538,21 @@ function renderDecisionHub(market = {}) {
   $("#temperatureLabel").textContent = temp.label;
   $("#temperatureRing").style.setProperty("--temperature", `${temp.value}%`);
   $("#temperatureMeta").innerHTML = [
-    ["上涨", temp.upCount ?? "--"],
-    ["下跌", temp.downCount ?? "--"],
-    ["涨停", temp.limitUp ?? "--"],
-    ["跌停", temp.limitDown ?? "--"],
-    ["炸板率", temp.breakRate !== null ? `${temp.breakRate}%` : "--"]
+    ["上涨", displayMetric(sentiment.upCount, temp.upCount)],
+    ["下跌", displayMetric(sentiment.downCount, temp.downCount)],
+    ["涨停", displayMetric(sentiment.limitUp, temp.limitUp)],
+    ["跌停", displayMetric(sentiment.limitDown, temp.limitDown)],
+    ["连板", safe(sentiment.consecutiveBoards, "待接入")],
+    ["炸板率", displayMetric(sentiment.breakRate, temp.breakRate, "%")]
   ].map(([label, value]) => `
     <div><span>${label}</span><strong>${escapeHtml(value)}</strong></div>
+  `).join("");
+  $("#temperatureBrief").innerHTML = `
+    <strong>温度解读：</strong>
+    <span>${temp.label}区间，说明市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从“修复”升级到“活跃”。</span>
+  `;
+  $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富", "同花顺", "雪球"]).map((source) => `
+    <span>${escapeHtml(source)}</span>
   `).join("");
 }
 
