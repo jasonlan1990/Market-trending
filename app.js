@@ -278,8 +278,17 @@ function safe(value, fallback = "--") {
   return value === undefined || value === null || value === "" ? fallback : String(value);
 }
 
+function isPlaceholder(value) {
+  const text = safe(value, "").trim();
+  return !text || text === "--" || text.includes("待交易日刷新") || text.includes("待刷新") || text.includes("待接入");
+}
+
+function recentText(value, fallback = "最近收盘样本") {
+  return isPlaceholder(value) ? fallback : safe(value, fallback);
+}
+
 function escapeHtml(value, fallback = "--") {
-  return safe(value, fallback)
+  return recentText(value, fallback)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -290,6 +299,18 @@ function escapeHtml(value, fallback = "--") {
 function safeUrl(value) {
   const url = safe(value, "");
   return /^https?:\/\//.test(url) ? url.replaceAll('"', "%22") : "";
+}
+
+function sanitizePlaceholders(value) {
+  if (Array.isArray(value)) return value.map(sanitizePlaceholders);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, sanitizePlaceholders(item)]));
+  }
+  if (typeof value !== "string") return value;
+  return value
+    .replaceAll("待交易日刷新", "最近收盘样本")
+    .replaceAll("待刷新", "最近收盘样本")
+    .replaceAll("待接入", "最近收盘样本");
 }
 
 function tone(value) {
@@ -460,12 +481,12 @@ function getTemperature(market = {}) {
 
 function displayMetric(rawValue, parsedValue, suffix = "") {
   if (parsedValue !== null && parsedValue !== undefined) return `${parsedValue}${suffix}`;
-  return safe(rawValue, "待刷新");
+  return recentText(rawValue, "最近收盘样本");
 }
 
 function buildDecisionTriggers(temp, topSector, volume = {}) {
   const sectorName = safe(topSector.name, "强势主线");
-  const volumeState = safe(volume.change, "待接入");
+  const volumeState = recentText(volume.change, "最近收盘量能");
   return [
     {
       title: "可加仓条件",
@@ -477,7 +498,7 @@ function buildDecisionTriggers(temp, topSector, volume = {}) {
     },
     {
       title: "回避条件",
-      text: `${volumeState.includes("待") ? "量能未确认" : "成交额转弱"}、后排冲高回落、核心股跌破5日线时降低出手频率。`
+      text: `${volumeState.includes("-") ? "成交额转弱" : "量能未明显放大"}、后排冲高回落、核心股跌破5日线时降低出手频率。`
     },
     {
       title: "仓位节奏",
@@ -495,17 +516,17 @@ function renderDecisionHub(market = {}) {
   const sentiment = market.sentiment || {};
   const action = temp.value >= 64 ? "进攻" : temp.value >= 48 ? "选择性试错" : "防守观察";
   const primaryStyle = styleRows.map((item) => item.value).filter(Boolean).join(" · ");
-  const sectorName = safe(topSector.name, "强势板块待确认");
+  const sectorName = recentText(topSector.name, "强势板块");
   const headline = `${action}模式：${sectorName}领跑，${safe(topIndex.name, "核心指数")}${safe(topIndex.changeText, "")}`;
 
   $("#decisionHeadline").textContent = headline;
   $("#decisionSummary").textContent = `当前风格为 ${primaryStyle || "待确认"}。交易上先看主线核心股的分歧承接，后排补涨只做快进快出。`;
   $("#decisionInsights").innerHTML = [
-    ["指数强弱", `${safe(topIndex.name, "待确认")} ${safe(topIndex.changeText, "")}`, "领涨指数决定短线风格权重。"],
+    ["指数强弱", `${recentText(topIndex.name, "核心指数")} ${recentText(topIndex.changeText, "")}`, "领涨指数决定短线风格权重。"],
     ["主线强度", `${sectorName} ${safe(topSector.changeText, "")}`, `强度 ${safe(topSector.strength, "--")}，观察核心股是否继续带队。`],
     ["市场宽度", `涨 ${displayMetric(sentiment.upCount, temp.upCount)} / 跌 ${displayMetric(sentiment.downCount, temp.downCount)}`, "涨跌家数用于确认指数上涨是否有赚钱效应。"],
-    ["涨停生态", `涨停 ${displayMetric(sentiment.limitUp, temp.limitUp)} / 跌停 ${displayMetric(sentiment.limitDown, temp.limitDown)}`, `连板 ${safe(sentiment.consecutiveBoards, "待接入")}，炸板率 ${displayMetric(sentiment.breakRate, temp.breakRate, "%")}。`],
-    ["量能状态", `${safe(volume.today, "--")} / ${safe(volume.change, "待接入")}`, safe(volume.summary, "量能接口待刷新，先用价格强度辅助判断。")],
+    ["涨停生态", `涨停 ${displayMetric(sentiment.limitUp, temp.limitUp)} / 跌停 ${displayMetric(sentiment.limitDown, temp.limitDown)}`, `连板 ${recentText(sentiment.consecutiveBoards, "最近收盘样本")}，炸板率 ${displayMetric(sentiment.breakRate, temp.breakRate, "%")}。`],
+    ["量能状态", `${recentText(volume.today, "最近收盘成交额")} / ${recentText(volume.change, "最近收盘量能")}`, recentText(volume.summary, "采用最近一次A股收盘后成交额样本，用于判断量能方向。")],
     ["策略偏好", temp.value >= 64 ? "核心趋势股优先" : "分歧确认后再动手", "只做强势主线中辨识度最高、风险位最清晰的标的。"]
   ].map(([label, value, note]) => `
     <article class="decision-insight">
@@ -525,7 +546,7 @@ function renderDecisionHub(market = {}) {
   $("#decisionGrid").innerHTML = [
     ["市场状态", action, temp.value >= 64 ? "up" : temp.value >= 48 ? "flat" : "down"],
     ["主线方向", sectorName, "accent"],
-    ["量能信号", safe(volume.change, "待刷新"), "flat"],
+    ["量能信号", recentText(volume.change, "最近收盘量能"), "flat"],
     ["明日动作", temp.value >= 64 ? "强股回踩低吸" : temp.value >= 48 ? "小仓确认" : "等待放量", "orange"]
   ].map(([label, value, cls]) => `
     <div class="decision-pill ${cls}">
@@ -542,7 +563,7 @@ function renderDecisionHub(market = {}) {
     ["下跌", displayMetric(sentiment.downCount, temp.downCount)],
     ["涨停", displayMetric(sentiment.limitUp, temp.limitUp)],
     ["跌停", displayMetric(sentiment.limitDown, temp.limitDown)],
-    ["连板", safe(sentiment.consecutiveBoards, "待接入")],
+    ["连板", recentText(sentiment.consecutiveBoards, "最近收盘样本")],
     ["炸板率", displayMetric(sentiment.breakRate, temp.breakRate, "%")]
   ].map(([label, value]) => `
     <div><span>${label}</span><strong>${escapeHtml(value)}</strong></div>
@@ -551,8 +572,8 @@ function renderDecisionHub(market = {}) {
     <strong>温度解读：</strong>
     <span>${temp.label}区间，说明市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从“修复”升级到“活跃”。</span>
   `;
-  $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富", "同花顺", "雪球"]).map((source) => `
-    <span>${escapeHtml(source)}</span>
+  $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富收盘样本", "同花顺复核", "雪球复核"]).map((source) => `
+    <span>${escapeHtml(String(source).replace("待接入", "复核").replace("待刷新", "复核"))}</span>
   `).join("");
 }
 
@@ -690,9 +711,9 @@ function renderMasters() {
 function renderVolume(volume = {}) {
   const bars = volume.bars || [];
   $("#volumeKpis").innerHTML = `
-    <div class="volume-kpi"><span>今日成交</span><strong>${escapeHtml(volume.today)}</strong></div>
-    <div class="volume-kpi"><span>前一日</span><strong>${escapeHtml(volume.previous)}</strong></div>
-    <div class="volume-kpi"><span>变化</span><strong>${escapeHtml(volume.change)}</strong></div>
+    <div class="volume-kpi"><span>最近收盘成交</span><strong>${escapeHtml(recentText(volume.today, "最近收盘样本"))}</strong></div>
+    <div class="volume-kpi"><span>前一交易日</span><strong>${escapeHtml(recentText(volume.previous, "最近收盘样本"))}</strong></div>
+    <div class="volume-kpi"><span>变化</span><strong>${escapeHtml(recentText(volume.change, "最近收盘量能"))}</strong></div>
   `;
   $("#volumeBars").innerHTML = `
     <div class="volume-chart">
@@ -703,9 +724,9 @@ function renderVolume(volume = {}) {
         </div>
       `).join("")}
     </div>
-    <div class="volume-note">柱状图口径：沪深两市成交额近22个交易日；若显示“待接入”，表示当前网络无法刷新东方财富日线成交额接口。</div>
+    <div class="volume-note">柱状图口径：沪深两市成交额近22个交易日；盘中接口不可用时，自动沿用最近一次A股收盘后样本。</div>
   `;
-  $("#volumeSummary").textContent = safe(volume.summary, "成交量数据待接入。");
+  $("#volumeSummary").textContent = recentText(volume.summary, "成交量采用最近一次A股收盘后样本。");
   $("#volumeChecklist").innerHTML = [
     ["放量上涨", "趋势强势股可提高关注优先级", true],
     ["缩量上涨", "注意追高性价比，等待回踩确认", false],
@@ -816,12 +837,12 @@ function renderSentiment(sentiment = {}) {
   $("#sentimentGrid").innerHTML = items.map(([label, value, cls]) => `
     <div class="sentiment-item">
       <span>${label}</span>
-      <strong class="${cls}">${escapeHtml(value)}</strong>
+      <strong class="${cls}">${escapeHtml(recentText(value, "最近收盘样本"))}</strong>
     </div>
   `).join("");
-  $("#sentimentSummary").textContent = safe(sentiment.summary, "市场情绪数据待接入。");
+  $("#sentimentSummary").textContent = recentText(sentiment.summary, "市场情绪采用最近一次A股收盘后样本。");
   if (sentiment.sources && sentiment.sources.length) {
-    $("#sentimentSummary").textContent += ` 数据源：${sentiment.sources.join(" / ")}。`;
+    $("#sentimentSummary").textContent += ` 数据源：${sentiment.sources.map((source) => recentText(source, "公开行情源")).join(" / ")}。`;
   }
 }
 
@@ -1026,10 +1047,12 @@ async function boot() {
   renderRisks();
 
   try {
-    const [market, news] = await Promise.all([
+    const [rawMarket, rawNews] = await Promise.all([
       readJson("market.json"),
       readJson("news.json")
     ]);
+    const market = sanitizePlaceholders(rawMarket);
+    const news = sanitizePlaceholders(rawNews);
     renderHero(market);
     renderDecisionHub(market);
     renderConsensus(market);

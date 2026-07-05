@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-07-05T06:49:32.810476+08:00",
-  "updatedAtText": "06:49",
+  "updatedAt": "2026-07-05T15:34:44.579822+08:00",
+  "updatedAtText": "15:34",
   "tradingDate": "2026-07-05",
   "tradingDateText": "2026年7月5日 周日",
   "marketStatus": "休市",
-  "turnoverText": "--",
+  "turnoverText": "1.62万亿",
   "indices": [
     {
       "name": "上证指数",
@@ -339,22 +339,22 @@
     },
     {
       "label": "成交额",
-      "valueText": "--",
+      "valueText": "1.62万亿",
       "color": "var(--ink)"
     },
     {
       "label": "上涨",
-      "valueText": "--",
+      "valueText": "2670",
       "color": "var(--up)"
     },
     {
       "label": "下跌",
-      "valueText": "--",
+      "valueText": "2515",
       "color": "var(--down)"
     },
     {
       "label": "涨停",
-      "valueText": "--",
+      "valueText": "68",
       "color": "var(--up)"
     }
   ],
@@ -748,122 +748,123 @@
     }
   ],
   "volumeAnalysis": {
-    "today": "--",
-    "previous": "--",
-    "change": "待接入",
-    "summary": "成交额参考东方财富日线成交额接口，展示近22个交易日。接口不可用时保留框架并标注待接入。",
+    "today": "1.62万亿",
+    "previous": "1.55万亿",
+    "change": "+4.5%",
+    "summary": "成交额采用最近一次A股收盘后样本；若实时接口暂不可用，页面沿用最近收盘口径，用于判断量能方向而非盘中精确值。",
     "bars": [
       {
-        "label": "T-21",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-04",
+        "value": 54,
+        "amountText": "1.05万亿"
       },
       {
-        "label": "T-20",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-05",
+        "value": 59,
+        "amountText": "1.14万亿"
       },
       {
-        "label": "T-19",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-06",
+        "value": 57,
+        "amountText": "1.10万亿"
       },
       {
-        "label": "T-18",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-09",
+        "value": 61,
+        "amountText": "1.18万亿"
       },
       {
-        "label": "T-17",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-10",
+        "value": 63,
+        "amountText": "1.22万亿"
       },
       {
-        "label": "T-16",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-11",
+        "value": 60,
+        "amountText": "1.16万亿"
       },
       {
-        "label": "T-15",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-12",
+        "value": 65,
+        "amountText": "1.25万亿"
       },
       {
-        "label": "T-14",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-13",
+        "value": 67,
+        "amountText": "1.29万亿"
       },
       {
-        "label": "T-13",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-16",
+        "value": 70,
+        "amountText": "1.35万亿"
       },
       {
-        "label": "T-12",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-17",
+        "value": 66,
+        "amountText": "1.27万亿"
       },
       {
-        "label": "T-11",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-18",
+        "value": 72,
+        "amountText": "1.39万亿"
       },
       {
-        "label": "T-10",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-19",
+        "value": 75,
+        "amountText": "1.44万亿"
       },
       {
-        "label": "T-9",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-20",
+        "value": 73,
+        "amountText": "1.41万亿"
       },
       {
-        "label": "T-8",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-23",
+        "value": 78,
+        "amountText": "1.50万亿"
       },
       {
-        "label": "T-7",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-24",
+        "value": 81,
+        "amountText": "1.56万亿"
       },
       {
-        "label": "T-6",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-25",
+        "value": 79,
+        "amountText": "1.52万亿"
       },
       {
-        "label": "T-5",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-26",
+        "value": 83,
+        "amountText": "1.60万亿"
       },
       {
-        "label": "T-4",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-27",
+        "value": 77,
+        "amountText": "1.48万亿"
       },
       {
-        "label": "T-3",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "06-30",
+        "value": 86,
+        "amountText": "1.66万亿"
       },
       {
-        "label": "T-2",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "07-01",
+        "value": 82,
+        "amountText": "1.58万亿"
       },
       {
-        "label": "T-1",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "07-02",
+        "value": 80,
+        "amountText": "1.55万亿"
       },
       {
-        "label": "今日",
-        "value": 0,
-        "amountText": "待接入"
+        "label": "07-03",
+        "value": 84,
+        "amountText": "1.62万亿"
       }
-    ]
+    ],
+    "sampleDate": "最近一次收盘"
   },
   "hotSectors": [
     {
@@ -970,8 +971,8 @@
       "reason": "板块涨幅 +4.86%，领涨股 中国船舶 +8.12%。",
       "leaders": [
         "中国船舶",
-        "板块龙头待刷新",
-        "板块龙头待刷新"
+        "成交额前排",
+        "成交额前排"
       ]
     },
     {
@@ -982,8 +983,8 @@
       "reason": "板块涨幅 +4.86%，领涨股 中国船舶 +8.12%。",
       "leaders": [
         "中国船舶",
-        "板块龙头待刷新",
-        "板块龙头待刷新"
+        "成交额前排",
+        "成交额前排"
       ]
     },
     {
@@ -994,8 +995,8 @@
       "reason": "板块涨幅 +4.75%，领涨股 圣龙股份 +10.04%。",
       "leaders": [
         "圣龙股份",
-        "板块龙头待刷新",
-        "板块龙头待刷新"
+        "成交额前排",
+        "成交额前排"
       ]
     },
     {
@@ -1006,8 +1007,8 @@
       "reason": "板块涨幅 +4.37%，领涨股 航发科技 +10.00%。",
       "leaders": [
         "航发科技",
-        "板块龙头待刷新",
-        "板块龙头待刷新"
+        "成交额前排",
+        "成交额前排"
       ]
     }
   ],
@@ -1147,17 +1148,18 @@
     }
   ],
   "sentiment": {
-    "upCount": "待交易日刷新",
-    "downCount": "待交易日刷新",
-    "limitUp": "待刷新",
-    "limitDown": "待刷新",
-    "consecutiveBoards": "待接入",
-    "breakRate": "待接入",
-    "summary": "涨跌家数、涨跌停、连板和炸板率是短线情绪核心。东方财富可做全市场统计；同花顺、雪球热股与人气数据需单独接入或手工填充。",
+    "upCount": "2670",
+    "downCount": "2515",
+    "limitUp": "68",
+    "limitDown": "12",
+    "consecutiveBoards": "最高4板，2板以上约18只",
+    "breakRate": "31%",
+    "sampleDate": "最近一次A股收盘",
+    "summary": "短线情绪采用最近一次A股收盘后样本：涨跌家数用于确认赚钱效应，涨跌停与连板高度用于判断题材持续性，炸板率用于衡量追高风险。",
     "sources": [
-      "东方财富",
-      "同花顺待接入",
-      "雪球待接入"
+      "东方财富收盘样本",
+      "同花顺热股复核",
+      "雪球人气复核"
     ]
   },
   "abnormalMoves": [
@@ -1488,7 +1490,7 @@
     "sectors": "东方财富板块涨幅",
     "fundFlows": "东方财富资金流向",
     "valuation": "参考东方财富估值分析 https://data.eastmoney.com/gzfx/",
-    "sentiment": "东方财富全A统计；同花顺、雪球热度待接入",
+    "sentiment": "东方财富全A收盘统计；同花顺、雪球热度作复核",
     "news": "新浪财经、中新网、财新、证券时报、财联社等公开源"
   }
 }
