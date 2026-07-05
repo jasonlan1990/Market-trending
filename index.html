@@ -60,10 +60,41 @@
 
     <div class="section-divider"></div>
 
+    <section class="section" id="decision">
+      <div class="section-title">
+        <span>今日市场结论：10秒读懂盘面</span>
+        <span class="title-badge">决策驾驶舱</span>
+      </div>
+      <div class="decision-layout">
+        <div class="card decision-card">
+          <div class="decision-eyebrow">今日一句话</div>
+          <h2 id="decisionHeadline">等待行情数据。</h2>
+          <p id="decisionSummary">正在生成盘面结论。</p>
+          <div class="decision-grid" id="decisionGrid"></div>
+        </div>
+        <div class="card temperature-card">
+          <div class="card-title"><i class="fas fa-temperature-half"></i> 市场情绪温度</div>
+          <div class="temperature-meter">
+            <div class="temperature-ring" id="temperatureRing">
+              <strong id="temperatureScore">--</strong>
+              <span id="temperatureLabel">读取中</span>
+            </div>
+          </div>
+          <div class="temperature-meta" id="temperatureMeta"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
     <section class="section" id="masters">
       <div class="section-title">
         <span>AI大师观点：18名专家对当前A股的看法</span>
         <span class="title-badge">股票池</span>
+      </div>
+      <div class="card consensus-card">
+        <div class="card-title"><i class="fas fa-users-viewfinder"></i> AI投委会共识股票池</div>
+        <div class="consensus-grid" id="consensusGrid"></div>
       </div>
       <div class="master-grid dense" id="masterGrid"></div>
     </section>
@@ -119,6 +150,10 @@
       <div class="section-title">
         <span>3、热点板块、涨幅榜、资金流向与估值锚定</span>
         <span class="title-badge">强度排序</span>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-ranking-star"></i> 主线强度榜：更适合交易的排序</div>
+        <div class="mainline-board" id="mainlineBoard"></div>
       </div>
       <div class="grid-2">
         <div class="card">
@@ -191,6 +226,10 @@
         <span class="title-badge">1-3日 / 1-3月</span>
       </div>
       <div class="grid-2" id="adviceGrid"></div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-map-signs"></i> 明日三种交易剧本</div>
+        <div class="scenario-grid" id="scenarioGrid"></div>
+      </div>
       <div class="card section-stack">
         <div class="card-title"><i class="fas fa-basket-shopping"></i> 明日趋势强势股股票池（10-15个）</div>
         <div class="stock-pool-grid" id="stockPoolGrid"></div>
