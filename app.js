@@ -304,6 +304,64 @@ function arrowIcon(value) {
   return "fa-minus";
 }
 
+function toNumber(value) {
+  if (typeof value === "number") return value;
+  const match = safe(value, "").replaceAll(",", "").match(/-?\d+(\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function getTopIndex(indices = []) {
+  return [...indices]
+    .filter((item) => Number.isFinite(item.changePercent))
+    .sort((a, b) => b.changePercent - a.changePercent)[0] || {};
+}
+
+function getTopSector(sectors = []) {
+  return [...sectors]
+    .sort((a, b) => (Number(b.strength) || 0) - (Number(a.strength) || 0))[0] || {};
+}
+
+function deriveStyleRows(market = {}) {
+  const indices = market.indices || [];
+  const large = avgChange(indices, ["上证50", "沪深300", "上证指数"]);
+  const small = avgChange(indices, ["中证2000", "中证500", "微盘股"]);
+  const growth = avgChange(indices, ["科创50", "创业板50", "中证2000"]);
+  const value = avgChange(indices, ["上证50", "沪深300"]);
+  const tech = avgChange(indices, ["科创50", "创业板50"]);
+  const dividend = avgChange(indices, ["上证50"]);
+
+  const derived = [
+    {
+      label: "大盘 / 小票",
+      value: large !== null && small !== null ? (large >= small ? "大盘占优" : "小票占优") : "待确认",
+      score: scoreFromDiff((large ?? 0) - (small ?? 0)),
+      left: "小票",
+      right: "大盘"
+    },
+    {
+      label: "价值 / 成长",
+      value: value !== null && growth !== null ? (value >= growth ? "价值占优" : "成长占优") : "待确认",
+      score: scoreFromDiff((value ?? 0) - (growth ?? 0)),
+      left: "成长",
+      right: "价值"
+    },
+    {
+      label: "红利 / 科技",
+      value: dividend !== null && tech !== null ? (dividend >= tech ? "红利占优" : "科技占优") : "待确认",
+      score: scoreFromDiff((dividend ?? 0) - (tech ?? 0)),
+      left: "科技",
+      right: "红利"
+    }
+  ];
+
+  return (market.styleMatrix && market.styleMatrix.length ? market.styleMatrix : derived)
+    .map((item, index) => ({ ...derived[index], ...item }));
+}
+
 async function readJson(path) {
   const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error(`Failed to load ${path}`);
@@ -377,6 +435,93 @@ function renderHero(market) {
     : "每日深度复盘，助你洞察市场先机";
 }
 
+function getTemperature(market = {}) {
+  const sentiment = market.sentiment || {};
+  const upCount = toNumber(sentiment.upCount);
+  const downCount = toNumber(sentiment.downCount);
+  const limitUp = toNumber(sentiment.limitUp);
+  const limitDown = toNumber(sentiment.limitDown);
+  const breakRate = toNumber(sentiment.breakRate);
+  const avgIndex = avgChange(market.indices || [], ["上证指数", "沪深300", "创业板50", "科创50"]);
+
+  let score = 50;
+  if (upCount !== null && downCount !== null && upCount + downCount > 0) {
+    score += ((upCount / (upCount + downCount)) - 0.5) * 34;
+  }
+  if (limitUp !== null) score += Math.min(limitUp, 90) * 0.16;
+  if (limitDown !== null) score -= Math.min(limitDown, 60) * 0.28;
+  if (breakRate !== null) score -= Math.min(breakRate, 80) * 0.12;
+  if (avgIndex !== null) score += avgIndex * 5;
+
+  const value = Math.round(clamp(score, 8, 92));
+  const label = value >= 78 ? "亢奋" : value >= 64 ? "活跃" : value >= 48 ? "修复" : value >= 32 ? "谨慎" : "冰点";
+  return { value, label, upCount, downCount, limitUp, limitDown, breakRate };
+}
+
+function renderDecisionHub(market = {}) {
+  const topSector = getTopSector(market.hotSectors);
+  const topIndex = getTopIndex(market.indices);
+  const styleRows = deriveStyleRows(market);
+  const temp = getTemperature(market);
+  const volume = market.volumeAnalysis || {};
+  const action = temp.value >= 64 ? "进攻" : temp.value >= 48 ? "选择性试错" : "防守观察";
+  const primaryStyle = styleRows.map((item) => item.value).filter(Boolean).join(" · ");
+  const sectorName = safe(topSector.name, "强势板块待确认");
+  const headline = `${action}模式：${sectorName}领跑，${safe(topIndex.name, "核心指数")}${safe(topIndex.changeText, "")}`;
+
+  $("#decisionHeadline").textContent = headline;
+  $("#decisionSummary").textContent = `当前风格为 ${primaryStyle || "待确认"}。交易上先看主线核心股的分歧承接，后排补涨只做快进快出。`;
+  $("#decisionGrid").innerHTML = [
+    ["市场状态", action, temp.value >= 64 ? "up" : temp.value >= 48 ? "flat" : "down"],
+    ["主线方向", sectorName, "accent"],
+    ["量能信号", safe(volume.change, "待刷新"), "flat"],
+    ["明日动作", temp.value >= 64 ? "强股回踩低吸" : temp.value >= 48 ? "小仓确认" : "等待放量", "orange"]
+  ].map(([label, value, cls]) => `
+    <div class="decision-pill ${cls}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+    </div>
+  `).join("");
+
+  $("#temperatureScore").textContent = temp.value;
+  $("#temperatureLabel").textContent = temp.label;
+  $("#temperatureRing").style.setProperty("--temperature", `${temp.value}%`);
+  $("#temperatureMeta").innerHTML = [
+    ["上涨", temp.upCount ?? "--"],
+    ["下跌", temp.downCount ?? "--"],
+    ["涨停", temp.limitUp ?? "--"],
+    ["跌停", temp.limitDown ?? "--"],
+    ["炸板率", temp.breakRate !== null ? `${temp.breakRate}%` : "--"]
+  ].map(([label, value]) => `
+    <div><span>${label}</span><strong>${escapeHtml(value)}</strong></div>
+  `).join("");
+}
+
+function renderConsensus(market = {}) {
+  const stockPool = market.stockPool || [];
+  const pickText = masters.flatMap((item) => item.picks).join(" ");
+  const items = stockPool.slice(0, 6).map((item, index) => {
+    const directHit = pickText.includes(item.name);
+    const sectorHit = pickText.includes(item.sector);
+    const score = clamp(92 - index * 6 + (directHit ? 8 : 0) + (sectorHit ? 4 : 0), 58, 98);
+    return { ...item, score, directHit, sectorHit };
+  });
+
+  $("#consensusGrid").innerHTML = items.map((item) => `
+    <article class="consensus-item">
+      <div class="consensus-score">${item.score}<span>%</span></div>
+      <div>
+        <div class="consensus-name">${escapeHtml(item.name)} <span>${escapeHtml(item.code)}</span></div>
+        <p>${escapeHtml(item.sector)} · ${escapeHtml(item.action)}</p>
+        <div class="tag-row">
+          <span class="stock-ticker">${item.directHit ? "大师点名" : "策略入池"}</span>
+          <span class="stock-ticker">${item.sectorHit ? "产业共振" : escapeHtml(item.horizon)}</span>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
 function renderQuickStats(items) {
   $("#quickStats").innerHTML = (items || []).map((item) => {
     const cls = item.color ? "" : tone(item.changePercent);
@@ -408,40 +553,7 @@ function scoreFromDiff(diff) {
 }
 
 function renderStyleMatrix(market) {
-  const indices = market.indices || [];
-  const large = avgChange(indices, ["上证50", "沪深300", "上证指数"]);
-  const small = avgChange(indices, ["中证2000", "中证500", "微盘股"]);
-  const growth = avgChange(indices, ["科创50", "创业板50", "中证2000"]);
-  const value = avgChange(indices, ["上证50", "沪深300"]);
-  const tech = avgChange(indices, ["科创50", "创业板50"]);
-  const dividend = avgChange(indices, ["上证50"]);
-
-  const derived = [
-    {
-      label: "大盘 / 小票",
-      value: large !== null && small !== null ? (large >= small ? "大盘占优" : "小票占优") : "待确认",
-      score: scoreFromDiff((large ?? 0) - (small ?? 0)),
-      left: "小票",
-      right: "大盘"
-    },
-    {
-      label: "价值 / 成长",
-      value: value !== null && growth !== null ? (value >= growth ? "价值占优" : "成长占优") : "待确认",
-      score: scoreFromDiff((value ?? 0) - (growth ?? 0)),
-      left: "成长",
-      right: "价值"
-    },
-    {
-      label: "红利 / 科技",
-      value: dividend !== null && tech !== null ? (dividend >= tech ? "红利占优" : "科技占优") : "待确认",
-      score: scoreFromDiff((dividend ?? 0) - (tech ?? 0)),
-      left: "科技",
-      right: "红利"
-    }
-  ];
-
-  const matrix = (market.styleMatrix && market.styleMatrix.length ? market.styleMatrix : derived)
-    .map((item, index) => ({ ...derived[index], ...item }));
+  const matrix = deriveStyleRows(market);
 
   $("#styleMatrix").innerHTML = matrix.map((item) => `
     <div class="style-row">
@@ -456,14 +568,14 @@ function renderStyleMatrix(market) {
     </div>
   `).join("");
 
-  $("#styleSignals").innerHTML = derived.map((item) => `
+  $("#styleSignals").innerHTML = matrix.map((item) => `
     <div class="mini-list-item">
       <span>${escapeHtml(item.label)}</span>
       <strong>${escapeHtml(item.value)}</strong>
     </div>
   `).join("");
 
-  $("#styleSummary").textContent = derived.map((item) => `${item.label}：${item.value}`).join("；") + "。交易上优先选择与主风格共振的趋势强势股。";
+  $("#styleSummary").textContent = matrix.map((item) => `${item.label}：${item.value}`).join("；") + "。交易上优先选择与主风格共振的趋势强势股。";
 }
 
 function renderIndices(items) {
@@ -563,6 +675,35 @@ function renderSectors(items = []) {
       </div>
     </article>
   `).join("");
+}
+
+function renderMainlineBoard(items = []) {
+  const topItems = [...items]
+    .sort((a, b) => (Number(b.strength) || 0) - (Number(a.strength) || 0))
+    .slice(0, 5);
+
+  $("#mainlineBoard").innerHTML = topItems.map((item, index) => {
+    const action = index === 0 ? "核心主攻" : index <= 2 ? "分歧低吸" : "观察补涨";
+    return `
+      <article class="mainline-item">
+        <div class="mainline-rank">0${index + 1}</div>
+        <div class="mainline-body">
+          <div class="mainline-head">
+            <strong>${escapeHtml(item.name)}</strong>
+            <span>${escapeHtml(action)}</span>
+          </div>
+          <div class="mainline-score">
+            <div style="width:${clamp(Number(item.strength) || 0, 0, 100)}%"></div>
+          </div>
+          <p>${escapeHtml(item.reason)}</p>
+          <div class="mainline-foot">
+            <span>强度 ${escapeHtml(item.strength || "--")}</span>
+            <div class="tag-row">${(item.leaders || []).slice(0, 4).map((leader) => `<span class="stock-ticker">${escapeHtml(leader)}</span>`).join("")}</div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
 function renderFundFlows(items = []) {
@@ -675,6 +816,46 @@ function renderAdvice(advice = {}) {
   `).join("");
 }
 
+function renderScenarios(market = {}) {
+  const topSector = getTopSector(market.hotSectors);
+  const temp = getTemperature(market);
+  const sectorName = safe(topSector.name, "强势主线");
+  const leaders = (topSector.leaders || []).slice(0, 3).join("、") || "板块核心股";
+  const scenarios = [
+    {
+      title: "剧本A：指数放量上攻",
+      icon: "fa-arrow-trend-up",
+      bias: "进攻",
+      text: `优先跟随 ${sectorName}，只看 ${leaders} 这类核心或中军。买点放在回踩不破 5 日线后的转强。`
+    },
+    {
+      title: "剧本B：冲高回落",
+      icon: "fa-arrows-left-right",
+      bias: "防追高",
+      text: "不追早盘一致性高开，等待主线核心股分歧承接。若后排明显掉队，降低交易频率。"
+    },
+    {
+      title: "剧本C：缩量震荡",
+      icon: "fa-hourglass-half",
+      bias: temp.value >= 55 ? "轻仓试错" : "观望",
+      text: "只做小仓位确认，仓位放在趋势强、成交活跃、风险位清晰的股票；无放量则保留现金。"
+    }
+  ];
+
+  $("#scenarioGrid").innerHTML = scenarios.map((item) => `
+    <article class="scenario-card">
+      <div class="scenario-icon"><i class="fas ${item.icon}"></i></div>
+      <div>
+        <div class="scenario-head">
+          <strong>${escapeHtml(item.title)}</strong>
+          <span>${escapeHtml(item.bias)}</span>
+        </div>
+        <p>${escapeHtml(item.text)}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
 function renderGlobal(items) {
   $("#globalGrid").innerHTML = (items || []).map((item) => {
     const cls = tone(item.changePercent);
@@ -714,7 +895,11 @@ function renderNews(items) {
 }
 
 function renderStockPool(items = []) {
-  $("#stockPoolGrid").innerHTML = items.slice(0, 15).map((item) => `
+  $("#stockPoolGrid").innerHTML = items.slice(0, 15).map((item, index) => {
+    const buyTrigger = item.buyTrigger || (index < 5 ? "回踩5日线不破后转强" : "放量突破平台后再确认");
+    const sellTrigger = item.sellTrigger || item.risk || "跌破关键均线或板块退潮";
+    const position = item.position || (index < 5 ? "标准仓" : index < 10 ? "轻仓试错" : "观察仓");
+    return `
     <article class="stock-pool-card">
       <div class="stock-pool-top">
         <div>
@@ -724,12 +909,18 @@ function renderStockPool(items = []) {
         <em>${escapeHtml(item.action)}</em>
       </div>
       <p>${escapeHtml(item.logic)}</p>
+      <div class="trade-plan">
+        <div><span>买点</span><strong>${escapeHtml(buyTrigger)}</strong></div>
+        <div><span>卖点</span><strong>${escapeHtml(sellTrigger)}</strong></div>
+        <div><span>仓位</span><strong>${escapeHtml(position)}</strong></div>
+      </div>
       <div class="stock-pool-bottom">
         <span>${escapeHtml(item.horizon)}</span>
-        <span>风控：${escapeHtml(item.risk)}</span>
+        <span>${escapeHtml(item.sector)}</span>
       </div>
     </article>
-  `).join("");
+  `;
+  }).join("");
 }
 
 function renderStrategy() {
@@ -781,9 +972,12 @@ async function boot() {
       readJson("news.json")
     ]);
     renderHero(market);
+    renderDecisionHub(market);
+    renderConsensus(market);
     renderIndices(market.indices);
     renderStyleMatrix(market);
     renderVolume(market.volumeAnalysis);
+    renderMainlineBoard(market.hotSectors);
     renderSectors(market.hotSectors);
     renderFundFlows(market.fundFlows);
     renderValuations(market.valuations);
@@ -793,6 +987,7 @@ async function boot() {
     renderLhb(market.lhb);
     renderEvents(market.events);
     renderAdvice(market.tradingAdvice);
+    renderScenarios(market);
     renderStockPool(market.stockPool);
     renderGlobal(market.globalMarkets);
     renderNews(news.items);
