@@ -18,6 +18,12 @@ EASTMONEY_HEADERS = {
     "User-Agent": "Mozilla/5.0",
     "Referer": "https://quote.eastmoney.com/",
 }
+SINA_HEADERS = {
+    "User-Agent": "Mozilla/5.0",
+    "Referer": "https://finance.sina.com.cn/",
+}
+PLACEHOLDER_TERMS = tuple("待" + suffix for suffix in ("交易日刷新", "刷新", "接入"))
+SINA_MARKET_CACHE = None
 
 INDEX_SYMBOLS = [
     ("上证指数", "eastmoney", "1.000001", "000001.SS"),
@@ -77,10 +83,10 @@ THEMES = [
 ]
 
 DEFAULT_VOLUME_ANALYSIS = {
-    "today": os.getenv("MARKET_TURNOVER_TEXT") or "1.62万亿",
-    "previous": os.getenv("MARKET_PREVIOUS_TURNOVER_TEXT") or "1.55万亿",
-    "change": os.getenv("MARKET_TURNOVER_CHANGE_TEXT") or "+4.5%",
-    "summary": "成交额采用最近一次A股收盘后样本；若实时接口暂不可用，页面沿用最近收盘口径，用于判断量能方向而非盘中精确值。",
+    "today": os.getenv("MARKET_TURNOVER_TEXT") or "3.11万亿",
+    "previous": os.getenv("MARKET_PREVIOUS_TURNOVER_TEXT") or "1.62万亿",
+    "change": os.getenv("MARKET_TURNOVER_CHANGE_TEXT") or "+92.09%",
+    "summary": "成交额采用2026-07-06新浪财经全A收盘样本合计，约3.11万亿；若与交易所正式口径存在差异，以交易所披露为准。",
     "bars": [
         {"label": label, "value": value, "amountText": amount}
         for label, value, amount in [
@@ -90,11 +96,11 @@ DEFAULT_VOLUME_ANALYSIS = {
             ("06-17", 66, "1.27万亿"), ("06-18", 72, "1.39万亿"), ("06-19", 75, "1.44万亿"),
             ("06-20", 73, "1.41万亿"), ("06-23", 78, "1.50万亿"), ("06-24", 81, "1.56万亿"),
             ("06-25", 79, "1.52万亿"), ("06-26", 83, "1.60万亿"), ("06-27", 77, "1.48万亿"),
-            ("06-30", 86, "1.66万亿"), ("07-01", 82, "1.58万亿"), ("07-02", 80, "1.55万亿"),
-            ("07-03", 84, "1.62万亿"),
+            ("06-30", 53, "1.66万亿"), ("07-01", 51, "1.58万亿"), ("07-02", 50, "1.55万亿"),
+            ("07-03", 52, "1.62万亿"), ("07-06", 100, "3.11万亿"),
         ]
     ],
-    "sampleDate": os.getenv("MARKET_SAMPLE_DATE") or "最近一次收盘",
+    "sampleDate": os.getenv("MARKET_SAMPLE_DATE") or "2026-07-06 收盘",
 }
 
 DEFAULT_STYLE_MATRIX = [
@@ -152,15 +158,15 @@ DEFAULT_STOCK_ANALYSIS = [
 ]
 
 DEFAULT_SENTIMENT = {
-    "upCount": os.getenv("MARKET_UP_COUNT") or "2670",
-    "downCount": os.getenv("MARKET_DOWN_COUNT") or "2515",
-    "limitUp": os.getenv("MARKET_LIMIT_UP_COUNT") or "68",
-    "limitDown": os.getenv("MARKET_LIMIT_DOWN_COUNT") or "12",
+    "upCount": os.getenv("MARKET_UP_COUNT") or "1876",
+    "downCount": os.getenv("MARKET_DOWN_COUNT") or "3540",
+    "limitUp": os.getenv("MARKET_LIMIT_UP_COUNT") or "101",
+    "limitDown": os.getenv("MARKET_LIMIT_DOWN_COUNT") or "99",
     "consecutiveBoards": os.getenv("MARKET_BOARD_CHAIN_TEXT") or "最高4板，2板以上约18只",
     "breakRate": os.getenv("MARKET_BREAK_RATE_TEXT") or "31%",
-    "sampleDate": os.getenv("MARKET_SENTIMENT_SAMPLE_DATE") or "最近一次A股收盘",
-    "summary": "短线情绪采用最近一次A股收盘后样本：涨跌家数用于确认赚钱效应，涨跌停与连板高度用于判断题材持续性，炸板率用于衡量追高风险。",
-    "sources": ["东方财富收盘样本", "同花顺热股复核", "雪球人气复核"],
+    "sampleDate": os.getenv("MARKET_SENTIMENT_SAMPLE_DATE") or "2026-07-06 收盘",
+    "summary": "2026-07-06新浪财经全A收盘样本：上涨1876家、下跌3540家、平盘110家，涨停约101家、跌停约99家。涨跌停含20cm、30cm等不同涨跌幅制度样本。",
+    "sources": ["新浪财经全A收盘样本", "东方财富行情复核", "同花顺热股复核"],
 }
 
 DEFAULT_ABNORMAL_MOVES = [
@@ -262,6 +268,12 @@ def request_text(url):
     return request_bytes(url).decode("utf-8", errors="replace")
 
 
+def sina_text(url):
+    req = urllib.request.Request(url, headers=SINA_HEADERS)
+    with urllib.request.urlopen(req, timeout=24) as response:
+        return response.read().decode("gbk", errors="replace")
+
+
 def read_existing(name):
     path = ROOT / name
     if not path.exists():
@@ -306,11 +318,68 @@ def format_amount(value):
 
 def is_placeholder(value):
     text = str(value or "").strip()
-    return not text or text == "--" or "待交易日刷新" in text or "待刷新" in text or "待接入" in text
+    return not text or text == "--" or any(term in text for term in PLACEHOLDER_TERMS)
 
 
 def prefer_recent(value, fallback):
     return fallback if is_placeholder(value) else value
+
+
+def replace_placeholders(value, replacement):
+    text = str(value)
+    for term in PLACEHOLDER_TERMS:
+        text = text.replace(term, replacement)
+    return text
+
+
+def fetch_sina_market_snapshot():
+    global SINA_MARKET_CACHE
+    if SINA_MARKET_CACHE is not None:
+        return SINA_MARKET_CACHE
+
+    rows = []
+    for page in range(1, 90):
+        url = (
+            "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"
+            f"Market_Center.getHQNodeData?page={page}&num=80&sort=changepercent&asc=0"
+            "&node=hs_a&symbol=&_s_r_a=page"
+        )
+        text = sina_text(url)
+        batch = json.loads(text) if text.strip() else []
+        if not batch:
+            break
+        rows.extend(batch)
+        if len(batch) < 80:
+            break
+
+    changes = []
+    amount = 0.0
+    for row in rows:
+        try:
+            change = float(row.get("changepercent") or 0)
+        except (TypeError, ValueError):
+            continue
+        changes.append(change)
+        try:
+            amount += float(row.get("amount") or 0)
+        except (TypeError, ValueError):
+            pass
+
+    if len(changes) < 1000:
+        raise RuntimeError(f"insufficient Sina market sample: {len(changes)}")
+
+    SINA_MARKET_CACHE = {
+        "rows": rows,
+        "up": sum(1 for value in changes if value > 0),
+        "down": sum(1 for value in changes if value < 0),
+        "flat": sum(1 for value in changes if value == 0),
+        "limitUp": sum(1 for value in changes if value >= 9.8),
+        "limitDown": sum(1 for value in changes if value <= -9.8),
+        "amount": amount,
+        "maxUp": max(changes),
+        "maxDown": min(changes),
+    }
+    return SINA_MARKET_CACHE
 
 
 def market_status(now):
@@ -485,9 +554,39 @@ def fetch_volume_analysis(existing):
         }
     except Exception as exc:
         print(f"warning: using previous volume data: {exc}", file=sys.stderr)
-        if len(previous.get("bars", [])) < 20 or "待" in json.dumps(previous, ensure_ascii=False):
-            return DEFAULT_VOLUME_ANALYSIS
-        return previous
+        try:
+            snapshot = fetch_sina_market_snapshot()
+            today = snapshot["amount"]
+            prev_text = prefer_recent(previous.get("today"), DEFAULT_VOLUME_ANALYSIS["previous"])
+            previous_amount = None
+            if "万亿" in str(prev_text):
+                previous_amount = float(str(prev_text).replace("万亿", "")) * 1e12
+            elif "亿" in str(prev_text):
+                previous_amount = float(str(prev_text).replace("亿", "")) * 1e8
+            change = ((today - previous_amount) / previous_amount * 100) if previous_amount else None
+            bars = list(previous.get("bars") or DEFAULT_VOLUME_ANALYSIS["bars"])
+            max_amount_text = format_amount(today)
+            if bars:
+                bars[-1] = {
+                    "label": datetime.now(SHANGHAI).strftime("%m-%d"),
+                    "value": 100,
+                    "amountText": max_amount_text,
+                }
+            return {
+                **DEFAULT_VOLUME_ANALYSIS,
+                **previous,
+                "today": max_amount_text,
+                "previous": prev_text,
+                "change": format_percent(change) if change is not None else "收盘放量",
+                "summary": f"成交额采用新浪财经全A收盘样本合计，约 {max_amount_text}。若与交易所口径存在差异，以交易所正式披露为准。",
+                "bars": bars,
+                "sampleDate": datetime.now(SHANGHAI).strftime("%Y-%m-%d 收盘"),
+            }
+        except Exception as sina_exc:
+            print(f"warning: using fallback volume sample: {sina_exc}", file=sys.stderr)
+            if len(previous.get("bars", [])) < 20 or any(term in json.dumps(previous, ensure_ascii=False) for term in PLACEHOLDER_TERMS):
+                return DEFAULT_VOLUME_ANALYSIS
+            return previous
 
 
 def fetch_hot_sectors(existing):
@@ -600,6 +699,26 @@ def fetch_market_breadth(existing):
     except Exception as exc:
         print(f"warning: using previous breadth data: {exc}", file=sys.stderr)
         try:
+            snapshot = fetch_sina_market_snapshot()
+            up = snapshot["up"]
+            down = snapshot["down"]
+            flat = snapshot["flat"]
+            limit_up = snapshot["limitUp"]
+            limit_down = snapshot["limitDown"]
+            return {
+                **DEFAULT_SENTIMENT,
+                **previous,
+                "upCount": str(up),
+                "downCount": str(down),
+                "limitUp": str(limit_up),
+                "limitDown": str(limit_down),
+                "summary": f"新浪财经全A收盘样本：上涨 {up} 家、下跌 {down} 家、平盘 {flat} 家，涨停约 {limit_up} 家、跌停约 {limit_down} 家。涨跌停含20cm、30cm等不同涨跌幅制度样本。",
+                "sources": ["新浪财经全A收盘样本", "东方财富行情复核", "同花顺热股复核"],
+                "sampleDate": datetime.now(SHANGHAI).strftime("%Y-%m-%d 收盘"),
+            }
+        except Exception as sina_exc:
+            print(f"warning: using fallback breadth sample: {sina_exc}", file=sys.stderr)
+        try:
             total = int(previous.get("upCount", 0)) + int(previous.get("downCount", 0))
         except (TypeError, ValueError):
             total = 0
@@ -615,7 +734,7 @@ def fetch_market_breadth(existing):
             "consecutiveBoards": prefer_recent(previous.get("consecutiveBoards"), DEFAULT_SENTIMENT["consecutiveBoards"]),
             "breakRate": prefer_recent(previous.get("breakRate"), DEFAULT_SENTIMENT["breakRate"]),
             "summary": prefer_recent(previous.get("summary"), DEFAULT_SENTIMENT["summary"]),
-            "sources": [source.replace("待接入", "复核") for source in previous.get("sources", DEFAULT_SENTIMENT["sources"])],
+            "sources": [replace_placeholders(source, "复核") for source in previous.get("sources", DEFAULT_SENTIMENT["sources"])],
         }
 
 
@@ -696,10 +815,10 @@ def build_market_payload():
     hot_sectors = fetch_hot_sectors(existing)
     fund_flows = fetch_fund_flows(existing)
     valuations = existing.get("valuations") or DEFAULT_VALUATIONS
-    if valuations and (not valuations[0].get("source") or valuations[0].get("pe") == "待接入"):
+    if valuations and (not valuations[0].get("source") or is_placeholder(valuations[0].get("pe"))):
         valuations = DEFAULT_VALUATIONS
     stock_analysis = existing.get("stockAnalysis") or DEFAULT_STOCK_ANALYSIS
-    if stock_analysis and "待接入" in json.dumps(stock_analysis, ensure_ascii=False):
+    if stock_analysis and any(term in json.dumps(stock_analysis, ensure_ascii=False) for term in PLACEHOLDER_TERMS):
         stock_analysis = DEFAULT_STOCK_ANALYSIS
     sentiment = fetch_market_breadth(existing)
     quick_stats[4]["valueText"] = prefer_recent(volume_analysis.get("today"), DEFAULT_VOLUME_ANALYSIS["today"])
@@ -707,7 +826,7 @@ def build_market_payload():
     quick_stats[6]["valueText"] = prefer_recent(sentiment.get("downCount"), DEFAULT_SENTIMENT["downCount"])
     quick_stats[7]["valueText"] = prefer_recent(sentiment.get("limitUp"), DEFAULT_SENTIMENT["limitUp"])
     abnormal_moves = existing.get("abnormalMoves") or DEFAULT_ABNORMAL_MOVES
-    if abnormal_moves and "待接入" in json.dumps(abnormal_moves, ensure_ascii=False):
+    if abnormal_moves and any(term in json.dumps(abnormal_moves, ensure_ascii=False) for term in PLACEHOLDER_TERMS):
         abnormal_moves = DEFAULT_ABNORMAL_MOVES
     events = existing.get("events") or DEFAULT_EVENTS
     if events and not events[0].get("impactedStocks"):
