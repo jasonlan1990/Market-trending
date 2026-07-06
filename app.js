@@ -562,7 +562,8 @@ function renderConsensus(market = {}) {
   const items = stockPool.slice(0, 6).map((item, index) => {
     const directHit = pickText.includes(item.name);
     const sectorHit = pickText.includes(item.sector);
-    const score = clamp(92 - index * 6 + (directHit ? 8 : 0) + (sectorHit ? 4 : 0), 58, 98);
+    const customScore = toNumber(item.consensusScore);
+    const score = customScore ?? clamp(92 - index * 6 + (directHit ? 8 : 0) + (sectorHit ? 4 : 0), 58, 98);
     return { ...item, score, directHit, sectorHit };
   });
 
