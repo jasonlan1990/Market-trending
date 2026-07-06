@@ -8,6 +8,8 @@ const colors = {
   orange: "#fa8c16"
 };
 
+const placeholderWords = ["交易日刷新", "刷新", "接入"].map((word) => `待${word}`);
+
 const fallbackThemes = [
   {
     title: "风险主线",
@@ -280,7 +282,7 @@ function safe(value, fallback = "--") {
 
 function isPlaceholder(value) {
   const text = safe(value, "").trim();
-  return !text || text === "--" || text.includes("待交易日刷新") || text.includes("待刷新") || text.includes("待接入");
+  return !text || text === "--" || placeholderWords.some((word) => text.includes(word));
 }
 
 function recentText(value, fallback = "最近收盘样本") {
@@ -307,10 +309,7 @@ function sanitizePlaceholders(value) {
     return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, sanitizePlaceholders(item)]));
   }
   if (typeof value !== "string") return value;
-  return value
-    .replaceAll("待交易日刷新", "最近收盘样本")
-    .replaceAll("待刷新", "最近收盘样本")
-    .replaceAll("待接入", "最近收盘样本");
+  return placeholderWords.reduce((text, word) => text.replaceAll(word, "最近收盘样本"), value);
 }
 
 function tone(value) {
@@ -573,7 +572,7 @@ function renderDecisionHub(market = {}) {
     <span>${temp.label}区间，说明市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从“修复”升级到“活跃”。</span>
   `;
   $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富收盘样本", "同花顺复核", "雪球复核"]).map((source) => `
-    <span>${escapeHtml(String(source).replace("待接入", "复核").replace("待刷新", "复核"))}</span>
+    <span>${escapeHtml(placeholderWords.reduce((text, word) => text.replaceAll(word, "复核"), String(source)))}</span>
   `).join("");
 }
 
