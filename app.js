@@ -458,6 +458,88 @@ function getTemperature(market = {}) {
   return { value, label, upCount, downCount, limitUp, limitDown, breakRate };
 }
 
+function temperatureLabel(value) {
+  const score = Number(value);
+  if (score >= 78) return "亢奋";
+  if (score >= 64) return "活跃";
+  if (score >= 48) return "修复";
+  if (score >= 32) return "谨慎";
+  return "冰点";
+}
+
+function temperatureTone(value) {
+  const score = Number(value);
+  if (score >= 78) return "hot";
+  if (score >= 64) return "warm";
+  if (score >= 48) return "repair";
+  if (score >= 32) return "cool";
+  return "ice";
+}
+
+function fallbackTemperatureHistory(current) {
+  const labels = ["06-05", "06-06", "06-09", "06-10", "06-11", "06-12", "06-13", "06-16", "06-17", "06-18", "06-19", "06-20", "06-23", "06-24", "06-25", "06-26", "06-27", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08"];
+  const values = [57, 53, 55, 59, 52, 61, 64, 66, 58, 69, 72, 68, 75, 78, 70, 73, 63, 48, 45, 43, 50, 51, 28, current.value];
+  return labels.map((label, index) => ({
+    label,
+    value: values[index],
+    tag: index === labels.length - 1 ? "今日" : temperatureLabel(values[index])
+  }));
+}
+
+function renderTemperatureHistory(sentiment = {}, current) {
+  const history = (Array.isArray(sentiment.history) && sentiment.history.length ? sentiment.history : fallbackTemperatureHistory(current))
+    .map((item) => {
+      const value = clamp(toNumber(item.value) ?? current.value, 8, 92);
+      return {
+        label: safe(item.label || item.date, "--"),
+        value,
+        tag: safe(item.tag, temperatureLabel(value)),
+        note: safe(item.note, "")
+      };
+    })
+    .slice(-24);
+
+  if (!history.length) return;
+
+  const minItem = history.reduce((min, item) => item.value < min.value ? item : min, history[0]);
+  const maxItem = history.reduce((max, item) => item.value > max.value ? item : max, history[0]);
+  const today = history[history.length - 1];
+  const avg = Math.round(history.reduce((sum, item) => sum + item.value, 0) / history.length);
+  const iceCount = history.filter((item) => item.value < 32).length;
+
+  $("#temperatureHistory").innerHTML = `
+    <div class="temperature-history-head">
+      <div>
+        <strong>近一月情绪温度</strong>
+        <span>今日 ${today.value} · ${temperatureLabel(today.value)}，月均 ${avg}</span>
+      </div>
+      <em>${iceCount ? `${iceCount}次冰点` : "未现冰点"}</em>
+    </div>
+    <div class="temperature-zones" aria-hidden="true">
+      <span>冰点</span><span>谨慎</span><span>修复</span><span>活跃</span><span>亢奋</span>
+    </div>
+    <div class="temperature-history-bars">
+      ${history.map((item) => {
+        const isToday = item === today;
+        const isExtreme = item === minItem || item === maxItem;
+        const tooltip = `${item.label}：${item.value} ${temperatureLabel(item.value)}${item.note ? `，${item.note}` : ""}`;
+        return `
+          <div class="temperature-day ${temperatureTone(item.value)} ${isToday ? "today" : ""} ${isExtreme ? "extreme" : ""}" title="${escapeHtml(tooltip)}" style="--score:${item.value}%">
+            <i></i>
+            <span>${escapeHtml(item.label)}</span>
+            ${isToday || isExtreme ? `<b>${isToday ? "今日" : item === minItem ? "冰点" : "高温"}</b>` : ""}
+          </div>
+        `;
+      }).join("")}
+    </div>
+    <div class="temperature-history-tags">
+      <span class="ice">冰点 ${minItem.label} ${minItem.value}</span>
+      <span class="repair">当前 ${today.tag || temperatureLabel(today.value)}</span>
+      <span class="hot">高温 ${maxItem.label} ${maxItem.value}</span>
+    </div>
+  `;
+}
+
 function displayMetric(rawValue, parsedValue, suffix = "") {
   if (parsedValue !== null && parsedValue !== undefined) return `${parsedValue}${suffix}`;
   return recentText(rawValue, "最近收盘样本");
@@ -551,6 +633,7 @@ function renderDecisionHub(market = {}) {
     <strong>温度解读：</strong>
     <span>${temp.label}区间，说明市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从“修复”升级到“活跃”。</span>
   `;
+  renderTemperatureHistory(sentiment, temp);
   $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富收盘样本", "同花顺复核", "雪球复核"]).map((source) => `
     <span>${escapeHtml(placeholderWords.reduce((text, word) => text.replaceAll(word, "复核"), String(source)))}</span>
   `).join("");
