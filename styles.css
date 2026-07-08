@@ -682,11 +682,17 @@ a {
 }
 
 .temperature-history {
-  margin-top: 14px;
+  margin-top: 20px;
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 10px;
-  padding: 12px;
+  padding: 18px;
   background: rgba(255,255,255,0.03);
+}
+
+.temperature-history.card {
+  background:
+    linear-gradient(135deg, rgba(22,119,255,0.08), rgba(255,77,79,0.045)),
+    var(--bg-card);
 }
 
 .temperature-history-head {
@@ -742,9 +748,9 @@ a {
   display: grid;
   grid-template-columns: repeat(24, minmax(8px, 1fr));
   align-items: end;
-  gap: 5px;
-  min-height: 92px;
-  padding-top: 18px;
+  gap: 10px;
+  min-height: 124px;
+  padding-top: 22px;
 }
 
 .temperature-day {
@@ -754,13 +760,13 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   min-width: 0;
-  height: 92px;
+  height: 118px;
 }
 
 .temperature-day i {
   display: block;
   width: 100%;
-  max-width: 14px;
+  max-width: 22px;
   height: max(12px, var(--score));
   border-radius: 999px 999px 4px 4px;
   background: var(--accent);
@@ -781,7 +787,7 @@ a {
 .temperature-day span {
   margin-top: 6px;
   color: var(--text-dim);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   writing-mode: vertical-rl;
 }
 
