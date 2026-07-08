@@ -681,6 +681,152 @@ a {
   line-height: 1.6;
 }
 
+.temperature-history {
+  margin-top: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,0.03);
+}
+
+.temperature-history-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.temperature-history-head strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.84rem;
+}
+
+.temperature-history-head span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
+.temperature-history-head em {
+  border: 1px solid rgba(22,119,255,0.18);
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: rgba(22,119,255,0.08);
+  color: var(--accent-light);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.temperature-zones {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  overflow: hidden;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, rgba(82,196,26,0.16), rgba(22,119,255,0.14), rgba(250,140,22,0.16), rgba(255,77,79,0.2));
+}
+
+.temperature-zones span {
+  padding: 4px 0;
+  color: var(--text-dim);
+  font-size: 0.64rem;
+  text-align: center;
+}
+
+.temperature-history-bars {
+  display: grid;
+  grid-template-columns: repeat(24, minmax(8px, 1fr));
+  align-items: end;
+  gap: 5px;
+  min-height: 92px;
+  padding-top: 18px;
+}
+
+.temperature-day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  height: 92px;
+}
+
+.temperature-day i {
+  display: block;
+  width: 100%;
+  max-width: 14px;
+  height: max(12px, var(--score));
+  border-radius: 999px 999px 4px 4px;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(22,119,255,0.12);
+}
+
+.temperature-day.ice i { background: linear-gradient(180deg, #56d7ff, #1677ff); }
+.temperature-day.cool i { background: linear-gradient(180deg, #75a7ff, #376dff); }
+.temperature-day.repair i { background: linear-gradient(180deg, #f5c26b, #fa8c16); }
+.temperature-day.warm i { background: linear-gradient(180deg, #ff9b6a, #ff6b3d); }
+.temperature-day.hot i { background: linear-gradient(180deg, #ff7875, #ff4d4f); }
+
+.temperature-day.today i {
+  outline: 2px solid rgba(255,255,255,0.32);
+  outline-offset: 2px;
+}
+
+.temperature-day span {
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 0.58rem;
+  writing-mode: vertical-rl;
+}
+
+.temperature-day b {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  padding: 2px 5px;
+  background: rgba(0,0,0,0.38);
+  color: var(--text);
+  font-size: 0.58rem;
+  white-space: nowrap;
+}
+
+.temperature-history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.temperature-history-tags span {
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.temperature-history-tags .ice {
+  background: rgba(22,119,255,0.1);
+  color: var(--accent-light);
+}
+
+.temperature-history-tags .repair {
+  background: rgba(250,140,22,0.12);
+  color: var(--orange);
+}
+
+.temperature-history-tags .hot {
+  background: rgba(255,77,79,0.12);
+  color: var(--up);
+}
+
 .temperature-sources {
   display: flex;
   flex-wrap: wrap;
