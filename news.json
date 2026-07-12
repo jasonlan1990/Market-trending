@@ -1,345 +1,260 @@
 {
-  "updatedAt": "2026-07-10T15:23:31+08:00",
+  "updatedAt": "2026-07-12T21:45:00+08:00",
   "items": [
     {
-      "title": "7月10日“农产品批发价格200指数”比昨天上升0.06个点",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656756.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 15:00:07 +0800",
-      "publishedAtText": "07-10 15:00",
+      "title": "新华百货：控股股东协议转让股份终止",
+      "url": "https://data.eastmoney.com/notices/detail/600785/AN202607121826911733.html",
+      "source": "东方财富公告",
+      "publishedAt": "2026-07-12 17:21:35 +0800",
+      "publishedAtText": "07-12 17:21",
       "impactTags": [
-        "农业",
-        "通胀"
+        "股权转让",
+        "零售"
       ],
       "impactedStocks": [
-        "农林牧渔",
-        "海大集团",
-        "新希望",
-        "牧原股份"
+        "新华百货",
+        "零售板块",
+        "消费ETF"
       ],
-      "impactNote": "可能影响：农林牧渔、海大集团、新希望、牧原股份"
+      "impactNote": "可能影响：新华百货、零售板块、消费ETF；事件落空偏利空"
     },
     {
-      "title": "徐福记驰援广西洪涝灾区，3000余箱爱心物资助力受灾群众渡难关",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656727.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:59:22 +0800",
-      "publishedAtText": "07-10 14:59",
+      "title": "东睦股份：发行股份及支付现金购买资产并募集配套资金注册稿",
+      "url": "https://data.eastmoney.com/notices/detail/600114/AN202607121826911524.html",
+      "source": "东方财富公告",
+      "publishedAt": "2026-07-12 17:00:49 +0800",
+      "publishedAtText": "07-12 17:00",
       "impactTags": [
-        "水利",
-        "应急工程"
+        "并购重组",
+        "新材料"
       ],
       "impactedStocks": [
-        "龙源技术",
-        "中国中铁",
-        "安徽建工",
-        "青龙管业"
+        "东睦股份",
+        "新材料",
+        "消费电子",
+        "机器人结构件"
       ],
-      "impactNote": "可能影响：龙源技术、中国中铁、安徽建工、青龙管业"
+      "impactNote": "可能影响：东睦股份、新材料、消费电子、机器人结构件"
     },
     {
-      "title": "MiniMax创始人回应近期市场波动：不再从公司领取薪酬，直到公司实现AGI",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656739.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:58:04 +0800",
-      "publishedAtText": "07-10 14:58",
+      "title": "赛力斯：2026年半年度业绩预亏公告",
+      "url": "https://data.eastmoney.com/notices/detail/601127/AN202607121826911469.html",
+      "source": "东方财富公告",
+      "publishedAt": "2026-07-12 16:58:15 +0800",
+      "publishedAtText": "07-12 16:58",
       "impactTags": [
-        "AI",
-        "算力"
+        "业绩预告",
+        "智能汽车"
       ],
       "impactedStocks": [
-        "寒武纪",
-        "工业富联",
-        "中际旭创",
-        "新易盛"
+        "赛力斯",
+        "汽车整车",
+        "华为汽车链",
+        "德赛西威"
       ],
-      "impactNote": "可能影响：寒武纪、工业富联、中际旭创、新易盛"
+      "impactNote": "可能影响：赛力斯、汽车整车、华为汽车链；个股业绩压力需警惕"
     },
     {
-      "title": "奥精医疗83岁董事长遭女儿女婿提议罢免，丈夫去年因病去世",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656735.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:56:58 +0800",
-      "publishedAtText": "07-10 14:56",
+      "title": "安达智能：回复2025年年报信息披露监管问询函",
+      "url": "https://data.eastmoney.com/notices/detail/688125/AN202607121826911472.html",
+      "source": "东方财富公告",
+      "publishedAt": "2026-07-12 16:56:46 +0800",
+      "publishedAtText": "07-12 16:56",
       "impactTags": [
-        "医药",
-        "医疗服务"
+        "监管问询",
+        "智能装备"
       ],
       "impactedStocks": [
-        "益诺思",
-        "药明康德",
-        "迪安诊断",
-        "恒瑞医药"
+        "安达智能",
+        "机器人",
+        "智能装备",
+        "科创板"
       ],
-      "impactNote": "可能影响：益诺思、药明康德、迪安诊断、恒瑞医药"
+      "impactNote": "可能影响：安达智能、机器人、智能装备；关注披露质量和订单兑现"
     },
     {
-      "title": "押注世界杯最赚钱“00后”球员，中国品牌赚大了？",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656745.shtml",
+      "title": "一批机器人产品亮相山东济宁，业界共话场景落地与人机共生",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657972.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:48:38 +0800",
-      "publishedAtText": "07-10 14:48",
+      "publishedAt": "2026-07-12 17:53:00 +0800",
+      "publishedAtText": "07-12 17:53",
       "impactTags": [
-        "院线",
-        "传媒消费"
-      ],
-      "impactedStocks": [
-        "幸福蓝海",
-        "万达电影",
-        "横店影视",
-        "芒果超媒"
-      ],
-      "impactNote": "可能影响：幸福蓝海、万达电影、横店影视、芒果超媒"
-    },
-    {
-      "title": "赔付门槛提高，惠民保变“鸡肋”了？",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656741.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:45:51 +0800",
-      "publishedAtText": "07-10 14:45",
-      "impactTags": [
-        "医药",
-        "医疗服务"
-      ],
-      "impactedStocks": [
-        "益诺思",
-        "药明康德",
-        "迪安诊断",
-        "恒瑞医药"
-      ],
-      "impactNote": "可能影响：益诺思、药明康德、迪安诊断、恒瑞医药"
-    },
-    {
-      "title": "潮玩传统赛道加速转型 AI等新渠道或成破局关键",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656738.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:43:43 +0800",
-      "publishedAtText": "07-10 14:43",
-      "impactTags": [
-        "AI",
-        "算力"
-      ],
-      "impactedStocks": [
-        "寒武纪",
-        "工业富联",
-        "中际旭创",
-        "新易盛"
-      ],
-      "impactNote": "可能影响：寒武纪、工业富联、中际旭创、新易盛"
-    },
-    {
-      "title": "卡位与“尝鲜”同在 机器人扎堆进商场",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656733.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:41:45 +0800",
-      "publishedAtText": "07-10 14:41",
-      "impactTags": [
-        "机器人"
+        "机器人",
+        "场景落地"
       ],
       "impactedStocks": [
         "雷赛智能",
         "埃斯顿",
+        "机器人",
+        "新时达",
         "大洋电机"
       ],
-      "impactNote": "可能影响：雷赛智能、埃斯顿、大洋电机"
+      "impactNote": "可能影响：雷赛智能、埃斯顿、机器人、新时达、大洋电机"
     },
     {
-      "title": "6月北京CPI环比小幅下降 同比温和上涨",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656722.shtml",
+      "title": "杨杰：在智能时代，数据成为人工智能的燃料",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657924.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:33:33 +0800",
-      "publishedAtText": "07-10 14:33",
+      "publishedAt": "2026-07-12 16:13:00 +0800",
+      "publishedAtText": "07-12 16:13",
+      "impactTags": [
+        "AI",
+        "数据要素"
+      ],
+      "impactedStocks": [
+        "寒武纪",
+        "中科曙光",
+        "工业富联",
+        "海量数据",
+        "数据ETF"
+      ],
+      "impactNote": "可能影响：寒武纪、中科曙光、工业富联、海量数据、数据ETF"
+    },
+    {
+      "title": "2025年我国港口货物、集装箱吞吐量稳居世界第一",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657903.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "2026-07-12 14:58:00 +0800",
+      "publishedAtText": "07-12 14:58",
+      "impactTags": [
+        "港口航运",
+        "外贸物流"
+      ],
+      "impactedStocks": [
+        "上港集团",
+        "宁波港",
+        "中远海控",
+        "厦门港务"
+      ],
+      "impactNote": "可能影响：上港集团、宁波港、中远海控、厦门港务"
+    },
+    {
+      "title": "高阶智驾加速下沉，中国新能源车企深耕大众市场",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657892.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "2026-07-12 14:52:00 +0800",
+      "publishedAtText": "07-12 14:52",
+      "impactTags": [
+        "智能驾驶",
+        "新能源车"
+      ],
+      "impactedStocks": [
+        "比亚迪",
+        "德赛西威",
+        "拓普集团",
+        "均胜电子",
+        "赛力斯"
+      ],
+      "impactNote": "可能影响：比亚迪、德赛西威、拓普集团、均胜电子、赛力斯"
+    },
+    {
+      "title": "智谱创始人内部信：直指AGI下一个高地",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657885.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "2026-07-12 14:47:00 +0800",
+      "publishedAtText": "07-12 14:47",
+      "impactTags": [
+        "AGI",
+        "国产大模型"
+      ],
+      "impactedStocks": [
+        "寒武纪",
+        "中际旭创",
+        "工业富联",
+        "科大讯飞"
+      ],
+      "impactNote": "可能影响：寒武纪、中际旭创、工业富联、科大讯飞"
+    },
+    {
+      "title": "香港加速角逐亚洲黄金枢纽",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657884.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "2026-07-12 14:35:00 +0800",
+      "publishedAtText": "07-12 14:35",
+      "impactTags": [
+        "黄金",
+        "贵金属"
+      ],
+      "impactedStocks": [
+        "紫金矿业",
+        "山东黄金",
+        "赤峰黄金",
+        "中金黄金"
+      ],
+      "impactNote": "可能影响：紫金矿业、山东黄金、赤峰黄金、中金黄金"
+    },
+    {
+      "title": "夏粮首超3000亿斤背后的农业新质生产力",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-12/10657860.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "2026-07-12 12:38:00 +0800",
+      "publishedAtText": "07-12 12:38",
       "impactTags": [
         "农业",
-        "通胀"
+        "粮食安全"
       ],
       "impactedStocks": [
-        "农林牧渔",
-        "海大集团",
-        "新希望",
-        "牧原股份"
+        "北大荒",
+        "隆平高科",
+        "登海种业",
+        "农发种业"
       ],
-      "impactNote": "可能影响：农林牧渔、海大集团、新希望、牧原股份"
+      "impactNote": "可能影响：北大荒、隆平高科、登海种业、农发种业"
     },
     {
-      "title": "温和回升 总体平稳——透视上半年我国物价数据",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656579.shtml",
+      "title": "中国石化完成对中国航油重组，发力绿色航空燃料产业",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-11/10657728.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:32:09 +0800",
-      "publishedAtText": "07-10 14:32",
+      "publishedAt": "2026-07-11 22:19:00 +0800",
+      "publishedAtText": "07-11 22:19",
       "impactTags": [
-        "农业",
-        "通胀"
+        "绿色航空燃料",
+        "央企重组"
       ],
       "impactedStocks": [
-        "农林牧渔",
-        "海大集团",
-        "新希望",
-        "牧原股份"
+        "中国石化",
+        "海新能科",
+        "嘉澳环保",
+        "华夏航空"
       ],
-      "impactNote": "可能影响：农林牧渔、海大集团、新希望、牧原股份"
+      "impactNote": "可能影响：中国石化、海新能科、嘉澳环保、华夏航空"
     },
     {
-      "title": "千只小猫瘫痪追踪：救助金变“封口费” 检测报告难服众",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656724.shtml",
+      "title": "平台经济迎来新风口，为千行百业添翼赋能",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-11/10657724.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:27:19 +0800",
-      "publishedAtText": "07-10 14:27",
+      "publishedAt": "2026-07-11 22:07:00 +0800",
+      "publishedAtText": "07-11 22:07",
       "impactTags": [
-        "市场流动性"
+        "平台经济",
+        "数字消费"
       ],
       "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
+        "焦点科技",
+        "值得买",
+        "南极电商",
+        "返利科技"
       ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
+      "impactNote": "可能影响：焦点科技、值得买、南极电商、返利科技"
     },
     {
-      "title": "宁夏酿酒炻罐凭自贸协定红利首次出口塞尔维亚",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656694.shtml",
+      "title": "京东集团全球首个落地RoboBase项目在广州开工",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-11/10657714.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:09:38 +0800",
-      "publishedAtText": "07-10 14:09",
+      "publishedAt": "2026-07-11 21:38:00 +0800",
+      "publishedAtText": "07-11 21:38",
       "impactTags": [
-        "市场流动性"
+        "物流机器人",
+        "具身智能"
       ],
       "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
+        "雷赛智能",
+        "机器人",
+        "埃斯顿",
+        "新时达",
+        "大洋电机"
       ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "马来西亚特色好物亮相兰洽会 参展商期待打通双向产销通道",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656687.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 14:04:09 +0800",
-      "publishedAtText": "07-10 14:04",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "中国税务部门曝光7起网红网店偷税案件",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656686.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 13:44:46 +0800",
-      "publishedAtText": "07-10 13:44",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "湘鄂工程机械产业对接会举办 联动共建世界级产业集群",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656666.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 13:36:15 +0800",
-      "publishedAtText": "07-10 13:36",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "从世界杯看中国制造新优势",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656537.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 13:15:46 +0800",
-      "publishedAtText": "07-10 13:15",
-      "impactTags": [
-        "院线",
-        "传媒消费"
-      ],
-      "impactedStocks": [
-        "幸福蓝海",
-        "万达电影",
-        "横店影视",
-        "芒果超媒"
-      ],
-      "impactNote": "可能影响：幸福蓝海、万达电影、横店影视、芒果超媒"
-    },
-    {
-      "title": "奔腾中国·质胜未来丨坚持新发展理念",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656554.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 13:07:26 +0800",
-      "publishedAtText": "07-10 13:07",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "健康知识大赛、大讲堂、健康操……货拉拉持续守护司机健康",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656634.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 12:56:20 +0800",
-      "publishedAtText": "07-10 12:56",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "老挝正式成为上海合作组织对话伙伴",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656613.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 12:11:36 +0800",
-      "publishedAtText": "07-10 12:11",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
-    },
-    {
-      "title": "“蓝靛果之乡”勃利：寒地小浆果闯出大名堂",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-10/10656596.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Fri, 10 Jul 2026 11:50:32 +0800",
-      "publishedAtText": "07-10 11:50",
-      "impactTags": [
-        "市场流动性"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "红利ETF"
-      ],
-      "impactNote": "可能影响：指数风险偏好、券商与红利底仓"
+      "impactNote": "可能影响：雷赛智能、机器人、埃斯顿、新时达、大洋电机"
     }
   ]
 }
