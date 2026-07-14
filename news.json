@@ -1,272 +1,178 @@
 {
-  "updatedAt": "2026-07-13T15:58:00+08:00",
+  "updatedAt": "2026-07-14T17:18:43.143575+08:00",
   "items": [
     {
-      "title": "上半年我国批准上市创新医疗器械42个 包括多个全球首款",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658406.shtml",
+      "title": "A股收评：三大指数集体大涨，超4200只个股飘红",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659116.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 15:13:00 +0800",
-      "publishedAtText": "07-13 15:13",
+      "publishedAt": "Tue, 14 Jul 2026 16:21:37 +0800",
+      "publishedAtText": "07-14 16:21",
       "impactTags": [
-        "医疗器械",
-        "创新医疗"
-      ],
-      "impactedStocks": [
-        "迈瑞医疗",
-        "联影医疗",
-        "鱼跃医疗",
-        "金域医学"
-      ],
-      "impactNote": "可能影响：迈瑞医疗、联影医疗、鱼跃医疗、金域医学"
-    },
-    {
-      "title": "今年38个1类创新药已获批上市，11款新靶点、新机制药均为国产",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658405.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 15:12:00 +0800",
-      "publishedAtText": "07-13 15:12",
-      "impactTags": [
-        "创新药",
-        "国产替代"
-      ],
-      "impactedStocks": [
-        "恒瑞医药",
-        "百济神州",
-        "药明康德",
-        "康方生物"
-      ],
-      "impactNote": "可能影响：恒瑞医药、百济神州、药明康德、康方生物"
-    },
-    {
-      "title": "A股收评：超4600只个股飘绿，三大指数集体收跌",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658404.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 15:10:00 +0800",
-      "publishedAtText": "07-13 15:10",
-      "impactTags": [
-        "市场情绪",
+        "A股收评",
         "风险偏好"
       ],
       "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
         "中证2000ETF",
-        "券商ETF",
-        "红利ETF",
-        "沪深300ETF"
+        "券商ETF"
       ],
-      "impactNote": "可能影响：中证2000ETF、券商ETF、红利ETF、沪深300ETF；短线风险偏好下降"
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、中证2000ETF、券商ETF"
     },
     {
-      "title": "我国上半年创新药对外授权约1100亿美元，创历史新高",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658402.shtml",
+      "title": "上半年我国外贸首破25万亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659125.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 15:08:00 +0800",
-      "publishedAtText": "07-13 15:08",
+      "publishedAt": "Tue, 14 Jul 2026 16:51:26 +0800",
+      "publishedAtText": "07-14 16:51",
       "impactTags": [
-        "创新药出海",
-        "BD交易"
-      ],
-      "impactedStocks": [
-        "恒瑞医药",
-        "药明康德",
-        "百济神州",
-        "泰格医药"
-      ],
-      "impactNote": "可能影响：恒瑞医药、药明康德、百济神州、泰格医药"
-    },
-    {
-      "title": "多家银行优化高端信用卡年费规则，深耕高净值客群",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658399.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 15:01:00 +0800",
-      "publishedAtText": "07-13 15:01",
-      "impactTags": [
-        "银行",
-        "财富管理"
-      ],
-      "impactedStocks": [
-        "招商银行",
-        "工商银行",
-        "建设银行",
-        "苏州银行"
-      ],
-      "impactNote": "可能影响：招商银行、工商银行、建设银行、苏州银行"
-    },
-    {
-      "title": "7月13日农产品批发价格200指数比上周五上升0.65个点",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658389.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 14:58:00 +0800",
-      "publishedAtText": "07-13 14:58",
-      "impactTags": [
-        "农业",
-        "通胀"
-      ],
-      "impactedStocks": [
-        "北大荒",
-        "隆平高科",
-        "海大集团",
-        "牧原股份"
-      ],
-      "impactNote": "可能影响：北大荒、隆平高科、海大集团、牧原股份"
-    },
-    {
-      "title": "塔里木油田向西气东输管网供气突破4000亿立方米",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658332.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 13:19:00 +0800",
-      "publishedAtText": "07-13 13:19",
-      "impactTags": [
-        "油气",
-        "天然气"
-      ],
-      "impactedStocks": [
-        "中国石油",
-        "中国海油",
-        "中国石化",
-        "新奥股份"
-      ],
-      "impactNote": "可能影响：中国石油、中国海油、中国石化、新奥股份"
-    },
-    {
-      "title": "全球竞逐AI：中国的解法是什么？",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658335.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 13:15:00 +0800",
-      "publishedAtText": "07-13 13:15",
-      "impactTags": [
-        "AI",
-        "算力"
-      ],
-      "impactedStocks": [
-        "寒武纪",
-        "中科曙光",
-        "工业富联",
-        "中际旭创"
-      ],
-      "impactNote": "可能影响：寒武纪、中科曙光、工业富联、中际旭创"
-    },
-    {
-      "title": "2026世界人工智能大会前瞻：厚积八载，未来已来",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658328.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 13:14:00 +0800",
-      "publishedAtText": "07-13 13:14",
-      "impactTags": [
-        "AI大会",
-        "机器人"
-      ],
-      "impactedStocks": [
-        "科大讯飞",
-        "机器人",
-        "雷赛智能",
-        "工业富联"
-      ],
-      "impactNote": "可能影响：科大讯飞、机器人、雷赛智能、工业富联"
-    },
-    {
-      "title": "巨力索具澄清涉商业航天不实传闻，股价盘中跌停",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658323.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 12:51:00 +0800",
-      "publishedAtText": "07-13 12:51",
-      "impactTags": [
-        "澄清公告",
-        "商业航天风险"
-      ],
-      "impactedStocks": [
-        "巨力索具",
-        "商业航天板块",
-        "军工ETF"
-      ],
-      "impactNote": "可能影响：巨力索具、商业航天板块、军工ETF；题材炒作降温风险"
-    },
-    {
-      "title": "中国电商物流指数连续4个月回升",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658321.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 12:51:00 +0800",
-      "publishedAtText": "07-13 12:51",
-      "impactTags": [
-        "物流",
-        "平台经济"
-      ],
-      "impactedStocks": [
-        "顺丰控股",
-        "圆通速递",
-        "韵达股份",
-        "京东物流链"
-      ],
-      "impactNote": "可能影响：顺丰控股、圆通速递、韵达股份、京东物流链"
-    },
-    {
-      "title": "比亚迪海豹08正式上市，售价19.69万元-23.99万元",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-13/10658301.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "2026-07-13 11:56:00 +0800",
-      "publishedAtText": "07-13 11:56",
-      "impactTags": [
-        "新能源车",
-        "智能驾驶"
-      ],
-      "impactedStocks": [
-        "比亚迪",
-        "德赛西威",
-        "拓普集团",
-        "均胜电子"
-      ],
-      "impactNote": "可能影响：比亚迪、德赛西威、拓普集团、均胜电子"
-    },
-    {
-      "title": "渤海化学披露2026年半年度业绩预告",
-      "url": "https://data.eastmoney.com/notices/detail/600800/AN202607131826927227.html",
-      "source": "东方财富公告",
-      "publishedAt": "2026-07-13 16:17:04 +0800",
-      "publishedAtText": "07-13 16:17",
-      "impactTags": [
-        "业绩预告",
-        "化工"
-      ],
-      "impactedStocks": [
-        "渤海化学",
-        "化工板块",
-        "炼油化工"
-      ],
-      "impactNote": "可能影响：渤海化学、化工板块、炼油化工"
-    },
-    {
-      "title": "通用股份披露2026年半年度业绩预增公告",
-      "url": "https://data.eastmoney.com/notices/detail/601500/AN202607131826927175.html",
-      "source": "东方财富公告",
-      "publishedAt": "2026-07-13 16:14:59 +0800",
-      "publishedAtText": "07-13 16:14",
-      "impactTags": [
-        "业绩预增",
-        "轮胎出口"
+        "外贸",
+        "出口链"
       ],
       "impactedStocks": [
         "通用股份",
         "赛轮轮胎",
-        "玲珑轮胎",
-        "汽车零部件"
+        "海尔智家",
+        "宁波港"
       ],
-      "impactNote": "可能影响：通用股份、赛轮轮胎、玲珑轮胎、汽车零部件"
+      "impactNote": "可能影响：通用股份、赛轮轮胎、海尔智家、宁波港"
     },
     {
-      "title": "友发集团：董事减持股份结果公告",
-      "url": "https://data.eastmoney.com/notices/detail/601686/AN202607131826927226.html",
-      "source": "东方财富公告",
-      "publishedAt": "2026-07-13 16:17:04 +0800",
-      "publishedAtText": "07-13 16:17",
+      "title": "上半年我国货物贸易进出口总值达25.47万亿元，同比增长16.9%",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659106.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Tue, 14 Jul 2026 16:50:06 +0800",
+      "publishedAtText": "07-14 16:50",
       "impactTags": [
-        "减持",
-        "基建材料"
+        "外贸",
+        "港口航运"
       ],
       "impactedStocks": [
-        "友发集团",
-        "钢管板块",
-        "基建材料"
+        "宁波港",
+        "中远海控",
+        "中国外运",
+        "通用股份"
       ],
-      "impactNote": "可能影响：友发集团、钢管板块、基建材料；弱市中减持消息偏谨慎"
+      "impactNote": "可能影响：宁波港、中远海控、中国外运、通用股份"
+    },
+    {
+      "title": "科技创新打开消费产业新增长空间，专家解读更可持续发展",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659100.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Tue, 14 Jul 2026 16:09:28 +0800",
+      "publishedAtText": "07-14 16:09",
+      "impactTags": [
+        "消费",
+        "科技创新"
+      ],
+      "impactedStocks": [
+        "贵州茅台",
+        "五粮液",
+        "中国中免",
+        "风语筑"
+      ],
+      "impactNote": "可能影响：贵州茅台、五粮液、中国中免、风语筑"
+    },
+    {
+      "title": "深圳企业绿电绿证交易总量突破500亿千瓦时",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659112.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Tue, 14 Jul 2026 16:26:19 +0800",
+      "publishedAtText": "07-14 16:26",
+      "impactTags": [
+        "绿电",
+        "电力"
+      ],
+      "impactedStocks": [
+        "长江电力",
+        "华能国际",
+        "国电电力",
+        "南网能源"
+      ],
+      "impactNote": "可能影响：长江电力、华能国际、国电电力、南网能源"
+    },
+    {
+      "title": "平台经济聚力共生共赢",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659142.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Tue, 14 Jul 2026 16:54:04 +0800",
+      "publishedAtText": "07-14 16:54",
+      "impactTags": [
+        "平台经济",
+        "互联网"
+      ],
+      "impactedStocks": [
+        "恒生科技ETF",
+        "三六零",
+        "昆仑万维",
+        "中文在线"
+      ],
+      "impactNote": "可能影响：恒生科技ETF、三六零、昆仑万维、中文在线"
+    },
+    {
+      "title": "广州设计之都打造全国首个碳普惠先行区",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-14/10659157.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Tue, 14 Jul 2026 17:08:36 +0800",
+      "publishedAtText": "07-14 17:08",
+      "impactTags": [
+        "碳普惠",
+        "环保"
+      ],
+      "impactedStocks": [
+        "南网能源",
+        "龙净环保",
+        "国网信通"
+      ],
+      "impactNote": "可能影响：南网能源、龙净环保、国网信通"
+    },
+    {
+      "title": "通用股份半年度业绩预增，轮胎出口链关注度提升",
+      "url": "https://data.eastmoney.com/notices/",
+      "source": "上市公司公告整理",
+      "publishedAtText": "07-14 盘后",
+      "impactTags": [
+        "业绩预增",
+        "轮胎"
+      ],
+      "impactedStocks": [
+        "通用股份",
+        "赛轮轮胎",
+        "玲珑轮胎"
+      ],
+      "impactNote": "可能影响：通用股份、赛轮轮胎、玲珑轮胎"
+    },
+    {
+      "title": "渤海化学披露业绩预告及二季度经营数据",
+      "url": "https://data.eastmoney.com/notices/",
+      "source": "上市公司公告整理",
+      "publishedAtText": "07-14 盘后",
+      "impactTags": [
+        "化工",
+        "业绩"
+      ],
+      "impactedStocks": [
+        "渤海化学",
+        "三友化工",
+        "新乡化纤"
+      ],
+      "impactNote": "可能影响：渤海化学、三友化工、新乡化纤"
+    },
+    {
+      "title": "龙虎榜：山东墨龙、万邦医药、青龙管业等波动加大",
+      "url": "https://data.eastmoney.com/stock/lhb.html",
+      "source": "东方财富龙虎榜",
+      "publishedAtText": "07-14 盘后",
+      "impactTags": [
+        "龙虎榜",
+        "短线风险"
+      ],
+      "impactedStocks": [
+        "山东墨龙",
+        "万邦医药",
+        "青龙管业"
+      ],
+      "impactNote": "可能影响：山东墨龙、万邦医药、青龙管业"
     }
   ]
 }

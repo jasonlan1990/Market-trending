@@ -33,184 +33,328 @@ const fallbackThemes = [
 
 const masters = [
   {
-    category: "价值投资",
-    icon: "fa-gem",
-    name: "沃伦·巴菲特",
-    avatar: "巴",
-    avatarStyle: "linear-gradient(135deg, #f6d365, #fda085)",
-    quote: "4682家下跌时，现金流和资产负债表比故事更重要。今天只看银行、运营商、油气和品牌医药里的稳健公司。",
-    tags: ["现金流", "安全边际", "防守"],
-    picks: ["建设银行", "中国移动", "华润三九"]
+    "category": "价值投资",
+    "icon": "fa-gem",
+    "name": "沃伦·巴菲特",
+    "avatar": "巴",
+    "avatarStyle": "linear-gradient(135deg, #f6d365, #fda085)",
+    "quote": "今天4210家上涨，但成交额反而缩到2.72万亿。修复可以看，真正值得买的还是现金流清楚、资产质量稳的油气央企、运营商和银行。",
+    "tags": [
+      "现金流",
+      "安全边际",
+      "缩量修复"
+    ],
+    "picks": [
+      "中国海油",
+      "中国移动",
+      "建设银行"
+    ]
   },
   {
-    category: "情绪流",
-    icon: "fa-theater-masks",
-    name: "炒股养家",
-    avatar: "养",
-    avatarStyle: "linear-gradient(135deg, #667eea, #764ba2)",
-    quote: "42只涨停对458只跌停，这是冰点，不是进攻日。明天只看中药、银行、油气的前排承接，后排反抽不碰。",
-    tags: ["冰点", "控回撤", "前排"],
-    picks: ["陇神戎发", "苏州银行", "中国海油"]
+    "category": "情绪流",
+    "icon": "fa-theater-masks",
+    "name": "炒股养家",
+    "avatar": "养",
+    "avatarStyle": "linear-gradient(135deg, #667eea, #764ba2)",
+    "quote": "7月13日冰点，7月14日修复，短线只做最强方向的前排。油气、PCB、元件是今天资金最认可的地方，后排冲高不接。",
+    "tags": [
+      "冰点修复",
+      "前排",
+      "不接后排"
+    ],
+    "picks": [
+      "通源石油",
+      "沪电股份",
+      "风语筑"
+    ]
   },
   {
-    category: "龙头战法",
-    icon: "fa-crown",
-    name: "赵老哥",
-    avatar: "赵",
-    avatarStyle: "linear-gradient(135deg, #ffecd2, #fcb69f)",
-    quote: "龙头战法今天要降频。陇神戎发能否带出中药梯队，银行能否继续护盘，是明天短线能不能修复的关键。",
-    tags: ["龙头确认", "梯队", "降频"],
-    picks: ["陇神戎发", "华润三九", "苏州银行"]
+    "category": "龙头战法",
+    "icon": "fa-crown",
+    "name": "赵老哥",
+    "avatar": "赵",
+    "avatarStyle": "linear-gradient(135deg, #ffecd2, #fcb69f)",
+    "quote": "龙头战法看带队能力。通源石油带油气，中曼石油带油服，国际复材带玻纤，明天只看这些前排能不能抗住分歧。",
+    "tags": [
+      "龙头带队",
+      "梯队",
+      "分歧承接"
+    ],
+    "picks": [
+      "通源石油",
+      "中曼石油",
+      "国际复材"
+    ]
   },
   {
-    category: "趋势交易",
-    icon: "fa-chart-line",
-    name: "杰西·利弗莫尔",
-    avatar: "利",
-    avatarStyle: "linear-gradient(135deg, #4facfe, #00f2fe)",
-    quote: "趋势交易不接下跌飞刀。今天只买强于指数、收在均线上方的防守趋势，其他票等价格先止跌。",
-    tags: ["相对强度", "止损", "不猜底"],
-    picks: ["中国海油", "建设银行", "中国移动"]
+    "category": "趋势交易",
+    "icon": "fa-chart-line",
+    "name": "杰西·利弗莫尔",
+    "avatar": "利",
+    "avatarStyle": "linear-gradient(135deg, #4facfe, #00f2fe)",
+    "quote": "价格已经告诉我们今日强弱：创业板50+3.71%，微盘+2.54%，但成交缩量。趋势交易只等强势股回踩确认，不追第一根大阳。",
+    "tags": [
+      "趋势确认",
+      "回踩",
+      "止损"
+    ],
+    "picks": [
+      "胜宏科技",
+      "紫金矿业",
+      "中国海油"
+    ]
   },
   {
-    category: "成长投资",
-    icon: "fa-seedling",
-    name: "彼得·林奇",
-    avatar: "林",
-    avatarStyle: "linear-gradient(135deg, #43e97b, #38f9d7)",
-    quote: "创新药获批和出海数据仍有亮点。弱市里成长股要回到业绩和产品线，优先看真正有兑现能力的医药龙头。",
-    tags: ["创新药", "业绩兑现", "产品线"],
-    picks: ["恒瑞医药", "药明康德", "迈瑞医疗"]
+    "category": "成长投资",
+    "icon": "fa-seedling",
+    "name": "彼得·林奇",
+    "avatar": "林",
+    "avatarStyle": "linear-gradient(135deg, #43e97b, #38f9d7)",
+    "quote": "外贸数据和业绩预增线值得看。成长股不是只买题材，通用股份这类业绩兑现、PCB这类订单景气，才有继续研究价值。",
+    "tags": [
+      "业绩兑现",
+      "出口链",
+      "订单景气"
+    ],
+    "picks": [
+      "通用股份",
+      "沪电股份",
+      "恒瑞医药"
+    ]
   },
   {
-    category: "价值成长",
-    icon: "fa-compass",
-    name: "查理·芒格",
-    avatar: "芒",
-    avatarStyle: "linear-gradient(135deg, #f093fb, #f5576c)",
-    quote: "这种盘面最适合少犯错。高估值科技要等止跌，组合里应留下护城河、分红和现金流都更清楚的资产。",
-    tags: ["少犯错", "护城河", "分红"],
-    picks: ["中国移动", "长江电力", "建设银行"]
+    "category": "价值成长",
+    "icon": "fa-compass",
+    "name": "查理·芒格",
+    "avatar": "芒",
+    "avatarStyle": "linear-gradient(135deg, #f093fb, #f5576c)",
+    "quote": "普涨日最容易让人忘记风险。成交没有放大，说明只能选择少数确定性更高的公司，别把反弹误认为所有股票都变好了。",
+    "tags": [
+      "少犯错",
+      "确定性",
+      "组合质量"
+    ],
+    "picks": [
+      "中国移动",
+      "深南电路",
+      "中国海油"
+    ]
   },
   {
-    category: "宏观配置",
-    icon: "fa-globe",
-    name: "霍华德·马克斯",
-    avatar: "马",
-    avatarStyle: "linear-gradient(135deg, #fa709a, #fee140)",
-    quote: "成交额缩到2.83万亿，跌停458家，风险补偿还不够。现在的重点不是抄底，而是等恐慌从扩散转为收敛。",
-    tags: ["风险补偿", "仓位控制", "等待"],
-    picks: ["红利ETF", "沪深300ETF", "建设银行"]
+    "category": "宏观配置",
+    "icon": "fa-globe",
+    "name": "霍华德·马克斯",
+    "avatar": "马",
+    "avatarStyle": "linear-gradient(135deg, #fa709a, #fee140)",
+    "quote": "情绪从12度拉到66度，但量能没有同步扩张，这是修复不是全面牛市。组合要保持风险补偿，进攻和防守各留一半。",
+    "tags": [
+      "风险补偿",
+      "仓位控制",
+      "修复反弹"
+    ],
+    "picks": [
+      "沪深300ETF",
+      "红利ETF",
+      "紫金矿业"
+    ]
   },
   {
-    category: "量化趋势",
-    icon: "fa-wave-square",
-    name: "詹姆斯·西蒙斯",
-    avatar: "西",
-    avatarStyle: "linear-gradient(135deg, #30cfd0, #330867)",
-    quote: "模型今天只加权中药、油气、银行和电信运营。强度、成交、资金三者同向的少数品种才值得观察。",
-    tags: ["强度排序", "资金同向", "前排"],
-    picks: ["陇神戎发", "中国海油", "苏州银行"]
+    "category": "量化趋势",
+    "icon": "fa-wave-square",
+    "name": "詹姆斯·西蒙斯",
+    "avatar": "西",
+    "avatarStyle": "linear-gradient(135deg, #30cfd0, #330867)",
+    "quote": "模型今日优先级是油气、PCB、元件、有色。涨幅、主力净流入和市场宽度同时改善，但成交额下降会压低仓位权重。",
+    "tags": [
+      "强度排序",
+      "资金同向",
+      "缩量折扣"
+    ],
+    "picks": [
+      "沪电股份",
+      "通源石油",
+      "江西铜业"
+    ]
   },
   {
-    category: "短线情绪",
-    icon: "fa-bolt",
-    name: "作手新一",
-    avatar: "新",
-    avatarStyle: "linear-gradient(135deg, #667eea, #764ba2)",
-    quote: "跌停扩散时，审美要极致。只看最硬的逆势核心，非核心不做，不能从亏钱效应里硬找机会。",
-    tags: ["核心审美", "冰点", "控制回撤"],
-    picks: ["陇神戎发", "苏州银行", "中国移动"]
+    "category": "短线情绪",
+    "icon": "fa-bolt",
+    "name": "作手新一",
+    "avatar": "新",
+    "avatarStyle": "linear-gradient(135deg, #667eea, #764ba2)",
+    "quote": "今天是冰点后的情绪修复，买点不在普涨当天，买点在明天分歧里。前排不补跌，才是可以小仓确认的信号。",
+    "tags": [
+      "情绪修复",
+      "分歧买点",
+      "核心审美"
+    ],
+    "picks": [
+      "中曼石油",
+      "胜宏科技",
+      "风语筑"
+    ]
   },
   {
-    category: "龙头战法",
-    icon: "fa-crown",
-    name: "乔帮主",
-    avatar: "乔",
-    avatarStyle: "linear-gradient(135deg, #ff9a9e, #fecfef)",
-    quote: "明天看冰点修复，核心条件是跌停数快速下降、前排不补跌。中药和银行如果分歧后还能走强，才是可做方向。",
-    tags: ["冰点修复", "分歧换手", "不补跌"],
-    picks: ["华润三九", "建设银行", "中国海油"]
+    "category": "龙头战法",
+    "icon": "fa-crown",
+    "name": "乔帮主",
+    "avatar": "乔",
+    "avatarStyle": "linear-gradient(135deg, #ff9a9e, #fecfef)",
+    "quote": "弱转强要看前排能否穿越。油气和PCB如果明天继续强，才说明不是单日反抽；后排补涨只适合快进快出。",
+    "tags": [
+      "穿越",
+      "前排",
+      "快进快出"
+    ],
+    "picks": [
+      "通源石油",
+      "沪电股份",
+      "紫金矿业"
+    ]
   },
   {
-    category: "弱转强",
-    icon: "fa-rotate",
-    name: "退学炒股",
-    avatar: "退",
-    avatarStyle: "linear-gradient(135deg, #a8edea, #fed6e3)",
-    quote: "真正的弱转强，要先看恐慌盘少了没有。跌停数如果还在高位，任何反抽都只按卖点或减仓点处理。",
-    tags: ["弱转强", "恐慌收敛", "确认"],
-    picks: ["陇神戎发", "红利ETF", "中国石油"]
+    "category": "弱转强",
+    "icon": "fa-rotate",
+    "name": "退学炒股",
+    "avatar": "退",
+    "avatarStyle": "linear-gradient(135deg, #a8edea, #fed6e3)",
+    "quote": "今天市场给了修复，但真正的弱转强在明天。跌停从458降到43是好事，下一步看涨停131家能不能转化为连板梯队。",
+    "tags": [
+      "弱转强",
+      "连板观察",
+      "确认"
+    ],
+    "picks": [
+      "通源石油",
+      "国际复材",
+      "风语筑"
+    ]
   },
   {
-    category: "打板高频",
-    icon: "fa-fire",
-    name: "北京炒家",
-    avatar: "北",
-    avatarStyle: "linear-gradient(135deg, #43e97b, #38f9d7)",
-    quote: "42个涨停配458个跌停，打板环境很差。只考虑板块第一、充分换手、且能带动情绪的首板。",
-    tags: ["降频", "首板", "换手"],
-    picks: ["中药首板", "银行前排", "油气前排"]
+    "category": "打板高频",
+    "icon": "fa-fire",
+    "name": "北京炒家",
+    "avatar": "北",
+    "avatarStyle": "linear-gradient(135deg, #43e97b, #38f9d7)",
+    "quote": "打板环境从冰点改善，但炸板率仍要看。明天只打板块第一、充分换手、能带情绪的板，后排一致不去。",
+    "tags": [
+      "首板",
+      "换手",
+      "降频"
+    ],
+    "picks": [
+      "油气前排",
+      "PCB前排",
+      "数字媒体前排"
+    ]
   },
   {
-    category: "情绪周期",
-    icon: "fa-temperature-half",
-    name: "涅槃重生",
-    avatar: "涅",
-    avatarStyle: "linear-gradient(135deg, #ffecd2, #fcb69f)",
-    quote: "今天是新的冰点样本。接下来先看跌停数从458家回落到百家以下，再看谁能从防守变成新主线。",
-    tags: ["冰点", "周期切换", "修复确认"],
-    picks: ["陇神戎发", "中国海油", "红利ETF"]
+    "category": "情绪周期",
+    "icon": "fa-temperature-half",
+    "name": "涅槃重生",
+    "avatar": "涅",
+    "avatarStyle": "linear-gradient(135deg, #ffecd2, #fcb69f)",
+    "quote": "7月13日是冰点，7月14日是修复，周期进入试错窗口。明天若成交额站回3万亿并且前排不补跌，可以提高出手频率。",
+    "tags": [
+      "周期修复",
+      "试错",
+      "量能确认"
+    ],
+    "picks": [
+      "通源石油",
+      "沪电股份",
+      "中证2000ETF"
+    ]
   },
   {
-    category: "价值防守",
-    icon: "fa-shield-halved",
-    name: "邓普顿",
-    avatar: "邓",
-    avatarStyle: "linear-gradient(135deg, #89f7fe, #66a6ff)",
-    quote: "便宜和稳健今天重新占优。银行、油气、电力这些方向不性感，但能在极端波动里保护组合。",
-    tags: ["低估", "红利", "资源"],
-    picks: ["建设银行", "中国海油", "中国神华"]
+    "category": "价值防守",
+    "icon": "fa-shield-halved",
+    "name": "邓普顿",
+    "avatar": "邓",
+    "avatarStyle": "linear-gradient(135deg, #89f7fe, #66a6ff)",
+    "quote": "普涨之后更要看便宜资产。油气、银行、电信运营仍有估值和股息托底，适合在组合里承担稳定器。",
+    "tags": [
+      "低估",
+      "红利",
+      "资源"
+    ],
+    "picks": [
+      "中国海油",
+      "建设银行",
+      "中国移动"
+    ]
   },
   {
-    category: "成长质量",
-    icon: "fa-medal",
-    name: "菲利普·费雪",
-    avatar: "费",
-    avatarStyle: "linear-gradient(135deg, #d4fc79, #96e6a1)",
-    quote: "成长股不是不能买，而是今天只能买质量。创新药、医疗器械和AI要看真实订单、研发壁垒和利润率。",
-    tags: ["成长质量", "研发", "产业兑现"],
-    picks: ["恒瑞医药", "迈瑞医疗", "中科曙光"]
+    "category": "成长质量",
+    "icon": "fa-medal",
+    "name": "菲利普·费雪",
+    "avatar": "费",
+    "avatarStyle": "linear-gradient(135deg, #d4fc79, #96e6a1)",
+    "quote": "科技修复要看质量。PCB和元件今天资金最强，但要挑订单、客户和盈利弹性真实的公司，不是所有电子股都值得追。",
+    "tags": [
+      "成长质量",
+      "订单",
+      "产业兑现"
+    ],
+    "picks": [
+      "沪电股份",
+      "深南电路",
+      "恒瑞医药"
+    ]
   },
   {
-    category: "价格行为",
-    icon: "fa-chart-simple",
-    name: "斯坦·温斯坦",
-    avatar: "温",
-    avatarStyle: "linear-gradient(135deg, #c471f5, #fa71cd)",
-    quote: "微盘股跌3.58%，破位股继续回避。只买强于指数、均线没有破坏、成交没有失控的股票。",
-    tags: ["相对强度", "二阶段", "均线"],
-    picks: ["中国移动", "建设银行", "华润三九"]
+    "category": "价格行为",
+    "icon": "fa-chart-simple",
+    "name": "斯坦·温斯坦",
+    "avatar": "温",
+    "avatarStyle": "linear-gradient(135deg, #c471f5, #fa71cd)",
+    "quote": "今日最好的图形在资源、PCB和部分数字媒体。只买强于指数且均线向上的股票，跌回突破位就承认失败。",
+    "tags": [
+      "相对强度",
+      "均线",
+      "突破回踩"
+    ],
+    "picks": [
+      "胜宏科技",
+      "紫金矿业",
+      "风语筑"
+    ]
   },
   {
-    category: "逆向投资",
-    icon: "fa-arrows-turn-to-dots",
-    name: "约翰·聂夫",
-    avatar: "聂",
-    avatarStyle: "linear-gradient(135deg, #fddb92, #d1fdff)",
-    quote: "逆向投资不是今天就满仓抄底，而是等恐慌释放后，买估值不贵、股息或业绩能托底的资产。",
-    tags: ["安全边际", "逆向", "估值"],
-    picks: ["红利ETF", "招商银行", "中国石油"]
+    "category": "逆向投资",
+    "icon": "fa-arrows-turn-to-dots",
+    "name": "约翰·聂夫",
+    "avatar": "聂",
+    "avatarStyle": "linear-gradient(135deg, #fddb92, #d1fdff)",
+    "quote": "昨日恐慌给了逆向观察点，但今天大涨后不能再盲目抄底。优先买估值不贵、现金流或业绩能解释上涨的资产。",
+    "tags": [
+      "逆向",
+      "估值",
+      "现金流"
+    ],
+    "picks": [
+      "中国海油",
+      "通用股份",
+      "红利ETF"
+    ]
   },
   {
-    category: "产业趋势",
-    icon: "fa-microchip",
-    name: "凯茜·伍德",
-    avatar: "木",
-    avatarStyle: "linear-gradient(135deg, #84fab0, #8fd3f4)",
-    quote: "AI大会和国产创新仍有产业趋势，但今天价格没有确认。科技股先等科创50止跌，再挑真正的核心。",
-    tags: ["AI趋势", "等待企稳", "核心资产"],
-    picks: ["寒武纪", "中科曙光", "工业富联"]
+    "category": "产业趋势",
+    "icon": "fa-microchip",
+    "name": "凯茜·伍德",
+    "avatar": "木",
+    "avatarStyle": "linear-gradient(135deg, #84fab0, #8fd3f4)",
+    "quote": "AI和科技创新没有结束，今天PCB/元件资金回流是信号。下一步要看AI硬件能否从修复变成新一轮趋势。",
+    "tags": [
+      "AI硬件",
+      "产业趋势",
+      "资金回流"
+    ],
+    "picks": [
+      "沪电股份",
+      "胜宏科技",
+      "工业富联"
+    ]
   }
 ];
 
