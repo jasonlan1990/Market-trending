@@ -623,8 +623,9 @@ function renderMarketHeatmap(market = {}) {
 }
 
 function fallbackEventTimeline(market = {}) {
+  const date = market.tradingDate ? market.tradingDate.slice(5) : "最新";
   const newsEvents = (market.events || []).slice(0, 5).map((item, index) => ({
-    date: market.tradingDate ? market.tradingDate.slice(5) : "最新",
+    date,
     time: index < 2 ? "15:00" : "盘后",
     title: item.title,
     category: item.type,
@@ -636,56 +637,128 @@ function fallbackEventTimeline(market = {}) {
     title: "核心事件时间轴",
     subtitle: "按事件对市场情绪的影响排序",
     summary: "事件轴用于解释情绪温度变化：先看宏观/地缘/政策，再看行业催化和上市公司公告，最后落到可交易板块。",
-    dates: ["06-24", "07-07", "07-10", "07-13"],
-    events: newsEvents
+    days: [{ date, events: newsEvents, summary: "当前交易日核心事件汇总。" }]
   };
 }
 
-function renderEventTimeline(market = {}) {
-  const timeline = market.eventTimeline || fallbackEventTimeline(market);
-  const events = Array.isArray(timeline.events) ? timeline.events : [];
-  if (!events.length) {
-    $("#eventTimeline").innerHTML = "";
-    return;
+function normalizeTimelineDays(timeline = {}) {
+  if (Array.isArray(timeline.days) && timeline.days.length) {
+    return timeline.days.map((day) => ({
+      date: safe(day.date || day.label, "--"),
+      title: safe(day.title, ""),
+      summary: safe(day.summary, timeline.summary || ""),
+      events: Array.isArray(day.events) ? day.events : []
+    }));
   }
   const dates = Array.isArray(timeline.dates) && timeline.dates.length
     ? timeline.dates
-    : [...new Set(events.map((item) => item.date).filter(Boolean))];
-  const focus = events.find((item) => item.focus) || events[0];
+    : [...new Set((timeline.events || []).map((item) => item.date).filter(Boolean))];
+  return dates.map((date) => ({
+    date,
+    summary: timeline.summary || "",
+    events: (timeline.events || []).filter((item) => item.date === date)
+  })).filter((day) => day.events.length);
+}
+
+function renderTimelineDay(timeline, days, activeIndex, activeEventIndex) {
+  const activeDay = days[activeIndex] || days[days.length - 1];
+  const events = activeDay.events || [];
+  const defaultFocusIndex = Math.max(0, events.findIndex((item) => item.focus));
+  const focusIndex = Number.isInteger(activeEventIndex) ? activeEventIndex : defaultFocusIndex;
+  const focus = events[focusIndex] || events[0] || {};
   const impactClass = (impact) => String(impact || "").includes("利空") ? "bad" : String(impact || "").includes("利好") ? "good" : "watch";
+  const count = days.reduce((sum, day) => sum + (day.events || []).length, 0);
+  const sourceText = timeline.source
+    ? `${safe(timeline.market, "A股")} · ${timeline.source}`
+    : `${safe(timeline.market, "A股")} · 截至 ${activeDay.date} 共 ${count} 条`;
+  const detailText = focus.detail
+    || (focus.title && activeDay.summary ? `${focus.title}：${activeDay.summary}` : "")
+    || activeDay.summary
+    || timeline.summary
+    || focus.title
+    || "该交易日事件影响仍需结合盘面确认。";
 
   $("#eventTimeline").innerHTML = `
     <div class="timeline-head">
       <div>
         <strong>${escapeHtml(timeline.title || "核心事件时间轴")}</strong>
-        <span>${escapeHtml(timeline.subtitle || "跟踪影响市场情绪的关键事件")}</span>
+        <span>${escapeHtml(timeline.subtitle || "连续20个交易日核心事件复盘")}</span>
       </div>
-      <em>${escapeHtml(timeline.source || "公开新闻与公告整理")}</em>
+      <em>${escapeHtml(sourceText)}</em>
     </div>
-    <div class="timeline-dates">
-      ${dates.map((date) => `<span class="${date === focus.date ? "active" : ""}">${escapeHtml(date)}</span>`).join("")}
-    </div>
-    <div class="timeline-events">
-      ${events.map((item) => `
-        <article class="timeline-event ${item === focus ? "focus" : ""}">
-          <time>${escapeHtml(item.date || "")} ${escapeHtml(item.time || "")}</time>
-          <strong>${escapeHtml(item.title)}</strong>
-          <div class="timeline-event-tags">
-            <span>${escapeHtml(item.category || "事件")}</span>
-            <span class="${impactClass(item.impact)}">${escapeHtml(item.impact || "观察")}</span>
-          </div>
-        </article>
+    <div class="timeline-date-strip" role="tablist" aria-label="核心事件日期">
+      ${days.map((day, index) => `
+        <button class="timeline-date-btn ${index === activeIndex ? "active" : ""}" type="button" data-date-index="${index}" role="tab" aria-selected="${index === activeIndex}">
+          ${escapeHtml(day.date)}
+        </button>
       `).join("")}
     </div>
+    <div class="timeline-day-stage">
+      <div class="timeline-date-rail">${escapeHtml(activeDay.date)}</div>
+      <div class="timeline-event-row">
+        ${events.map((item, index) => `
+          <article class="timeline-event ${item === focus ? "focus" : ""}" data-event-index="${index}" role="button" tabindex="0" aria-label="查看 ${escapeHtml(item.title)} 的解读">
+            <time>${escapeHtml(item.date || activeDay.date)} ${escapeHtml(item.time || "")}</time>
+            <strong>${escapeHtml(item.title)}</strong>
+            <div class="timeline-event-tags">
+              <span>${escapeHtml(item.category || "事件")}</span>
+              <span class="${impactClass(item.impact)}">${escapeHtml(item.impact || "观察")}</span>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </div>
     <div class="timeline-detail">
+      <button class="timeline-collapse" type="button">收起</button>
       <div class="timeline-detail-tags">
-        ${(focus.markets || []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
+        ${(focus.markets || [timeline.market || "A股"]).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
         ${(focus.tags || []).slice(0, 5).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
       </div>
-      <p>${escapeHtml(timeline.summary || focus.detail || focus.title)}</p>
+      <p>${escapeHtml(detailText)}</p>
       ${timeline.sourceNote ? `<small>${escapeHtml(timeline.sourceNote)}</small>` : ""}
     </div>
   `;
+
+  document.querySelectorAll(".timeline-date-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextIndex = Number(button.dataset.dateIndex);
+      if (Number.isFinite(nextIndex)) renderTimelineDay(timeline, days, nextIndex);
+    });
+  });
+  document.querySelectorAll(".timeline-event").forEach((card) => {
+    const openEvent = () => {
+      const nextEventIndex = Number(card.dataset.eventIndex);
+      if (Number.isFinite(nextEventIndex)) renderTimelineDay(timeline, days, activeIndex, nextEventIndex);
+    };
+    card.addEventListener("click", openEvent);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openEvent();
+      }
+    });
+  });
+  const collapse = document.querySelector(".timeline-collapse");
+  const detail = document.querySelector(".timeline-detail");
+  if (collapse && detail) {
+    collapse.addEventListener("click", () => {
+      detail.classList.toggle("collapsed");
+      collapse.textContent = detail.classList.contains("collapsed") ? "展开" : "收起";
+    });
+  }
+  const activeButton = document.querySelector(".timeline-date-btn.active");
+  if (activeButton) activeButton.scrollIntoView({ block: "nearest", inline: "end" });
+}
+
+function renderEventTimeline(market = {}) {
+  const timeline = market.eventTimeline || fallbackEventTimeline(market);
+  const days = normalizeTimelineDays(timeline).slice(-20);
+  if (!days.length) {
+    $("#eventTimeline").innerHTML = "";
+    return;
+  }
+  const preferredIndex = days.findIndex((day) => day.events.some((event) => event.focus));
+  renderTimelineDay(timeline, days, preferredIndex >= 0 ? preferredIndex : days.length - 1);
 }
 
 function displayMetric(rawValue, parsedValue, suffix = "") {
