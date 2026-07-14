@@ -850,6 +850,174 @@ a {
   font-weight: 800;
 }
 
+.event-timeline-card {
+  margin-top: 20px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(0,209,178,0.08), rgba(22,119,255,0.045)),
+    var(--bg-card);
+}
+
+.timeline-head,
+.heatmap-market-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.timeline-head {
+  margin-bottom: 14px;
+}
+
+.timeline-head strong,
+.heatmap-market-head strong {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.timeline-head span,
+.heatmap-market-head span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
+.timeline-head em {
+  border: 1px solid rgba(0,209,178,0.22);
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: rgba(0,209,178,0.08);
+  color: #21d6a2;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.timeline-dates {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.timeline-dates span {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 6px 12px;
+  background: rgba(22,119,255,0.055);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.timeline-dates .active {
+  border-color: rgba(0,209,178,0.5);
+  background: rgba(0,209,178,0.14);
+  color: #21d6a2;
+}
+
+.timeline-events {
+  display: grid;
+  grid-auto-columns: minmax(260px, 1fr);
+  grid-auto-flow: column;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px 0 16px;
+}
+
+.timeline-event {
+  min-height: 132px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 14px;
+  background: rgba(255,255,255,0.035);
+}
+
+.timeline-event.focus {
+  border-color: rgba(0,209,178,0.55);
+  background: rgba(0,209,178,0.075);
+  box-shadow: 0 0 0 1px rgba(0,209,178,0.08);
+}
+
+.timeline-event time {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.timeline-event strong {
+  display: block;
+  min-height: 48px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.timeline-event-tags,
+.timeline-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-event-tags {
+  margin-top: 12px;
+}
+
+.timeline-event-tags span,
+.timeline-detail-tags span {
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: rgba(22,119,255,0.1);
+  color: var(--accent-light);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.timeline-event-tags .good {
+  background: rgba(82,196,26,0.14);
+  color: var(--down);
+}
+
+.timeline-event-tags .bad {
+  background: rgba(255,77,79,0.14);
+  color: var(--up);
+}
+
+.timeline-event-tags .watch {
+  background: rgba(250,140,22,0.14);
+  color: var(--orange);
+}
+
+.timeline-detail {
+  border: 1px solid rgba(0,209,178,0.22);
+  border-radius: 10px;
+  padding: 14px;
+  background: rgba(0,0,0,0.16);
+}
+
+.timeline-detail p {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.75;
+}
+
+.timeline-detail small {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
 .index-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
@@ -1149,6 +1317,120 @@ a {
 
 .compact-list .checklist-item {
   padding: 10px 0;
+}
+
+.market-heatmap-card {
+  overflow: hidden;
+}
+
+.market-heatmap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.heatmap-market {
+  overflow: hidden;
+  border: 1px solid rgba(22,119,255,0.18);
+  border-radius: 10px;
+  background: rgba(4,10,18,0.72);
+}
+
+.heatmap-market:nth-child(2) {
+  border-color: rgba(0,209,178,0.38);
+}
+
+.heatmap-market-head {
+  min-height: 34px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.035);
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: 72px;
+  grid-auto-flow: dense;
+  gap: 3px;
+  padding: 4px;
+}
+
+.heatmap-tile {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 8px;
+  text-align: center;
+}
+
+.heatmap-tile.xl {
+  grid-column: span 2;
+  grid-row: span 3;
+}
+
+.heatmap-tile.lg {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.heatmap-tile.md {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.heatmap-tile.sm {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.heatmap-tile.negative {
+  background: linear-gradient(135deg, #f51d2d, #a91f29);
+}
+
+.heatmap-tile.positive {
+  background: linear-gradient(135deg, #18a05a, #0d6f3f);
+}
+
+.heatmap-tile.neutral {
+  background: linear-gradient(135deg, #3f4b5f, #202938);
+}
+
+.heatmap-tile strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #fff;
+  font-size: clamp(0.68rem, 0.85vw, 0.88rem);
+  font-weight: 900;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.heatmap-tile span {
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: clamp(0.74rem, 0.9vw, 1rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.heatmap-tile em {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.62rem;
+  font-style: normal;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .sector-list,
@@ -2040,6 +2322,10 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .market-heatmap {
+    grid-template-columns: 1fr;
+  }
+
   .news-grid {
     grid-template-columns: 1fr;
   }
@@ -2120,6 +2406,14 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .timeline-events {
+    grid-auto-columns: minmax(240px, 82vw);
+  }
+
+  .heatmap-grid {
+    grid-auto-rows: 64px;
+  }
+
   .index-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2132,5 +2426,21 @@ a {
 @media (max-width: 520px) {
   .index-grid {
     grid-template-columns: 1fr;
+  }
+
+  .heatmap-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .heatmap-tile.xl,
+  .heatmap-tile.lg,
+  .heatmap-tile.md {
+    grid-column: span 2;
+  }
+
+  .timeline-head,
+  .heatmap-market-head {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

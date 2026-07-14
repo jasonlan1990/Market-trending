@@ -540,6 +540,154 @@ function renderTemperatureHistory(sentiment = {}, current) {
   `;
 }
 
+function numericChange(item = {}) {
+  if (Number.isFinite(item.change)) return Number(item.change);
+  if (Number.isFinite(item.changePercent)) return Number(item.changePercent);
+  const raw = String(item.changeText || item.value || "").replace("%", "");
+  const parsed = Number.parseFloat(raw);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatHeatChange(item = {}) {
+  if (item.changeText) return String(item.changeText);
+  const value = numericChange(item);
+  return `${value > 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
+
+function heatmapTone(item = {}) {
+  const value = numericChange(item);
+  if (value > 0.05) return "positive";
+  if (value < -0.05) return "negative";
+  return "neutral";
+}
+
+function fallbackHeatmaps(market = {}) {
+  const aShare = (market.hotSectors || []).slice(0, 10).map((item, index) => ({
+    name: item.name,
+    changeText: item.changeText,
+    size: index < 2 ? "lg" : index < 6 ? "md" : "sm",
+    note: (item.leaders || []).slice(0, 3).join(" / ")
+  }));
+  return [
+    {
+      market: "美股",
+      subtitle: "隔夜映射",
+      items: [
+        { name: "AI算力", changeText: "-5.82%", size: "lg" },
+        { name: "基础软件", changeText: "-5.31%", size: "md" },
+        { name: "半导体封测", changeText: "-5.21%", size: "md" },
+        { name: "炼油销售", changeText: "+4.66%", size: "sm" },
+        { name: "数字资产", changeText: "-4.72%", size: "sm" }
+      ]
+    },
+    { market: "A股", subtitle: "今日收盘", items: aShare },
+    {
+      market: "港股",
+      subtitle: "联动观察",
+      items: [
+        { name: "特种化工", changeText: "-10.79%", size: "lg" },
+        { name: "通信线缆", changeText: "-9.55%", size: "lg" },
+        { name: "印制电路板", changeText: "-8.12%", size: "md" },
+        { name: "油气服务", changeText: "+2.78%", size: "sm" }
+      ]
+    }
+  ];
+}
+
+function renderMarketHeatmap(market = {}) {
+  const groups = Array.isArray(market.marketHeatmaps) && market.marketHeatmaps.length
+    ? market.marketHeatmaps
+    : fallbackHeatmaps(market);
+
+  $("#marketHeatmap").innerHTML = groups.map((group) => `
+    <section class="heatmap-market">
+      <div class="heatmap-market-head">
+        <strong>${escapeHtml(group.market)}</strong>
+        <span>${escapeHtml(group.subtitle || "")}</span>
+      </div>
+      <div class="heatmap-grid">
+        ${(group.items || []).map((item) => {
+          const change = formatHeatChange(item);
+          const tooltip = `${item.name} ${change}${item.note ? ` · ${item.note}` : ""}`;
+          return `
+            <article class="heatmap-tile ${heatmapTone(item)} ${escapeHtml(item.size || "md")}" title="${escapeHtml(tooltip)}">
+              <strong>${escapeHtml(item.name)}</strong>
+              <span>${escapeHtml(change)}</span>
+              ${item.note ? `<em>${escapeHtml(item.note)}</em>` : ""}
+            </article>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `).join("");
+}
+
+function fallbackEventTimeline(market = {}) {
+  const newsEvents = (market.events || []).slice(0, 5).map((item, index) => ({
+    date: market.tradingDate ? market.tradingDate.slice(5) : "最新",
+    time: index < 2 ? "15:00" : "盘后",
+    title: item.title,
+    category: item.type,
+    impact: index === 0 ? "利好" : item.type === "公告" ? "中性" : "观察",
+    markets: ["A股"],
+    tags: item.impactedStocks || []
+  }));
+  return {
+    title: "核心事件时间轴",
+    subtitle: "按事件对市场情绪的影响排序",
+    summary: "事件轴用于解释情绪温度变化：先看宏观/地缘/政策，再看行业催化和上市公司公告，最后落到可交易板块。",
+    dates: ["06-24", "07-07", "07-10", "07-13"],
+    events: newsEvents
+  };
+}
+
+function renderEventTimeline(market = {}) {
+  const timeline = market.eventTimeline || fallbackEventTimeline(market);
+  const events = Array.isArray(timeline.events) ? timeline.events : [];
+  if (!events.length) {
+    $("#eventTimeline").innerHTML = "";
+    return;
+  }
+  const dates = Array.isArray(timeline.dates) && timeline.dates.length
+    ? timeline.dates
+    : [...new Set(events.map((item) => item.date).filter(Boolean))];
+  const focus = events.find((item) => item.focus) || events[0];
+  const impactClass = (impact) => String(impact || "").includes("利空") ? "bad" : String(impact || "").includes("利好") ? "good" : "watch";
+
+  $("#eventTimeline").innerHTML = `
+    <div class="timeline-head">
+      <div>
+        <strong>${escapeHtml(timeline.title || "核心事件时间轴")}</strong>
+        <span>${escapeHtml(timeline.subtitle || "跟踪影响市场情绪的关键事件")}</span>
+      </div>
+      <em>${escapeHtml(timeline.source || "公开新闻与公告整理")}</em>
+    </div>
+    <div class="timeline-dates">
+      ${dates.map((date) => `<span class="${date === focus.date ? "active" : ""}">${escapeHtml(date)}</span>`).join("")}
+    </div>
+    <div class="timeline-events">
+      ${events.map((item) => `
+        <article class="timeline-event ${item === focus ? "focus" : ""}">
+          <time>${escapeHtml(item.date || "")} ${escapeHtml(item.time || "")}</time>
+          <strong>${escapeHtml(item.title)}</strong>
+          <div class="timeline-event-tags">
+            <span>${escapeHtml(item.category || "事件")}</span>
+            <span class="${impactClass(item.impact)}">${escapeHtml(item.impact || "观察")}</span>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+    <div class="timeline-detail">
+      <div class="timeline-detail-tags">
+        ${(focus.markets || []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
+        ${(focus.tags || []).slice(0, 5).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}
+      </div>
+      <p>${escapeHtml(timeline.summary || focus.detail || focus.title)}</p>
+      ${timeline.sourceNote ? `<small>${escapeHtml(timeline.sourceNote)}</small>` : ""}
+    </div>
+  `;
+}
+
 function displayMetric(rawValue, parsedValue, suffix = "") {
   if (parsedValue !== null && parsedValue !== undefined) return `${parsedValue}${suffix}`;
   return recentText(rawValue, "最近收盘样本");
@@ -1118,10 +1266,12 @@ async function boot() {
     const news = sanitizePlaceholders(rawNews);
     renderHero(market);
     renderDecisionHub(market);
+    renderEventTimeline(market);
     renderConsensus(market);
     renderIndices(market.indices);
     renderStyleMatrix(market);
     renderVolume(market.volumeAnalysis);
+    renderMarketHeatmap(market);
     renderMainlineBoard(market.hotSectors);
     renderSectors(market.hotSectors);
     renderFundFlows(market.fundFlows);
