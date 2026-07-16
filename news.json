@@ -1,175 +1,175 @@
 {
-  "updatedAt": "2026-07-15T15:44:07.067594+08:00",
+  "updatedAt": "2026-07-16T16:16:36.169497+08:00",
   "items": [
     {
-      "title": "A股收评：超3300只个股飘红，三大指数集体收跌",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659797.shtml",
+      "title": "A股收评：超2800只个股飘绿，三大指数集体收跌",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660532.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-15 15:40",
+      "publishedAtText": "07-16 15:19",
       "impactTags": [
         "A股收评",
-        "结构轮动"
+        "风险偏好"
       ],
       "impactedStocks": [
         "沪深300ETF",
-        "医疗ETF",
-        "传媒ETF",
-        "券商ETF"
+        "科创50ETF",
+        "创业板ETF",
+        "中证500ETF"
       ],
-      "impactNote": "可能影响：沪深300ETF、医疗ETF、传媒ETF、券商ETF"
+      "impactNote": "可能影响：沪深300ETF、科创50ETF、创业板ETF、中证500ETF"
     },
     {
-      "title": "6月末我国社会融资规模存量超460万亿元",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659784.shtml",
+      "title": "商务部回应推动解决安世半导体问题进展",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660582.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-15 15:20",
+      "publishedAtText": "07-16 16:10",
       "impactTags": [
-        "社融",
-        "金融"
+        "半导体",
+        "供应链"
       ],
       "impactedStocks": [
-        "招商银行",
-        "建设银行",
-        "同花顺",
-        "券商ETF"
+        "北方华创",
+        "中芯国际",
+        "寒武纪",
+        "半导体ETF"
       ],
-      "impactNote": "可能影响：招商银行、建设银行、同花顺、券商ETF"
+      "impactNote": "可能影响：北方华创、中芯国际、寒武纪、半导体ETF"
     },
     {
-      "title": "中国PPI环比连涨8个月后转降，国家统计局解析",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659777.shtml",
+      "title": "生态环境部：我国已成为全球规模最大的碳市场",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660505.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-15 15:08",
+      "publishedAtText": "07-16 14:32",
       "impactTags": [
-        "PPI",
-        "周期品"
+        "碳市场",
+        "绿色低碳"
       ],
       "impactedStocks": [
-        "中国神华",
-        "紫金矿业",
-        "三友化工",
+        "国网英大",
+        "远达环保",
+        "南网能源",
+        "碳中和ETF"
+      ],
+      "impactNote": "可能影响：国网英大、远达环保、南网能源、碳中和ETF"
+    },
+    {
+      "title": "中国首个全链条绿色低碳乙烯工程在新疆投产",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660465.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-16 14:03",
+      "impactTags": [
+        "绿色化工",
+        "低碳产业"
+      ],
+      "impactedStocks": [
+        "中国石化",
+        "宝丰能源",
+        "新疆天业",
         "化工ETF"
       ],
-      "impactNote": "可能影响：中国神华、紫金矿业、三友化工、化工ETF"
+      "impactNote": "可能影响：中国石化、宝丰能源、新疆天业、化工ETF"
     },
     {
-      "title": "6月中国快递发展指数同比增长2.4%，市场规模稳步扩容",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659808.shtml",
+      "title": "扩大消费，供给侧与需求侧改革当并行",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660453.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-15 16:02",
+      "publishedAtText": "07-16 14:18",
       "impactTags": [
-        "快递物流",
-        "电商"
-      ],
-      "impactedStocks": [
-        "顺丰控股",
-        "圆通速递",
-        "壹网壹创",
-        "值得买"
-      ],
-      "impactNote": "可能影响：顺丰控股、圆通速递、壹网壹创、值得买"
-    },
-    {
-      "title": "7月15日农产品批发价格200指数上升0.23个点",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659792.shtml",
-      "source": "中新网财经新闻",
-      "publishedAtText": "07-15 15:35",
-      "impactTags": [
-        "农产品",
-        "消费"
-      ],
-      "impactedStocks": [
-        "牧原股份",
-        "温氏股份",
-        "农产品",
-        "海天味业"
-      ],
-      "impactNote": "可能影响：牧原股份、温氏股份、农产品、海天味业"
-    },
-    {
-      "title": "网络直播绝非税收灰色地带",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659770.shtml",
-      "source": "中新网财经新闻",
-      "publishedAtText": "07-15 14:50",
-      "impactTags": [
-        "直播电商",
-        "监管"
-      ],
-      "impactedStocks": [
-        "遥望科技",
-        "值得买",
-        "壹网壹创",
-        "电商服务"
-      ],
-      "impactNote": "可能影响：遥望科技、值得买、壹网壹创、电商服务"
-    },
-    {
-      "title": "稳增长仍是中国经济发展关键着力点",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659764.shtml",
-      "source": "中新网财经新闻",
-      "publishedAtText": "07-15 14:35",
-      "impactTags": [
-        "稳增长",
+        "消费",
         "政策"
       ],
       "impactedStocks": [
-        "沪深300ETF",
-        "券商ETF",
-        "基建ETF",
+        "贵州茅台",
+        "五粮液",
+        "中国中免",
         "消费ETF"
       ],
-      "impactNote": "可能影响：沪深300ETF、券商ETF、基建ETF、消费ETF"
+      "impactNote": "可能影响：贵州茅台、五粮液、中国中免、消费ETF"
     },
     {
-      "title": "沉浸式探访无人机智造全流程，感受低空经济",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-15/10659742.shtml",
+      "title": "去库存成效显著，上半年房地产市场呈现四大特点",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660543.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-15 13:58",
+      "publishedAtText": "07-16 15:30",
       "impactTags": [
-        "低空经济",
-        "无人机"
+        "地产",
+        "稳增长"
       ],
       "impactedStocks": [
-        "中无人机",
-        "航天彩虹",
-        "宗申动力",
-        "万丰奥威"
+        "保利发展",
+        "万科A",
+        "招商蛇口",
+        "地产ETF"
       ],
-      "impactNote": "可能影响：中无人机、航天彩虹、宗申动力、万丰奥威"
+      "impactNote": "可能影响：保利发展、万科A、招商蛇口、地产ETF"
     },
     {
-      "title": "东方财富资金流向：医药生物、化学制药、医疗服务资金净流入居前",
+      "title": "508项重要国家标准发布，涉及高新技术与百姓生活",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660496.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-16 14:56",
+      "impactTags": [
+        "标准",
+        "高新技术"
+      ],
+      "impactedStocks": [
+        "中国软件",
+        "中科曙光",
+        "国检集团",
+        "科技ETF"
+      ],
+      "impactNote": "可能影响：中国软件、中科曙光、国检集团、科技ETF"
+    },
+    {
+      "title": "AI短剧工作台推出，内容制作工具继续发酵",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-16/10660511.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-16 14:55",
+      "impactTags": [
+        "AI内容",
+        "传媒"
+      ],
+      "impactedStocks": [
+        "掌阅科技",
+        "中文在线",
+        "芒果超媒",
+        "传媒ETF"
+      ],
+      "impactNote": "可能影响：掌阅科技、中文在线、芒果超媒、传媒ETF"
+    },
+    {
+      "title": "东方财富资金流向：计算机、IT服务、传媒、影视院线资金净流入居前",
       "url": "https://data.eastmoney.com/zjlx/detail.html",
       "source": "东方财富资金流向",
-      "publishedAtText": "07-15 收盘",
+      "publishedAtText": "07-16 收盘",
       "impactTags": [
         "资金流",
-        "医药"
+        "传媒"
       ],
       "impactedStocks": [
-        "昭衍新药",
-        "药明康德",
-        "恒瑞医药",
-        "泰格医药"
+        "芒果超媒",
+        "掌阅科技",
+        "广和通",
+        "传媒ETF"
       ],
-      "impactNote": "可能影响：昭衍新药、药明康德、恒瑞医药、泰格医药"
+      "impactNote": "可能影响：芒果超媒、掌阅科技、广和通、传媒ETF"
     },
     {
-      "title": "东方财富龙虎榜：最新公开接口仍为7月14日样本，7月15日盘后需继续复核",
+      "title": "东方财富龙虎榜：最新公开接口为7月15日样本，7月16日盘后需继续复核",
       "url": "https://data.eastmoney.com/stock/lhb.html",
       "source": "东方财富龙虎榜",
-      "publishedAtText": "07-15 盘后复核",
+      "publishedAtText": "07-16 盘后复核",
       "impactTags": [
         "龙虎榜",
         "短线风险"
       ],
       "impactedStocks": [
-        "ST南新",
-        "风华高科",
-        "东山精密",
-        "昭衍新药"
+        "万邦医药",
+        "睿智医药",
+        "青龙管业",
+        "航天动力"
       ],
-      "impactNote": "可能影响：ST南新、风华高科、东山精密、昭衍新药"
+      "impactNote": "可能影响：万邦医药、睿智医药、青龙管业、航天动力"
     }
   ]
 }
