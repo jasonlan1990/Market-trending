@@ -1,175 +1,175 @@
 {
-  "updatedAt": "2026-07-21T18:02:00+08:00",
+  "updatedAt": "2026-07-28T16:28:00+08:00",
   "items": [
     {
-      "title": "A股周二放量上涨，半导体板块大涨",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663705.shtml",
+      "title": "A股收评：超2700只个股飘绿，三大指数收跌，科创50跌超6%",
+      "url": "https://www.chinanews.com/cj/2026/07-28/10667875.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-21 17:30",
+      "publishedAtText": "07-28 15:13",
       "impactTags": [
         "A股收评",
-        "半导体"
+        "科技退潮"
       ],
       "impactedStocks": [
-        "北方华创",
-        "中微公司",
-        "雅克科技",
-        "芯片ETF"
-      ],
-      "impactNote": "可能影响：北方华创、中微公司、雅克科技、芯片ETF"
-    },
-    {
-      "title": "东方财富资金流向：电子、半导体、数字芯片设计净流入居前",
-      "url": "https://data.eastmoney.com/zjlx/detail.html",
-      "source": "东方财富资金流向",
-      "publishedAtText": "07-21 收盘",
-      "impactTags": [
-        "资金流",
-        "科技成长"
-      ],
-      "impactedStocks": [
-        "寒武纪",
-        "中芯国际",
-        "中际旭创",
+        "科创50ETF",
+        "创业板ETF",
+        "芯片ETF",
         "半导体ETF"
       ],
-      "impactNote": "可能影响：寒武纪、中芯国际、中际旭创、半导体ETF"
+      "impactNote": "可能影响：科创50ETF、创业板ETF、芯片ETF、半导体ETF"
     },
     {
-      "title": "中国智能算力规模达2185EFLOPS",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-20/10662934.shtml",
-      "source": "中新网财经新闻",
-      "publishedAtText": "07-21 复核",
+      "title": "东方财富资金流向：银行、白酒、食品饮料资金净流入居前",
+      "url": "https://data.eastmoney.com/zjlx/detail.html",
+      "source": "东方财富资金流向",
+      "publishedAtText": "07-28 收盘",
       "impactTags": [
-        "算力",
-        "AI"
+        "资金流",
+        "防守消费"
+      ],
+      "impactedStocks": [
+        "建设银行",
+        "贵州茅台",
+        "五粮液",
+        "食品饮料ETF"
+      ],
+      "impactNote": "可能影响：建设银行、贵州茅台、五粮液、食品饮料ETF"
+    },
+    {
+      "title": "商务部：人工智能相关产品成为中国外贸“新名片”",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667904.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-28 15:51",
+      "impactTags": [
+        "AI出口",
+        "外贸"
       ],
       "impactedStocks": [
         "工业富联",
         "中际旭创",
         "新易盛",
-        "中科曙光"
+        "AIETF"
       ],
-      "impactNote": "可能影响：工业富联、中际旭创、新易盛、中科曙光"
+      "impactNote": "可能影响：工业富联、中际旭创、新易盛、AIETF"
     },
     {
-      "title": "无锡科创企业“芯”灵手巧，赋予科技生命感知能力",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663696.shtml",
+      "title": "扩大服务消费：难在哪？怎么办？",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667884.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-21 17:30",
+      "publishedAtText": "07-28 15:36",
       "impactTags": [
-        "芯片",
-        "科创"
+        "服务消费",
+        "消费"
       ],
       "impactedStocks": [
-        "华虹公司",
-        "中芯国际",
-        "沪硅产业",
-        "科创50ETF"
+        "中国中免",
+        "三只松鼠",
+        "盐津铺子",
+        "消费ETF"
       ],
-      "impactNote": "可能影响：华虹公司、中芯国际、沪硅产业、科创50ETF"
+      "impactNote": "可能影响：中国中免、三只松鼠、盐津铺子、消费ETF"
     },
     {
-      "title": "工信部：中国研发的四足机器人占全球销量份额近七成",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-20/10662946.shtml",
+      "title": "半年突破万亿元，直播电商打开消费增量",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667880.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-21 复核",
+      "publishedAtText": "07-28 15:30",
       "impactTags": [
-        "机器人",
-        "智能制造"
+        "直播电商",
+        "消费内容"
       ],
       "impactedStocks": [
-        "雷赛智能",
-        "埃斯顿",
-        "大洋电机",
-        "机器人ETF"
+        "遥望科技",
+        "值得买",
+        "三只松鼠",
+        "中文在线"
       ],
-      "impactNote": "可能影响：雷赛智能、埃斯顿、大洋电机、机器人ETF"
+      "impactNote": "可能影响：遥望科技、值得买、三只松鼠、中文在线"
     },
     {
-      "title": "2026亚太数字伙伴对话暨“投资成都”全球招商大会在蓉启幕",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663700.shtml",
+      "title": "截至2026年6月底我国电动汽车充电基础设施总数达2305.7万个",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667873.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-21 17:30",
+      "publishedAtText": "07-28 15:21",
       "impactTags": [
-        "数字经济",
-        "数据要素"
+        "充电桩",
+        "新能源车"
       ],
       "impactedStocks": [
-        "易华录",
-        "云赛智联",
-        "数据ETF",
-        "数字经济ETF"
+        "特锐德",
+        "许继电气",
+        "宇通客车",
+        "充电桩ETF"
       ],
-      "impactNote": "可能影响：易华录、云赛智联、数据ETF、数字经济ETF"
+      "impactNote": "可能影响：特锐德、许继电气、宇通客车、充电桩ETF"
     },
     {
-      "title": "宁夏2026年上半年外贸享政策红利实现稳步增长",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663709.shtml",
+      "title": "商务部回应欧盟近期不断推出对华保护主义措施",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667902.shtml",
       "source": "中新网财经新闻",
-      "publishedAtText": "07-21 17:31",
+      "publishedAtText": "07-28 15:47",
       "impactTags": [
-        "外贸",
-        "区域经济"
+        "外贸摩擦",
+        "出口链"
       ],
       "impactedStocks": [
-        "宁夏建材",
-        "宝丰能源",
-        "跨境通",
-        "物流ETF"
+        "海信视像",
+        "安克创新",
+        "比亚迪",
+        "出口链ETF"
       ],
-      "impactNote": "可能影响：宁夏建材、宝丰能源、跨境通、物流ETF"
+      "impactNote": "可能影响：海信视像、安克创新、比亚迪、出口链ETF"
     },
     {
-      "title": "东方财富龙虎榜：雅克科技3家机构买入，半导体材料获得盘后确认",
+      "title": "全球“换船潮”推动中国造船业领跑",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667895.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-28 15:45",
+      "impactTags": [
+        "船舶",
+        "高端制造"
+      ],
+      "impactedStocks": [
+        "中国船舶",
+        "中船防务",
+        "中国重工",
+        "船舶ETF"
+      ],
+      "impactNote": "可能影响：中国船舶、中船防务、中国重工、船舶ETF"
+    },
+    {
+      "title": "商务部：中国工业产能利用率总体处于合理区间",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-28/10667889.shtml",
+      "source": "中新网财经新闻",
+      "publishedAtText": "07-28 15:52",
+      "impactTags": [
+        "工业经济",
+        "顺周期"
+      ],
+      "impactedStocks": [
+        "宝钢股份",
+        "中国铝业",
+        "中国石化",
+        "工业ETF"
+      ],
+      "impactNote": "可能影响：宝钢股份、中国铝业、中国石化、工业ETF"
+    },
+    {
+      "title": "东方财富龙虎榜：最新公开样本为7月27日，7月28日盘后席位待更新",
       "url": "https://data.eastmoney.com/stock/lhb.html",
       "source": "东方财富龙虎榜",
-      "publishedAtText": "07-21 盘后",
+      "publishedAtText": "07-28 盘后复核",
       "impactTags": [
         "龙虎榜",
-        "机构买入"
+        "盘后复核"
       ],
       "impactedStocks": [
-        "雅克科技",
-        "贤丰控股",
-        "浙江美大",
-        "中岩大地"
+        "风华高科",
+        "日科化学",
+        "至纯科技",
+        "万邦医药"
       ],
-      "impactNote": "可能影响：雅克科技、贤丰控股、浙江美大、中岩大地"
-    },
-    {
-      "title": "东方财富估值分析：科创50与半导体估值快速修复，需关注分位数回升",
-      "url": "https://data.eastmoney.com/gzfx/",
-      "source": "东方财富估值分析",
-      "publishedAtText": "07-21 收盘",
-      "impactTags": [
-        "估值",
-        "科创50"
-      ],
-      "impactedStocks": [
-        "科创50ETF",
-        "半导体ETF",
-        "北方华创",
-        "寒武纪"
-      ],
-      "impactNote": "可能影响：科创50ETF、半导体ETF、北方华创、寒武纪"
-    },
-    {
-      "title": "黑龙江：“产销对接”“电商赋能”双轮驱动农产品“走出去”",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663711.shtml",
-      "source": "中新网财经新闻",
-      "publishedAtText": "07-21 17:36",
-      "impactTags": [
-        "农业电商",
-        "农产品"
-      ],
-      "impactedStocks": [
-        "北大荒",
-        "农产品",
-        "供销大集",
-        "农业ETF"
-      ],
-      "impactNote": "可能影响：北大荒、农产品、供销大集、农业ETF"
+      "impactNote": "可能影响：风华高科、日科化学、至纯科技、万邦医药"
     }
   ]
 }
